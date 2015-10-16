@@ -8,7 +8,7 @@ Llamado asi por el duke bizantino del siglo XV, es un lenguaje de tipos dinamico
 
 ##Especificacion
 ###Tipos
-Los tipos en Pancakes son dinamicos, pueden tomar valores como numeros, strings, listas, boleanos, o el valor 'null'.
+Los tipos en Pancakes son dinamicos, pueden tomar valores como numeros, strings, listas, boleanos, funciones, o el valor 'null'. 
 
 
 ```js
@@ -28,8 +28,6 @@ true
 false
 
 #Cadenas de carácters
-
-'hello "world" '
 "world 'hello' "
 
 #Listas de tipos primitivos
@@ -38,14 +36,58 @@ b = [1, 'dos', 3];
 c = [j, ]
 c.push(a);
 
-#Para version 0.5.0
-#Vectores, solo aceptan un mismo tipo.
 
-a1 = new A();
-a2 = new A();
-a3 = new A();
+#Funciones (por ahora se toman como un tipo)
+fun mi_funcion(){
+	
+	var foo = 3;
 
-a_rreglo = {a1, a2, a3};
-b_rreglo = {new A(), new B()}
+	return foo;
+
+}
+
+```
+
+###Estatutos de control
+
+Pancakes tiene cuatro tipos de estatutos de control: if, for, while y do while.
+
+```js
+
+#if
+if( mi_cadena.length() % 2 == 0){
+	haz_algo();
+}
+
+#for
+for(i;0;10){
+
+	do_something(i); #pasa el parametro, 0, 1, 2, 3, ... , 8, 9
+
+}
+
+#do
+do{
+	cont++;
+} while (cont < 10)
+
+#while
+while(cont > 0){
+	cont--;
+}
+
+
+```
+
+###Comentarios
+
+Pancakes tiene dos tipos de comentarios, de linea y de bloque (o multi linea).
+
+```js
+#Soy un comentario de linea
+
+/* Soy un comentario
+	de bloque
+*/
 
 ```

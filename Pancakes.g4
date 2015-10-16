@@ -1,6 +1,6 @@
 grammar Pancakes;
 
-root
+pancakes
 	: program
 	;
 
@@ -11,7 +11,7 @@ program
 element
 	: var_declaration
 	| 'fun' fun_declaration
-	| fun_call
+	| fun_call ';'
 	| class_declaration
 	| loops
 	| conditionals
@@ -20,7 +20,7 @@ element
 	;
 
 var_declaration
-	: ('var' ID ('=' expression)? (',' ID ('=' expression)?)* ';')
+	: ('var' ID ('=' ( 'fun' fun_declaration| expression))? (',' ID ('=' ( 'fun' fun_declaration| expression))?)* ';')
 	;
 	
 fun_declaration
@@ -37,7 +37,7 @@ fun_arg
 	;
 	
 fun_call
-	: ID '(' params ')' ';'
+	: ID '(' params ')'
 	| ID '.' fun_call 
 	;
 
@@ -72,7 +72,7 @@ for_loop
 	;
 
 loop_element
-	: fun_call
+	: fun_call ';'
 	| loops
 	| conditionals
 	| assignments
@@ -121,7 +121,7 @@ class_instantiation
 	;
 
 assignments
-	: ID '=' expression ';'
+	: ID '=' (expression | 'fun' fun_declaration) ';'
 	| ID '++' ';'
 	| ID '--' ';'
 	;
