@@ -1,4 +1,4 @@
-grammar Pancakes
+grammar Pancakes;
 
 root
 	: program
@@ -62,13 +62,13 @@ class_elements
 	;
 
 loops
-	: for
+	: for_loop
 	| do_while
-	| while
+	| while_loop
 	;
 
-for
-	: 'for' '(' ID ';' INT ';' INT ')' '{' (loop_element)* '}'
+for_loop
+	: FOR '(' ID ';' NUMBER ';' NUMBER ')' '{' (loop_element)* '}'
 	;
 
 loop_element
@@ -79,11 +79,11 @@ loop_element
 	;
 
 do_while
-	: 'do' '{' (loop_element)* '}' 'while' '(' cond_expression ')'
+	: 'do' '{' (loop_element)* '}' WHILE '(' expression ')'
 	;
 
-while
-	: 'while' '(' cond_expression ')' '{' (loop_element)* '}'
+while_loop
+	: WHILE '(' expression ')' '{' (loop_element)* '}'
 	;
 
 conditionals
@@ -138,6 +138,11 @@ value
 	;
 
 
+
+WHILE: 'while';
+
+FOR: 'for';
+
 LINE_COMMENT : '#' .*? '\n' -> skip ;
 
 COMMENT : '/*' .*? '*/' -> skip ;
@@ -148,10 +153,15 @@ CID: [A-Z](ALPHA | DIGIT | '_')* ;
 
 STRING: '"' (ESC|.)*? '"' ;
 
+NUMBER
+	: DIGIT+ 
+	| DIGIT+ '.' DIGIT* 
+	| '.' DIGIT+
+	;
+
 	
-TRUE: "true";
-	
-FALSE: "false";
+BOOLEAN: ('true' | 'false');
+
 
 fragment
 ESC : '\\"' | '\\\\' ;
@@ -162,3 +172,4 @@ ALPHA : [a-zA-Z] ;
 fragment
 DIGIT : [0-9] ;
 
+WS : [ \t\n\r]+ -> skip ;
