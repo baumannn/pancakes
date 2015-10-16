@@ -16,7 +16,6 @@ element
 	| loops
 	| conditionals
 	| assignments
-	| comment
 	| return_statement
 	;
 
@@ -77,7 +76,6 @@ loop_element
 	| loops
 	| conditionals
 	| assignments
-	| comment
 	;
 
 do_while
@@ -138,6 +136,7 @@ value
 	| BOOLEAN
 	| NUMBER
 	;
+
 
 LINE_COMMENT : '#' .*? '\n' -> skip ;
 
