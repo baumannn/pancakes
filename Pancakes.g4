@@ -93,20 +93,6 @@ conditionals
 	;
 
 
-
-
-expression
-	: VAL
-	| expression '&&' expression
-	| expression '||' expression
-	| expression '==' expression
-	| expression '<=' expression
-	| expression '>=' expression
-	| expression '<' expression
-	| expression '>' expression
-	| expression '!=' expression
-	;
-
 expression
  : '!' expression
  | expression '*' expression
@@ -127,10 +113,14 @@ expression
  | ID
  | '(' expression ')'
  | fun_call
+ | class_instantiation
  //| expression '?' expression ':' expression
  //| expression 'in' expression (array contains value)
  ;
 
+class_instantiation
+	: 'new' CID '(' params ')'
+	;
 
 assignments
 	: ID '=' expression ';'
