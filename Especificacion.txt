@@ -1,0 +1,51 @@
+#Pancakes
+
+
+##Introduccion
+Llamado asi por el duke bizantino del siglo XV, es un lenguaje de tipos dinamicos, que contiene clases con herencias y output gráfico.
+
+
+
+##Especificacion
+###Tipos
+Los tipos en Pancakes son dinamicos, pueden tomar valores como numeros, strings, listas, boleanos, o el valor 'null'.
+
+
+```js
+
+#Numero
+#Puede ser cualquier tipo de numero real, todos se consideran equivalentes
+1
+1.0
+0.0
+1.123123
+-10
+-10.4
+
+
+#Booleano
+true
+false
+
+#Cadenas de carácters
+
+'hello "world" '
+"world 'hello' "
+
+#Listas de tipos primitivos
+a = [1, 2, 3, 4];
+b = [1, 'dos', 3];
+c = [j, ]
+c.push(a);
+
+#Para version 0.5.0
+#Vectores, solo aceptan un mismo tipo.
+
+a1 = new A();
+a2 = new A();
+a3 = new A();
+
+a_rreglo = {a1, a2, a3};
+b_rreglo = {new A(), new B()}
+
+```

@@ -109,7 +109,7 @@ expression
  | expression '!=' expression
  | expression '&&' expression
  | expression '||' expression
- | VAL
+ | value
  | ID
  | '(' expression ')'
  | fun_call
@@ -128,23 +128,38 @@ assignments
 	| ID '--' ';'
 	;
 
-comment
-	: '/*' ANYTHING '*/'
-	;
 
 return_statement
 	: 'return' expression? ';'
 	;
 
+value
+	: STRING
+	| BOOLEAN
+	| NUMBER
+	;
 
-ID
+LINE_COMMENT : '#' .*? '\n' -> skip ;
 
-CID
+COMMENT : '/*' .*? '*/' -> skip ;
 
-VAL
+ID: [a-z] (ALPHA | DIGIT | '_') * ;
+
+CID: [A-Z](ALPHA | DIGIT | '_')* ;
+
+STRING: '"' (ESC|.)*? '"' ;
+
 	
-TRUE
+TRUE: "true";
 	
-FALSE
+FALSE: "false";
 
-ANYTHING
+fragment
+ESC : '\\"' | '\\\\' ;
+
+fragment
+ALPHA : [a-zA-Z] ;
+
+fragment
+DIGIT : [0-9] ;
+
