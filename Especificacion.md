@@ -91,3 +91,17 @@ Pancakes tiene dos tipos de comentarios, de linea y de bloque (o multi linea).
 */
 
 ```
+
+###Declaración de variables
+
+Pancakes tiene dos tipos de comentarios, de linea y de bloque (o multi linea).
+
+```js
+#Soy un comentario de linea
+
+/* Soy un comentario
+	de bloque
+*/
+
+```
+

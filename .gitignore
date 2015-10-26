@@ -10,6 +10,7 @@ Pancakes.tokens
 # MacOSX files
 .DS_Store
 
+pancakes.properties
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

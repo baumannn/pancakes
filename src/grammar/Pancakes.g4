@@ -1,5 +1,15 @@
 grammar Pancakes;
 
+
+@parser::header { 
+  package main.parser; 
+}  
+  
+@lexer::header { 
+  package main.parser; 
+}  
+
+
 pancakes
 	: program
 	;
