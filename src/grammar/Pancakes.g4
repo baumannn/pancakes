@@ -1,6 +1,10 @@
 grammar Pancakes;
 
+options {  
+  output=AST; 
+}
 
+/*
 @parser::header { 
   package main.parser; 
 }  
@@ -8,7 +12,7 @@ grammar Pancakes;
 @lexer::header { 
   package main.parser; 
 }  
-
+*/
 
 pancakes
 	: program
@@ -43,12 +47,12 @@ args
 	;
 
 fun_arg
-	: ('ref')? ID
+	: ('ref')? ID indexes?
 	;
 	
 fun_call
-	: ID '(' params ')'
-	| ID '.' fun_call 
+	: ID indexes? '(' params ')'
+	| ID indexes? '.' fun_call 
 	;
 
 params
@@ -58,7 +62,7 @@ params
 
 param
 	: expression
-	| '&' ID
+	| '&' ID indexes?
 	;
 
 class_declaration
@@ -78,7 +82,7 @@ loops
 	;
 
 for_loop
-	: FOR '(' ID ';' NUMBER ';' NUMBER ')' '{' (loop_element)* '}'
+	: For '(' ID ';' Number ';' Number ')' '{' (loop_element)* '}'
 	;
 
 loop_element
@@ -89,11 +93,11 @@ loop_element
 	;
 
 do_while
-	: 'do' '{' (loop_element)* '}' WHILE '(' expression ')'
+	: 'do' '{' (loop_element)* '}' While '(' expression ')'
 	;
 
 while_loop
-	: WHILE '(' expression ')' '{' (loop_element)* '}'
+	: While '(' expression ')' '{' (loop_element)* '}'
 	;
 
 conditionals
@@ -103,25 +107,17 @@ conditionals
 
 expression
  : '!' expression
- | expression '*' expression
- | expression '/' expression
- | expression '//' expression //floored division
+ | expression ^( '*' | '/' | '//') expression // '//' is floored division
+ | expression ^( '+' | '-' ) expression
+ | expression ^( '>=' | '<=' | '>' | '<' | '==' | '!=' ) expression
  | expression '%' expression
- | expression '+' expression
- | expression '-' expression
- | expression '>=' expression
- | expression '<=' expression
- | expression '>' expression
- | expression '<' expression
- | expression '==' expression
- | expression '!=' expression
- | expression '&&' expression
- | expression '||' expression
+ | expression ^( '&&' | '||' ) expression
  | value
  | ID
  | '(' expression ')'
  | fun_call
  | class_instantiation
+ | expression indexes+
  //| expression '?' expression ':' expression
  //| expression 'in' expression (array contains value)
  ;
@@ -130,10 +126,12 @@ class_instantiation
 	: 'new' CID '(' params ')'
 	;
 
+
+
 assignments
-	: ID '=' (expression | 'fun' fun_declaration) ';'
-	| ID '++' ';'
-	| ID '--' ';'
+	: ID indexes? '=' (expression | 'fun' fun_declaration) ';'
+	| ID indexes? '++' ';'
+	| ID indexes? '--' ';'
 	;
 
 
@@ -142,44 +140,46 @@ return_statement
 	;
 
 value
-	: STRING
-	| BOOLEAN
-	| NUMBER
+	: String
+	| Boolean
+	| Number
 	;
 
+indexes
+	: ('[' expression ']')+
+	;
 
+While: 'while';
 
-WHILE: 'while';
+For: 'for';
 
-FOR: 'for';
+Line_comment : '#' .*? '\n' -> skip ;
 
-LINE_COMMENT : '#' .*? '\n' -> skip ;
+Comment : '/*' .*? '*/' -> skip ;
 
-COMMENT : '/*' .*? '*/' -> skip ;
+ID: [a-z] (Alpha | Digit | '_') * ;
 
-ID: [a-z] (ALPHA | DIGIT | '_') * ;
+CID: [A-Z](Alpha | Digit | '_')* ;
 
-CID: [A-Z](ALPHA | DIGIT | '_')* ;
+String: '"' (Esc|.)*? '"' ;
 
-STRING: '"' (ESC|.)*? '"' ;
-
-NUMBER
-	: DIGIT+ 
-	| DIGIT+ '.' DIGIT* 
-	| '.' DIGIT+
+Number
+	: Digit+ 
+	| Digit+ '.' Digit* 
+	| '.' Digit+
 	;
 
 	
-BOOLEAN: ('true' | 'false');
+Boolean: ('true' | 'false');
 
 
 fragment
-ESC : '\\"' | '\\\\' ;
+Esc : '\\"' | '\\\\' ;
 
 fragment
-ALPHA : [a-zA-Z] ;
+Alpha : [a-zA-Z] ;
 
 fragment
-DIGIT : [0-9] ;
+Digit : [0-9] ;
 
 WS : [ \t\n\r]+ -> skip ;

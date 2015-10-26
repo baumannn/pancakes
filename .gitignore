@@ -1,3 +1,6 @@
+#output files
+misc/
+
 *.class
 
 PancakesBaseListener.java
