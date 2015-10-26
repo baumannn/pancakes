@@ -1,6 +1,5 @@
 #Pancakes
 
-
 ##Introduccion
 Llamado asi por el duke bizantino del siglo XV, es un lenguaje de tipos dinamicos, que contiene clases con herencias y output gráfico.
 
