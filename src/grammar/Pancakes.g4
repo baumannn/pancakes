@@ -1,9 +1,5 @@
 grammar Pancakes;
 
-options {  
-  output=AST; 
-}
-
 /*
 @parser::header { 
   package main.parser; 
@@ -106,12 +102,12 @@ conditionals
 
 
 expression
- : '!' expression
- | expression ^( '*' | '/' | '//') expression // '//' is floored division
- | expression ^( '+' | '-' ) expression
- | expression ^( '>=' | '<=' | '>' | '<' | '==' | '!=' ) expression
+ : '!' expression 
+ | expression ( '*' | '/' | '//') expression // '//' is floored division
+ | expression ( '+' | '-' ) expression
+ | expression ( '>=' | '<=' | '>' | '<' | '==' | '!=' ) expression
  | expression '%' expression
- | expression ^( '&&' | '||' ) expression
+ | expression ( '&&' | '||' ) expression
  | value
  | ID
  | '(' expression ')'
