@@ -32,7 +32,7 @@ public class Main {
 
             walker.walk(listener, pancakesContext);
 
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,0 +1,161 @@
+Traduccion de elementos No-Atomicos
+
+Homogeneos ie. arreglos
+
+id[limite inferior] [limite superior];
+
+dir(id[s1, s2, .., sn]) = dir(id) + f([s1 .. sn])
+
+
+m1 = MULT(2, n) di = d2  * d3 * d4 * .. * dn
+
+m2 = MULT(3, n) di = d3 * d4 * .. * dn
+
+m(n-1) = dn
+
+m(n) = 1
+
+
+k = ?????? (normalmente es 0)
+k = limite inferior (1) * m(n)
+
+
+
+f(id[s1,s2..sn]) = s1 * m1 + s2 * m2 + ... + s(n-1) * m(n-1) + Sn - K
+
+ejemplo:
+
+vector:
+f(id[s1]) = s1 - k
+
+matriz:
+
+f(id[s1,s2]) = s2 * d2 + s1 - k
+
+ int A[-3 .. 6]
+ int i;
+ int B[2..4, 0..3]                          m0 = d1 * d2 * .. * dn
+ int j;                                     m1 = m0 / d1
+ int C[0..2, -2..5, 4..8]                   m2 = m1 / d2
+                                            ..
+
+
+
+                                                         +---------+---------+-----+
++-------------------------------------+                  |         |         |    X|
+|                                     |                  |    6    |  -3     |   XX|
+|Nombre   Tipo    dir     dim         |                  +---------+---------+  XX |
++-------+-------+-------+-------------+                  |                   |XX   |
+|       |       |       |             |                  |      3            |X    |
+| A     |  i    | 5000  |     +------------------------> +-------------------------+
+|       |       |       |             |
+|       |       |       |             |                     m1 = 10/10 = 1
+|       |       |       |             |                     k= Lim Inf * m1 = -3
+|       |       |       |        XXX  |
+|  i    |  i    | 5010  |    XX X     |
+|       |       |       | XX          |             +--------+-----------+-------+
+|       |       |       |             |             |        |           |       |
+|       |       |       |             |             |    4   |     2     |       |
+|       |       |       |             |             |        |           |       |
+|  B    |   i   | 5011  |   +---------------------> +--------+-----------+  +    |
+|       |       |       |             |             |                    |  |    |
+|       |       |       |             |             |                    |  |    |
+|       |       |       |             |             +--------------------+-------+
+|       |       |       |             |                                     |
+|       |       |       |             |                                     |
+|       |       |       |             |                m1 = ?? = 4          |
+|       |       |       |             |                                     |
+|       |       |       |             |                sumaK = 0 + 2  * 4   |
+|       |       |       |             |                (ir sumando para no tener que regresar)
+|       |       |       |             |                                     |
+|       |       |       |             |                                     |
+|       |       |       |             |           +-------------------------+
+|       |       |       |             |           |
+|       |       |       |             |           |   +----------+---------+-------+
+|       |       |       |             |           +-->+          |         |     XX|
+|       |       |       |             |               |   3      |    0    |    XX |
+|       |       |       |             |               |          |         |    X  |
+|       |       |       |             |               |          |         |   XX  |
+|       |       |       |             |               +----------+---------+ XXX   |
++-------+-------+-------+-------------+               |                    | X     |
+                                                      |       -8           |XX     |
+                                                      |                    |X      |
+                                                      +----------------------------+
+                                                         m2 = m1 / d2 = 4/4 = 1
+                                                         sumaK = 8 + 0 * 1 = 8
+
+
+
+
+
+
+
+
+
+
+IDEA:
+
+class = named array
+
+id.value === id["value"]
+id.function() === id["function"]();
+
+
+array{
+	
+
+	enum{
+		_size : index;
+		(fun) size : index
+		index name : index
+		index name : index
+	}
+}
+
+
+var i = 1;
+
+
+var t = 4.0
+var f = i + t;
+var f2 = t + i;
+
+
+
+t{
+	type: Boolean
+	value: ??
+	ref: 0x021313
+	//end 0x021314
+}
+t{
+	type: "Float" 
+	value: 2
+	ref: 0x021314
+	//end 0x021316
+}
+s{
+	type: string
+	value: ??
+	ref: 0x021313
+	size: 30;
+	//end ref + size;
+}
+s{
+	type: function
+	value: ??
+	ref: 0x021313
+	closure: x =2,  ref j = 4;
+}
+
+object{
+	type: object
+	value: "ClassID" -> lookup
+	ref: 0x021313
+}
+
+
+
+
+
+

@@ -3,13 +3,6 @@ misc/
 
 *.class
 
-PancakesBaseListener.java
-PancakesLexer.java
-PancakesLexer.tokens
-PancakesListener.java
-PancakesParser.java
-Pancakes.tokens
-
 # MacOSX files
 .DS_Store
 

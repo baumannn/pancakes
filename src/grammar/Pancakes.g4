@@ -1,15 +1,5 @@
 grammar Pancakes;
 
-/*
-@parser::header { 
-  package main.parser; 
-}  
-  
-@lexer::header { 
-  package main.parser; 
-}  
-*/
-
 pancakes
 	: program
 	;
@@ -30,11 +20,15 @@ element
 	;
 
 var_declaration
-	: ('var' ID ('=' ( 'fun' fun_declaration| expression))? (',' ID ('=' ( 'fun' fun_declaration| expression))?)* ';')
+	: ('var' ID ('=' ( ('fun' anon_fun_declaration)| expression))? (',' ID ('=' ( 'fun' anon_fun_declaration| expression))?)* ';')
 	;
 	
 fun_declaration
 	: ID '(' args ')' '{' (element)* '}' 
+	;
+
+anon_fun_declaration
+	: '(' args ')' '{' (element)* '}' 
 	;
 
 args
