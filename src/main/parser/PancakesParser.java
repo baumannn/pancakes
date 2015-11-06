@@ -20,7 +20,8 @@ public class PancakesParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
-		T__24=25, BOOLEAN=26, ID=27, INT=28, FLOAT=29, STRING=30, WS=31, SL_COMMENT=32;
+		T__24=25, BOOLEAN=26, ID=27, INT=28, FLOAT=29, T_FLOAT=30, T_INT=31, T_BOOL=32, 
+		T_STRING=33, T_VOID=34, STRING=35, WS=36, SL_COMMENT=37;
 	public static final int
 		RULE_pancakes = 0, RULE_var_declare = 1, RULE_type = 2, RULE_fun_declare = 3, 
 		RULE_fun_params = 4, RULE_fun_param = 5, RULE_block = 6, RULE_statement = 7, 
@@ -31,14 +32,16 @@ public class PancakesParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'='", "';'", "'float'", "'int'", "'boolean'", "'string'", "'void'", 
-		"'('", "')'", "','", "'{'", "'}'", "'return'", "'if'", "'else'", "''", 
-		"'['", "']'", "'-'", "'!'", "'*'", "'/'", "'//'", "'+'", "'=='"
+		null, "'='", "';'", "'T_FLOAT'", "'T_INT'", "'T_BOOL'", "'T_STRING'", 
+		"'T_VOID'", "'('", "')'", "','", "'{'", "'}'", "'return'", "'if'", "'else'", 
+		"''", "'['", "']'", "'-'", "'!'", "'*'", "'/'", "'//'", "'+'", "'=='", 
+		null, null, null, null, "'float'", "'int'", "'boolean'", "'string'", "'void'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, "BOOLEAN", "ID", "INT", "FLOAT", "STRING", "WS", "SL_COMMENT"
+		null, null, "BOOLEAN", "ID", "INT", "FLOAT", "T_FLOAT", "T_INT", "T_BOOL", 
+		"T_STRING", "T_VOID", "STRING", "WS", "SL_COMMENT"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -965,7 +968,7 @@ public class PancakesParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\"\u0097\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\'\u0097\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\3\2\3\2\6\2\33\n\2\r\2\16\2\34\3\3\3\3\3\3\3\3\5\3#\n\3\3"+
 		"\3\3\3\3\4\3\4\3\5\3\5\3\5\3\5\5\5-\n\5\3\5\3\5\3\5\3\6\3\6\3\6\7\6\65"+
@@ -996,7 +999,7 @@ public class PancakesParser extends Parser {
 		"\2\2\2c^\3\2\2\2cd\3\2\2\2d\23\3\2\2\2ef\b\13\1\2fg\7\25\2\2gz\5\24\13"+
 		"\rhi\7\26\2\2iz\5\24\13\fjk\7\35\2\2km\7\n\2\2ln\5\26\f\2ml\3\2\2\2mn"+
 		"\3\2\2\2no\3\2\2\2oz\7\13\2\2pz\7\35\2\2qz\7\36\2\2rz\7\37\2\2sz\7\34"+
-		"\2\2tz\7 \2\2uv\7\n\2\2vw\5\24\13\2wx\7\13\2\2xz\3\2\2\2ye\3\2\2\2yh\3"+
+		"\2\2tz\7%\2\2uv\7\n\2\2vw\5\24\13\2wx\7\13\2\2xz\3\2\2\2ye\3\2\2\2yh\3"+
 		"\2\2\2yj\3\2\2\2yp\3\2\2\2yq\3\2\2\2yr\3\2\2\2ys\3\2\2\2yt\3\2\2\2yu\3"+
 		"\2\2\2z\u008b\3\2\2\2{|\f\13\2\2|}\t\3\2\2}\u008a\5\24\13\f~\177\f\n\2"+
 		"\2\177\u0080\t\4\2\2\u0080\u008a\5\24\13\13\u0081\u0082\f\t\2\2\u0082"+
