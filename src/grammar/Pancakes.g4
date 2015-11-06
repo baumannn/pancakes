@@ -9,7 +9,7 @@ var_declare
     ;
 
 type
-    : 'float' | 'int' | 'boolean' | 'string' | 'void' 
+    : 'T_FLOAT' | 'T_INT' | 'T_BOOL' | 'T_STRING' | 'T_VOID' 
     ; 
 
 fun_declare
@@ -71,6 +71,12 @@ FLOAT
 	: DIGIT+ '.' DIGIT* 
 	| '.' DIGIT+
 	;
+
+T_FLOAT : 'float'; 
+T_INT : 'int'; 
+T_BOOL : 'boolean'; 
+T_STRING : 'string'; 
+T_VOID : 'void';
 
 STRING : '"' (ESC|.)*? '"' ;
 
