@@ -1,6 +1,10 @@
 package main.parser;
 
+import main.pancakes.Main;
+import main.parser.symbolTable.*;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
 import java.util.HashMap;
 
@@ -9,10 +13,16 @@ import java.util.HashMap;
  */
 public class PancakesMainListener extends PancakesBaseListener {
 
-    HashMap<String, String> currentContext;
+
+    ParseTreeProperty <Scope> scopes = new ParseTreeProperty<>(); // todos los scopes
+    GlobalScope globals; //todo ???
+    Scope currentScope;
 
     @Override
     public void enterPancakes(PancakesParser.PancakesContext ctx) {
+
+        globals = new GlobalScope();
+        currentScope = globals;
 
     }
 
@@ -29,6 +39,7 @@ public class PancakesMainListener extends PancakesBaseListener {
     @Override
     public void exitVar_declare(PancakesParser.Var_declareContext ctx) {
 
+        defineVar(ctx.type(),ctx.ID().getSymbol());
     }
 
     @Override
@@ -44,11 +55,24 @@ public class PancakesMainListener extends PancakesBaseListener {
     @Override
     public void enterFun_declare(PancakesParser.Fun_declareContext ctx) {
 
+        String name = ctx.ID().getText();
+
+        int typeTokenType = ctx.type().start.getType();
+        Symbol.Type type = Main.getType(typeTokenType);
+
+
+        FunctionSymbol function = new FunctionSymbol(name,type,currentScope);
+        currentScope.define(function);
+        scopes.put(ctx,function); //set function parent to ctx
+        currentScope = function;
+
     }
+
 
     @Override
     public void exitFun_declare(PancakesParser.Fun_declareContext ctx) {
 
+        currentScope = currentScope.getEnclosingScope(); //pop pop
     }
 
     @Override
@@ -69,16 +93,23 @@ public class PancakesMainListener extends PancakesBaseListener {
     @Override
     public void exitFun_param(PancakesParser.Fun_paramContext ctx) {
 
+        defineVar(ctx.type(),ctx.ID().getSymbol());
+
+
     }
+
 
     @Override
     public void enterBlock(PancakesParser.BlockContext ctx) {
 
+
+        currentScope = new LocalScope(currentScope);
     }
 
     @Override
     public void exitBlock(PancakesParser.BlockContext ctx) {
 
+        currentScope = currentScope.getEnclosingScope();
     }
 
     @Override
@@ -130,4 +161,20 @@ public class PancakesMainListener extends PancakesBaseListener {
     public void exitEveryRule(ParserRuleContext ctx) {
 
     }
+
+
+    ////////////////
+    // functions ///
+    ////////////////
+
+
+    void defineVar(PancakesParser.TypeContext typeCtx, Token nameToken) {
+        int typeTokenType = typeCtx.start.getType();
+        Symbol.Type type = Main.getType(typeTokenType);
+        VariableSymbol var = new VariableSymbol(nameToken.getText(), type);
+        currentScope.define(var);
+    }
+
+
+
 }

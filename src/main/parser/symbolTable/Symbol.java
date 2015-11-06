@@ -4,8 +4,12 @@ package main.parser.symbolTable;
  * Created by adrian on 11/2/15.
  */
 public class Symbol {
-    public String name; //name of symbol
-    public Type type;
+
+    public static enum Type {tINVALID, tVOID, tINT, tFLOAT, tBOOL, tSTRING};
+
+    private String name; //name of symbol
+    private Type type;
+    private Scope scope;
 
     public Symbol(String name) {
         this.name = name;
@@ -24,4 +28,15 @@ public class Symbol {
         return getName();
     }
 
+    public void setScope(Scope scope) {
+        this.scope = scope;
+    }
+
+    public Scope getScope() {
+        return scope;
+    }
+
+    public Type getType() {
+        return type;
+    }
 }
