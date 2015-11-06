@@ -2,23 +2,30 @@ package main.parser.symbolTable;
 
 import main.parser.PancakesParser;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by adrian on 11/2/15.
  */
 public class SymbolTable implements Scope{
 
 
+    Map<String,Symbol> globalScope = new HashMap<>();
+
+
+
+
     public SymbolTable() {
-        globalScope = new GlobalScope();
+        initTypeSystem();
+    }
 
-//        globalScope.define(new BuiltInTypeSymbol("int"));
-//        globalScope.define(new BuiltInTypeSymbol("float"));
-//        globalScope.define(new BuiltInTypeSymbol("bool"));
-//        globalScope.define(new BuiltInTypeSymbol("string"));
-        globalScope.define(new BuiltInTypeSymbol("bivar"));
+    protected void initTypeSystem(){
 
-
-
+        define(new BuiltInTypeSymbol("int"));
+        define(new BuiltInTypeSymbol("float"));
+        define(new BuiltInTypeSymbol("bool"));
+        define(new BuiltInTypeSymbol("string"));
 
 
     }
@@ -36,11 +43,16 @@ public class SymbolTable implements Scope{
 
     @Override
     public void define(Symbol sym) {
-
+        globalScope.put(sym.name, sym);
     }
 
     @Override
     public Symbol resolve(String name) {
-        return null;
+        return globalScope.get(name);
+    }
+
+    @Override
+    public String toString() {
+        return getScopeName() + ":" + globalScope;
     }
 }
