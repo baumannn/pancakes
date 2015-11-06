@@ -1,175 +1,93 @@
 grammar Pancakes;
 
 pancakes
-	: program
+    : (fun_declare | var_declare)+
+    ;
+
+var_declare
+    : type ID ('=' expr)? ';'
+    ;
+
+type
+    : 'float' | 'int' | 'boolean' | 'string' | 'void' 
+    ; 
+
+fun_declare
+    : type ID '(' fun_params? ')' block 
+    ;
+
+fun_params
+    : fun_param (',' fun_param)*
+    ;
+fun_param
+    : type ID
+    ;
+
+block
+	: '{' statement* '}'
 	;
 
-program
-	: element*
-	;
+statement
+    : block
+    | var_declare
+    | if_statement
+    | 'return' expr? ';' 
+    | expr '=' expr ';' 
+    | expr ';'
+    ;
 
-element
-	: var_declaration
-	| 'fun' fun_declaration
-	| fun_call ';'
-	| class_declaration
-	| loops
-	| conditionals
-	| assignments
-	| return_statement
-	;
+if_statement
+    : 'if' '(' expr ')' '{' statement '}' ('else' '{' statement '')?
+    ;
 
-var_declaration
-	: ('var' ID ('=' ( ('fun' anon_fun_declaration)| expression))? (',' ID ('=' ( 'fun' anon_fun_declaration| expression))?)* ';')
-	;
-	
-fun_declaration
-	: ID '(' args ')' '{' (element)* '}' 
-	;
+expr
+	: ID '(' arguments? ')'
+    | expr '[' expr ']'
+    | '-' expr
+    | '!' expr
+    | expr ('*' | '/' | '//') expr
+    | expr ('+'|'-') expr
+    | expr '==' expr
+    | ID
+    | INT
+    | FLOAT
+    | BOOLEAN
+    | STRING
+    | '(' expr ')'
+    ;
 
-anon_fun_declaration
-	: '(' args ')' '{' (element)* '}' 
-	;
-
-args
-	: /* empty */
-	| (fun_arg) (',' fun_arg)*
-	;
-
-fun_arg
-	: ('ref')? ID indexes?
-	;
-	
-fun_call
-	: ID indexes? '(' params ')'
-	| ID indexes? '.' fun_call 
-	;
-
-params
-	: /* empty */
-	| (param) (',' param)*
-	;
-
-param
-	: expression
-	| '&' ID indexes?
-	;
-
-class_declaration
-	: 'class' CID (':' CID)? '{' (class_elements)+ '}'
-	;
- 
-
-class_elements
-	: fun_declaration
-	| var_declaration
-	;
-
-loops
-	: for_loop
-	| do_while
-	| while_loop
-	;
-
-for_loop
-	: For '(' ID ';' Number ';' Number ')' '{' (loop_element)* '}'
-	;
-
-loop_element
-	: fun_call ';'
-	| loops
-	| conditionals
-	| assignments
-	;
-
-do_while
-	: 'do' '{' (loop_element)* '}' While '(' expression ')'
-	;
-
-while_loop
-	: While '(' expression ')' '{' (loop_element)* '}'
-	;
-
-conditionals
-	: 'if' '(' expression ')' '{' (loop_element | return_statement)* '}' ('else' '{' (loop_element | return_statement)* '}')?
+arguments 
+	: expr (',' expr)*
 	;
 
 
-expression
- : '!' expression 
- | expression ( '*' | '/' | '//') expression // '//' is floored division
- | expression ( '+' | '-' ) expression
- | expression ( '>=' | '<=' | '>' | '<' | '==' | '!=' ) expression
- | expression '%' expression
- | expression ( '&&' | '||' ) expression
- | value
- | ID
- | '(' expression ')'
- | fun_call
- | class_instantiation
- | expression indexes+
- //| expression '?' expression ':' expression
- //| expression 'in' expression (array contains value)
- ;
+BOOLEAN : ('true' | 'false');
 
-class_instantiation
-	: 'new' CID '(' params ')'
+ID  : LETTER (LETTER | DIGIT)* ;
+
+INT : DIGIT+ ;
+
+FLOAT
+	: DIGIT+ '.' DIGIT* 
+	| '.' DIGIT+
 	;
 
-
-
-assignments
-	: ID indexes? '=' (expression | 'fun' fun_declaration) ';'
-	| ID indexes? '++' ';'
-	| ID indexes? '--' ';'
-	;
-
-
-return_statement
-	: 'return' expression? ';'
-	;
-
-value
-	: String
-	| Boolean
-	| Number
-	;
-
-indexes
-	: ('[' expression ']')+
-	;
-
-While: 'while';
-
-For: 'for';
-
-Line_comment : '#' .*? '\n' -> skip ;
-
-Comment : '/*' .*? '*/' -> skip ;
-
-ID: [a-z] (Alpha | Digit | '_') * ;
-
-CID: [A-Z](Alpha | Digit | '_')* ;
-
-String: '"' (Esc|.)*? '"' ;
-
-Number
-	: Digit+ 
-	| Digit+ '.' Digit* 
-	| '.' Digit+
-	;
-
-	
-Boolean: ('true' | 'false');
-
+STRING : '"' (ESC|.)*? '"' ;
 
 fragment
-Esc : '\\"' | '\\\\' ;
+LETTER : [a-zA-Z_] ;
 
 fragment
-Alpha : [a-zA-Z] ;
+DIGIT : [0-9] ;
 
 fragment
-Digit : [0-9] ;
+ESC : '\\"' | '\\\\' ;
 
-WS : [ \t\n\r]+ -> skip ;
+//fragment
+//ALPHA : [a-zA-Z] ;
+
+
+WS  : [ \t\n\r]+ -> skip ;
+
+SL_COMMENT
+    : '#' .*? '\n' -> skip ;

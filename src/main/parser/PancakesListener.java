@@ -18,233 +18,103 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitPancakes(PancakesParser.PancakesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#program}.
+	 * Enter a parse tree produced by {@link PancakesParser#var_declare}.
 	 * @param ctx the parse tree
 	 */
-	void enterProgram(PancakesParser.ProgramContext ctx);
+	void enterVar_declare(PancakesParser.Var_declareContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#program}.
+	 * Exit a parse tree produced by {@link PancakesParser#var_declare}.
 	 * @param ctx the parse tree
 	 */
-	void exitProgram(PancakesParser.ProgramContext ctx);
+	void exitVar_declare(PancakesParser.Var_declareContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#element}.
+	 * Enter a parse tree produced by {@link PancakesParser#type}.
 	 * @param ctx the parse tree
 	 */
-	void enterElement(PancakesParser.ElementContext ctx);
+	void enterType(PancakesParser.TypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#element}.
+	 * Exit a parse tree produced by {@link PancakesParser#type}.
 	 * @param ctx the parse tree
 	 */
-	void exitElement(PancakesParser.ElementContext ctx);
+	void exitType(PancakesParser.TypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#var_declaration}.
+	 * Enter a parse tree produced by {@link PancakesParser#fun_declare}.
 	 * @param ctx the parse tree
 	 */
-	void enterVar_declaration(PancakesParser.Var_declarationContext ctx);
+	void enterFun_declare(PancakesParser.Fun_declareContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#var_declaration}.
+	 * Exit a parse tree produced by {@link PancakesParser#fun_declare}.
 	 * @param ctx the parse tree
 	 */
-	void exitVar_declaration(PancakesParser.Var_declarationContext ctx);
+	void exitFun_declare(PancakesParser.Fun_declareContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#fun_declaration}.
+	 * Enter a parse tree produced by {@link PancakesParser#fun_params}.
 	 * @param ctx the parse tree
 	 */
-	void enterFun_declaration(PancakesParser.Fun_declarationContext ctx);
+	void enterFun_params(PancakesParser.Fun_paramsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#fun_declaration}.
+	 * Exit a parse tree produced by {@link PancakesParser#fun_params}.
 	 * @param ctx the parse tree
 	 */
-	void exitFun_declaration(PancakesParser.Fun_declarationContext ctx);
+	void exitFun_params(PancakesParser.Fun_paramsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#args}.
+	 * Enter a parse tree produced by {@link PancakesParser#fun_param}.
 	 * @param ctx the parse tree
 	 */
-	void enterArgs(PancakesParser.ArgsContext ctx);
+	void enterFun_param(PancakesParser.Fun_paramContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#args}.
+	 * Exit a parse tree produced by {@link PancakesParser#fun_param}.
 	 * @param ctx the parse tree
 	 */
-	void exitArgs(PancakesParser.ArgsContext ctx);
+	void exitFun_param(PancakesParser.Fun_paramContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#fun_arg}.
+	 * Enter a parse tree produced by {@link PancakesParser#block}.
 	 * @param ctx the parse tree
 	 */
-	void enterFun_arg(PancakesParser.Fun_argContext ctx);
+	void enterBlock(PancakesParser.BlockContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#fun_arg}.
+	 * Exit a parse tree produced by {@link PancakesParser#block}.
 	 * @param ctx the parse tree
 	 */
-	void exitFun_arg(PancakesParser.Fun_argContext ctx);
+	void exitBlock(PancakesParser.BlockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#fun_call}.
+	 * Enter a parse tree produced by {@link PancakesParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterFun_call(PancakesParser.Fun_callContext ctx);
+	void enterStatement(PancakesParser.StatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#fun_call}.
+	 * Exit a parse tree produced by {@link PancakesParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitFun_call(PancakesParser.Fun_callContext ctx);
+	void exitStatement(PancakesParser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#params}.
+	 * Enter a parse tree produced by {@link PancakesParser#if_statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterParams(PancakesParser.ParamsContext ctx);
+	void enterIf_statement(PancakesParser.If_statementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#params}.
+	 * Exit a parse tree produced by {@link PancakesParser#if_statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitParams(PancakesParser.ParamsContext ctx);
+	void exitIf_statement(PancakesParser.If_statementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#param}.
+	 * Enter a parse tree produced by {@link PancakesParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterParam(PancakesParser.ParamContext ctx);
+	void enterExpr(PancakesParser.ExprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#param}.
+	 * Exit a parse tree produced by {@link PancakesParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitParam(PancakesParser.ParamContext ctx);
+	void exitExpr(PancakesParser.ExprContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#class_declaration}.
+	 * Enter a parse tree produced by {@link PancakesParser#arguments}.
 	 * @param ctx the parse tree
 	 */
-	void enterClass_declaration(PancakesParser.Class_declarationContext ctx);
+	void enterArguments(PancakesParser.ArgumentsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#class_declaration}.
+	 * Exit a parse tree produced by {@link PancakesParser#arguments}.
 	 * @param ctx the parse tree
 	 */
-	void exitClass_declaration(PancakesParser.Class_declarationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#class_elements}.
-	 * @param ctx the parse tree
-	 */
-	void enterClass_elements(PancakesParser.Class_elementsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#class_elements}.
-	 * @param ctx the parse tree
-	 */
-	void exitClass_elements(PancakesParser.Class_elementsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#loops}.
-	 * @param ctx the parse tree
-	 */
-	void enterLoops(PancakesParser.LoopsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#loops}.
-	 * @param ctx the parse tree
-	 */
-	void exitLoops(PancakesParser.LoopsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#for_loop}.
-	 * @param ctx the parse tree
-	 */
-	void enterFor_loop(PancakesParser.For_loopContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#for_loop}.
-	 * @param ctx the parse tree
-	 */
-	void exitFor_loop(PancakesParser.For_loopContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#loop_element}.
-	 * @param ctx the parse tree
-	 */
-	void enterLoop_element(PancakesParser.Loop_elementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#loop_element}.
-	 * @param ctx the parse tree
-	 */
-	void exitLoop_element(PancakesParser.Loop_elementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#do_while}.
-	 * @param ctx the parse tree
-	 */
-	void enterDo_while(PancakesParser.Do_whileContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#do_while}.
-	 * @param ctx the parse tree
-	 */
-	void exitDo_while(PancakesParser.Do_whileContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#while_loop}.
-	 * @param ctx the parse tree
-	 */
-	void enterWhile_loop(PancakesParser.While_loopContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#while_loop}.
-	 * @param ctx the parse tree
-	 */
-	void exitWhile_loop(PancakesParser.While_loopContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#conditionals}.
-	 * @param ctx the parse tree
-	 */
-	void enterConditionals(PancakesParser.ConditionalsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#conditionals}.
-	 * @param ctx the parse tree
-	 */
-	void exitConditionals(PancakesParser.ConditionalsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpression(PancakesParser.ExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpression(PancakesParser.ExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#class_instantiation}.
-	 * @param ctx the parse tree
-	 */
-	void enterClass_instantiation(PancakesParser.Class_instantiationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#class_instantiation}.
-	 * @param ctx the parse tree
-	 */
-	void exitClass_instantiation(PancakesParser.Class_instantiationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#assignments}.
-	 * @param ctx the parse tree
-	 */
-	void enterAssignments(PancakesParser.AssignmentsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#assignments}.
-	 * @param ctx the parse tree
-	 */
-	void exitAssignments(PancakesParser.AssignmentsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#return_statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterReturn_statement(PancakesParser.Return_statementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#return_statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitReturn_statement(PancakesParser.Return_statementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#value}.
-	 * @param ctx the parse tree
-	 */
-	void enterValue(PancakesParser.ValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#value}.
-	 * @param ctx the parse tree
-	 */
-	void exitValue(PancakesParser.ValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#indexes}.
-	 * @param ctx the parse tree
-	 */
-	void enterIndexes(PancakesParser.IndexesContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#indexes}.
-	 * @param ctx the parse tree
-	 */
-	void exitIndexes(PancakesParser.IndexesContext ctx);
+	void exitArguments(PancakesParser.ArgumentsContext ctx);
 }
