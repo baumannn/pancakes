@@ -3,14 +3,8 @@ package main.pancakes;
 import main.parser.*;
 
 import main.parser.symbolTable.Symbol;
-import org.antlr.runtime.tree.CommonTree;
-import org.antlr.runtime.tree.DOTTreeGenerator;
-import org.antlr.stringtemplate.StringTemplate;
-import org.antlr.v4.misc.OrderedHashMap;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.*;
 import org.antlr.v4.runtime.tree.*;
-import org.antlr.*;
 
 import java.io.IOException;
 
@@ -40,7 +34,7 @@ public class Main {
 
             // Walk it and attach our listener
             ParseTreeWalker walker = new ParseTreeWalker();
-            PancakesMainListener listener = new PancakesMainListener();
+            FirstPassPancakesListener listener = new FirstPassPancakesListener();
 
             walker.walk(listener, pancakesContext);
 
