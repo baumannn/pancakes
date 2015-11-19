@@ -39,10 +39,10 @@ public class Main {
 
             // Walk it and attach our listener
             ParseTreeWalker walker = new ParseTreeWalker();
-            FirstPassPancakesListener listener = new FirstPassPancakesListener();
+            FirstPassPancakesListener fp_listener = new FirstPassPancakesListener();
+            walker.walk(fp_listener, pancakesContext);
 
-
-            walker.walk(listener, pancakesContext);
+            SecondPassPancakesListener sp_listener  = new SecondPassPancakesListener( fp_listener.getGlobals(), fp_listener.getScopes());
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package main.parser;
 
+import com.sun.tools.javah.Util;
 import main.pancakes.Main;
 import main.parser.symbolTable.*;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -14,8 +15,8 @@ import java.util.HashMap;
 public class FirstPassPancakesListener extends PancakesBaseListener {
 
 
-    ParseTreeProperty <Scope> scopes = new ParseTreeProperty<>(); // todos los scopes
-    GlobalScope globals; //todo ???
+    private ParseTreeProperty <Scope> scopes = new ParseTreeProperty<>(); // todos los scopes
+    private GlobalScope globals; //todo ???
     Scope currentScope;
 
 
@@ -58,7 +59,12 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
             scopes.put(ctx, function); //set function parent to ctx
             currentScope = function;
         } else{
+            function = new FunctionSymbol(name + "#" + ctx.ID().getSymbol().getLine(),type,currentScope);
+            currentScope.define(function);
+            scopes.put(ctx, function); //set function parent to ctx
+            currentScope = function;
             Main.logError(ctx.ID().getSymbol(), "Error: Function was already declared: " + name);
+
         }
 
 
@@ -149,5 +155,11 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
     }
 
 
+    public ParseTreeProperty<Scope> getScopes() {
+        return scopes;
+    }
 
+    public GlobalScope getGlobals() {
+        return globals;
+    }
 }
