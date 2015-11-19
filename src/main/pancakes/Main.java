@@ -22,6 +22,11 @@ public class Main {
         }
     }
 
+    public static void logError(Token t, String msg) {
+        System.err.printf("line %d:%d %s\n", t.getLine(), t.getCharPositionInLine(),
+                msg);
+    }
+
     public static void main(String[] args) {
 
         try {

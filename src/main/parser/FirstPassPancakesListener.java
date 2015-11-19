@@ -29,6 +29,7 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
         globals = new GlobalScope();
         currentScope = globals;
 
+
     }
 
 
@@ -66,7 +67,7 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
     @Override
     public void exitFun_param(PancakesParser.Fun_paramContext ctx) {
 
-        defineVar(ctx.type(),ctx.ID().getSymbol());
+        defineVar(ctx.type(), ctx.ID().getSymbol());
 
 
     }
@@ -83,6 +84,41 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
 
         currentScope = currentScope.getEnclosingScope();
     }
+
+
+    ///CONSTANTS
+
+    @Override
+    public void exitFloatConst(PancakesParser.FloatConstContext ctx) {
+        String name = ctx.FLOAT().getText();
+
+
+        FunctionSymbol function = new  (name,type,currentScope);
+        currentScope.define(function);
+        scopes.put(ctx, new BuiltInTypeSymbol("float")); //set function parent to ctx
+        currentScope = function;
+
+
+
+    }
+
+    @Override
+    public void exitStringConst(PancakesParser.StringConstContext ctx) {
+
+    }
+
+    @Override
+    public void exitBoolConst(PancakesParser.BoolConstContext ctx) {
+
+    }
+
+    @Override
+    public void exitIntConst(PancakesParser.IntConstContext ctx) {
+
+    }
+
+    //
+
 
 
 

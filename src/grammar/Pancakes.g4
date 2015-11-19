@@ -9,7 +9,7 @@ var_declare
     ;
 
 type
-    : 'T_FLOAT' | 'T_INT' | 'T_BOOL' | 'T_STRING' | 'T_VOID' 
+    : T_FLOAT | T_INT | T_BOOL | T_STRING | T_VOID 
     ; 
 
 fun_declare
@@ -41,19 +41,19 @@ if_statement
     ;
 
 expr
-	: ID '(' arguments? ')'
-    | expr '[' expr ']'
-    | '-' expr
-    | '!' expr
-    | expr ('*' | '/' | '//') expr
-    | expr ('+'|'-') expr
-    | expr '==' expr
-    | ID
-    | INT
-    | FLOAT
-    | BOOLEAN
-    | STRING
-    | '(' expr ')'
+	: ID '(' arguments? ')'         #FunCall
+    | expr '[' expr ']'             #ArrayIndex
+    | '-' expr                      #UnaryNegate
+    | '!' expr                      #UnaryNot
+    | expr ('*' | '/' | '//') expr  #MultDivIntDiv
+    | expr ('+'|'-') expr           #AddSub
+    | expr '==' expr                #Equality
+    | ID                            #VarRef
+    | INT                           #IntConst
+    | FLOAT                         #FloatConst
+    | BOOLEAN                       #BoolConst
+    | STRING                        #StringConst
+    | '(' expr ')'                  #Paren
     ;
 
 arguments 

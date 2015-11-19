@@ -98,15 +98,161 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitIf_statement(PancakesParser.If_statementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#expr}.
+	 * Enter a parse tree produced by the {@code FloatConst}
+	 * labeled alternative in {@link PancakesParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpr(PancakesParser.ExprContext ctx);
+	void enterFloatConst(PancakesParser.FloatConstContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PancakesParser#expr}.
+	 * Exit a parse tree produced by the {@code FloatConst}
+	 * labeled alternative in {@link PancakesParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpr(PancakesParser.ExprContext ctx);
+	void exitFloatConst(PancakesParser.FloatConstContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code UnaryNegate}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryNegate(PancakesParser.UnaryNegateContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code UnaryNegate}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryNegate(PancakesParser.UnaryNegateContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code StringConst}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterStringConst(PancakesParser.StringConstContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StringConst}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitStringConst(PancakesParser.StringConstContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code FunCall}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunCall(PancakesParser.FunCallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code FunCall}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunCall(PancakesParser.FunCallContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code UnaryNot}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryNot(PancakesParser.UnaryNotContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code UnaryNot}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryNot(PancakesParser.UnaryNotContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code AddSub}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterAddSub(PancakesParser.AddSubContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code AddSub}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitAddSub(PancakesParser.AddSubContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code MultDivIntDiv}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultDivIntDiv(PancakesParser.MultDivIntDivContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code MultDivIntDiv}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultDivIntDiv(PancakesParser.MultDivIntDivContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code VarRef}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarRef(PancakesParser.VarRefContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code VarRef}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarRef(PancakesParser.VarRefContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ArrayIndex}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayIndex(PancakesParser.ArrayIndexContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ArrayIndex}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayIndex(PancakesParser.ArrayIndexContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Paren}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterParen(PancakesParser.ParenContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Paren}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitParen(PancakesParser.ParenContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code BoolConst}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolConst(PancakesParser.BoolConstContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code BoolConst}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolConst(PancakesParser.BoolConstContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IntConst}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntConst(PancakesParser.IntConstContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IntConst}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntConst(PancakesParser.IntConstContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Equality}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterEquality(PancakesParser.EqualityContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Equality}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitEquality(PancakesParser.EqualityContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PancakesParser#arguments}.
 	 * @param ctx the parse tree

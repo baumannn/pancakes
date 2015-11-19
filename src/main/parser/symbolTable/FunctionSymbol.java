@@ -36,7 +36,7 @@ public class FunctionSymbol extends Symbol implements Scope {
     public void define(Symbol symbol) {
 
         symbol.setScope(this);
-        args.put(symbol.getName(),symbol);
+        args.put(symbol.getName(), symbol);
 
     }
 
