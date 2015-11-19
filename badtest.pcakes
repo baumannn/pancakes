@@ -24,6 +24,10 @@ int add_1 (int num) {
 
 }
 
+int add_1 (){
+	return 1;
+}
+
 void _thingTester666_ (float fl, int in, boolean bo, string st) {
 	
 
