@@ -17,12 +17,28 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
     GlobalScope globals;
     Scope currentScope;
     HashMap<PancakesParser.ExprContext, Symbol.Type> typeMap;
+    HashMap<Symbol.Type,HashMap<Symbol.Type, HashMap<Operand, Symbol.Type>>> tesseract;
 
     public ThirdPassPancakesListener(GlobalScope globalScope, ParseTreeProperty<Scope> scopes) {
 
         globals = globalScope;
         this.scopes = scopes;
         typeMap = new HashMap<>();
+
+
+        HashMap<Symbol.Type, HashMap<Operand, Symbol.Type>> cube;
+        for (Operand o : Operand.values()) {
+
+            HashMap<Operand, Symbol.Type> square = new HashMap<>();
+
+
+
+
+
+        }
+
+
+
     }
 
     /*
@@ -82,6 +98,18 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
 //        tm.put(ctx, Main.resolveType(type1, type2, "MultDivIntDiv"));
 //    }
 
+
+    @Override
+    public void exitAddSub(PancakesParser.AddSubContext ctx) {
+        PancakesParser.ExprContext e1 = ctx.expr(0);
+        PancakesParser.ExprContext e2 = ctx.expr(1);
+
+        if(ctx.expr(0).getRuleContext() == ctx.expr(1).getRuleContext()){
+            typeMap.put(ctx, )
+        }
+    }
+
+
     //Equality
 
     @Override
@@ -90,7 +118,7 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
         PancakesParser.ExprContext expr2 = ctx.expr(1);
 
 
-        staticTypeCheck(expr1, expr2, Operand.oEquality);
+        validStaticTypeCheck(expr1, expr2, Operand.oEquality);
     }
 
 
@@ -131,6 +159,24 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
     @Override
     public void exitParen(PancakesParser.ParenContext ctx) {
         typeMap.put(ctx, typeMap.get(ctx.expr()));
+    }
+
+
+
+
+    private void addToTesseract(Symbol.Type t1, Symbol.Type t2, Operand o, Symbol.Type out){
+
+        tesseract.get(t1).get(t2).put(o, out);
+
+    }
+
+
+    private Symbol.Type validStaticTypeCheck(PancakesParser.ExprContext e1, PancakesParser.ExprContext e2, Operand o) {
+
+
+        return tesseract.get(typeMap.get(e1)).get(typeMap.get(e2)).get(o);
+
+
     }
 
 
