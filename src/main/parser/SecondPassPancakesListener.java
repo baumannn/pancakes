@@ -17,7 +17,7 @@ public class SecondPassPancakesListener extends PancakesBaseListener {
     public SecondPassPancakesListener(GlobalScope globalScope, ParseTreeProperty<Scope> scopes) {
 
         globals = globalScope;
-        currentScope = globals;
+        this.currentScope = globals;
         this.scopes = scopes;
 
     }

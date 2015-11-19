@@ -95,7 +95,11 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
     @Override
     public void enterBlock(PancakesParser.BlockContext ctx) {
 
-        currentScope = new LocalScope(currentScope);
+        LocalScope lc = new LocalScope(currentScope);
+
+        currentScope = lc;
+
+        scopes.put(ctx, lc);
     }
 
     @Override
