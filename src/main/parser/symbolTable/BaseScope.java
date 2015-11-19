@@ -23,11 +23,8 @@ public abstract class BaseScope implements Scope {
     @Override
     public void define(Symbol symbol) {
 
-
         symbol.setScope(this);
         symbols.put(symbol.getName(),symbol);
-
-
 
     }
 
@@ -44,5 +41,10 @@ public abstract class BaseScope implements Scope {
             return null;
         }
 
+    }
+
+    @Override
+    public boolean isDefined(Symbol sym) {
+        return symbols.containsKey(sym.getName());
     }
 }
