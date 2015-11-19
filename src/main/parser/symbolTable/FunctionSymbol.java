@@ -40,6 +40,10 @@ public class FunctionSymbol extends Symbol implements Scope {
 
     }
 
+    @Override
+    public boolean isDefined(Symbol sym) {
+        return args.containsKey(sym.getName());
+    }
 
     @Override
     public String getScopeName() {

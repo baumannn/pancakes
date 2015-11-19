@@ -1,112 +1,57 @@
-#var declaration
-
-var esteEsUnVar = !(!8.4 * a), otro_var = 0, tercero;
 
 
+# Pancakes testfile
 
-#class declaration
+# puede empezar con declaraciones de variables o de funciones
 
 
-class Clase{
+
+
+# declaracion de variables
+
+float f;
+int i = 0;
+boolean b;
+string s;
+
+
+
+#declaracion de funciones
+
+int add_1 (int num) {
 	
-	funclase(){}
-
-	var varclase = 0;
+	return( num + 1 ) ;
 
 }
 
-fun mi_funcion(){
+void _thingTester666_ (float fl, int in, boolean bo, string st) {
 	
-	var foo = 3;
 
-	return foo;
+	int j = 0;
 
-}
-
-
-
-c = "world 'hello'";
-
-#fun declaration
-
-fun funcion (){}
-
-fun fun2(ref arg) {
-
-	var clase = new Clase();
-		
-
-	#loops
-
-	var i;
-
-	for(i;0;10){
-
-		clase.funclase();
-
-		do{
-
-			while(my_string.length() > 0){
-
-				if( my_string2.length() % 2 == 0){
-					return 45;
-				}
-
-
-			}
-
-		} while (true)
+	# block adentro
+	{
+		int k = 0;
 
 	}
 
+	if ( add_1(j) ) {
 
+		return;
+
+	}
+
+	if ( j == 1 ) {
+
+		j = - j ;
+
+	} else {
+
+		j = add_1(j);
+
+	}
+
+	_thingTester666_( fl, add_1(in), !bo, st);
 
 
 }
-
-fun fun3(ref arg1, arg2, arg3) {
-	
-
-	fun2(&hola);
-
-
-
-}
-
-
-
-esteEsUnVar = new Clase();
-esteEsUnVar++;
-esteEsUnVar--;
-
-esteEsUnVar = !6;
-esteEsUnVar = 4/6;
-esteEsUnVar = "as"//4;
-esteEsUnVar = true >= false;
-esteEsUnVar = true <= false;
-esteEsUnVar = true > false;
-esteEsUnVar = true < false;
-esteEsUnVar = false!=false;
-esteEsUnVar = 1-0;
-esteEsUnVar = 1+1;
-esteEsUnVar = 1*2;
-esteEsUnVar = 1==2;
-esteEsUnVar = 1&&2;
-esteEsUnVar = 1||2;
-esteEsUnVar = 6;
-esteEsUnVar = (otro_var);
-esteEsUnVar = fun2("yes");
-
-esteEsUnVar = fun mi_funcion (){
-
-as= asd;
-asd =  1;
- };
-
-
-return;
-
-
-#assignments
-
-#aasjdkasjd
