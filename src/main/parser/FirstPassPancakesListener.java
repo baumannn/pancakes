@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import java.util.HashMap;
 
 /**
- * Created by adrian on 10/28/15.
+ * Registers variables and functions in scopes.
  */
 public class FirstPassPancakesListener extends PancakesBaseListener {
 
@@ -36,7 +36,10 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
     @Override
     public void exitVar_declare(PancakesParser.Var_declareContext ctx) {
 
-        defineVar(ctx.type(),ctx.ID().getSymbol());
+        if( !defineVar(ctx.type(), ctx.ID().getSymbol())){
+            Main.logError(ctx.ID().getSymbol(), "Error: Redefinition of variable: " +  ctx.ID().getText());
+        }
+
     }
 
 
@@ -50,9 +53,14 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
 
 
         FunctionSymbol function = new FunctionSymbol(name,type,currentScope);
-        currentScope.define(function);
-        scopes.put(ctx,function); //set function parent to ctx
-        currentScope = function;
+        if( !currentScope.isDefined(function)) {
+            currentScope.define(function);
+            scopes.put(ctx, function); //set function parent to ctx
+            currentScope = function;
+        } else{
+            Main.logError(ctx.ID().getSymbol(), "Error: Function was already declared: " + name);
+        }
+
 
     }
 
@@ -67,7 +75,9 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
     @Override
     public void exitFun_param(PancakesParser.Fun_paramContext ctx) {
 
-        defineVar(ctx.type(), ctx.ID().getSymbol());
+        if( !defineVar(ctx.type(), ctx.ID().getSymbol())){
+            Main.logError(ctx.ID().getSymbol(), "Error: Redefinition of variable: " + ctx.ID().getText());
+        }
 
 
     }
@@ -93,10 +103,7 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
         String name = ctx.FLOAT().getText();
 
 
-        FunctionSymbol function = new  (name,type,currentScope);
-        currentScope.define(function);
-        scopes.put(ctx, new BuiltInTypeSymbol("float")); //set function parent to ctx
-        currentScope = function;
+       // Symbol.Type type = Main.getType(typeTokenType);
 
 
 
@@ -127,11 +134,17 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
     ////////////////
 
 
-    void defineVar(PancakesParser.TypeContext typeCtx, Token nameToken) {
+    boolean defineVar(PancakesParser.TypeContext typeCtx, Token nameToken) {
         int typeTokenType = typeCtx.start.getType();
         Symbol.Type type = Main.getType(typeTokenType);
         VariableSymbol var = new VariableSymbol(nameToken.getText(), type);
-        currentScope.define(var);
+
+        if( !currentScope.isDefined(var)) {
+            currentScope.define(var);
+            return true;
+        }
+
+        return false;
     }
 
 

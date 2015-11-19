@@ -45,7 +45,8 @@ expr
     | expr '[' expr ']'             #ArrayIndex
     | '-' expr                      #UnaryNegate
     | '!' expr                      #UnaryNot
-    | expr ('*' | '/' | '//') expr  #MultDivIntDiv
+    | expr ('*' | '/') expr  #MultDiv
+    | expr ('//') expr
     | expr ('+'|'-') expr           #AddSub
     | expr '==' expr                #Equality
     | ID                            #VarRef

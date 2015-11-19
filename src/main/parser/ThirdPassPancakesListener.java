@@ -62,8 +62,19 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
 
 
     @Override
-    public void exitMultDivIntDiv(PancakesParser.MultDivIntDivContext ctx) {
-        Symbol s1 = ctx.
+    public void exitMultDiv(PancakesParser.MultDivIntDivContext ctx) {
+       TypesMap tm;
 
+        Symbol.Type type1 = tm.lookUpType(ctx.expr(0));
+        Symbol.Type type2 = tm.lookUpType(ctx.expr(1));
+
+        if( !Main.areCompatibleTypes(type1, type2, "MultDivIntDiv")){
+            //error
+        }
+
+        ctx.
+
+        tm.put(ctx, Main.resolveType(type1, type2, "MultDivIntDiv"));
     }
+
 }
