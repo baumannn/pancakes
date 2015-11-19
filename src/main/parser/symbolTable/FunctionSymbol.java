@@ -55,5 +55,7 @@ public class FunctionSymbol extends Symbol implements Scope {
         return enclosingScope;
     }
 
-
+    public Map<String, Symbol> getArgs() {
+        return args;
+    }
 }

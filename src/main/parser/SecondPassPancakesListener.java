@@ -65,14 +65,29 @@ public class SecondPassPancakesListener extends PancakesBaseListener {
     @Override
     public void exitFunCall(PancakesParser.FunCallContext ctx) {
         String funName = ctx.ID().getSymbol().getText();
-        Symbol funSym = currentScope.resolve(funName);
+        Symbol sym = currentScope.resolve(funName);
 
-        if( funSym == null){
+        if( sym == null){
             Main.logError(ctx.ID().getSymbol(), "Error: Function name not declared: " + funName);
+            return;
         }
 
-        if(funSym instanceof VariableSymbol){
+        if(sym instanceof VariableSymbol){
             Main.logError(ctx.ID().getSymbol(), "Error: Name refers to variable: " + funName);
+            return;
+        }
+
+        FunctionSymbol funSym = (FunctionSymbol) currentScope.resolve(funName);
+
+        if (funSym.getArgs().size() != ctx.arguments().expr().size()){
+            Main.logError(ctx.ID().getSymbol(),
+                    "Argument mismatch in"
+                            + funName
+                            + ", expected:"
+                            + funSym.getArgs().size()
+                            + ", got:"
+                            + ctx.arguments().expr().size() );
+            return;
         }
 
     }

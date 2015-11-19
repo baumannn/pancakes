@@ -42,12 +42,12 @@ if_statement
 
 expr
 	: ID '(' arguments? ')'         #FunCall
-    | expr '[' expr ']'             #ArrayIndex
+    | ID '[' expr ']'               #ArrayIndex
     | '-' expr                      #UnaryNegate
     | '!' expr                      #UnaryNot
-    | expr ('*' | '/') expr 		#MultDiv
+    | expr (MULT | DIV ) expr 		#MultDiv
     | expr ('//') expr				#Intdiv
-    | expr ('+'|'-') expr           #AddSub
+    | expr ( ADD | MINUS) expr      #AddSub
     | expr '==' expr                #Equality
     | ID                            #VarRef
     | INT                           #IntConst
@@ -69,6 +69,12 @@ T_INT : 'int';
 T_BOOL : 'boolean'; 
 T_STRING : 'string'; 
 T_VOID : 'void';
+
+ADD : '+';
+MINUS : '-' ;
+MULT : '*' ;
+DIV : '/';
+
 
 
 ID  : LETTER (LETTER | DIGIT)* ;

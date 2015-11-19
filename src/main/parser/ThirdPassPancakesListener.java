@@ -3,6 +3,7 @@ package main.parser;
 import main.pancakes.Main;
 import main.parser.symbolTable.*;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
+import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 import java.util.HashMap;
 
@@ -11,7 +12,7 @@ import java.util.HashMap;
  */
 public class ThirdPassPancakesListener extends PancakesBaseListener{
 
-    public static enum Operand {oEquality, oMultiplication, oDivision, oIntdiv, oAddition, oSubtraction, oNot, oUnaryNegation, oArrayIndex};
+    public static enum Operand {oEquality, oMultiplication, oDivision, oIntdiv, oAddition, oSubtraction, oUnaryNot, oUnaryNegation, oArrayIndex};
 
     ParseTreeProperty<Scope> scopes; // todos los scopes
     GlobalScope globals;
@@ -65,33 +66,106 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
      **/
 
 
-//    @Override
-//    public void exitMultDiv(PancakesParser.MultDivIntDivContext ctx) {
-//       TypesMap tm;
-//        //typesmap dice el tipo de una expr
-//
-//        Symbol.Type type1 = tm.lookUpType(ctx.expr(0));
-//        Symbol.Type type2 = tm.lookUpType(ctx.expr(1));
-//
-//        if( !Main.areCompatibleTypes(type1, type2, "MultDivIntDiv")){
-//            //error
-//        }
-//
-//        ctx.
-//
-//        tm.put(ctx, Main.resolveType(type1, type2, "MultDivIntDiv"));
-//    }
+    /*
+     ************************************
+     * Function Calls
+     *
+     ************************************
+     **/
+
+    @Override
+    public void exitFunCall(PancakesParser.FunCallContext ctx) {
+        FunctionSymbol referencedFunction = (FunctionSymbol) currentScope.resolve(ctx.ID().getSymbol().getText());
+    }
+
+    /*
+     ************************************
+     * Array indexes
+     *
+     ************************************
+     **/
+
+    @Override
+    public void exitArrayIndex(PancakesParser.ArrayIndexContext ctx) {
+        if( typeMap.get(ctx.expr()) != Symbol.Type.tINT){
+            System.err.printf("line %d:%d %s\n", ctx.start.getLine(), ctx.start.getCharPositionInLine(), "Array index is not an integer.");
+        }
+
+        String varName = ctx.ID().getSymbol().getText();
+        Symbol vs = currentScope.resolve(varName);
+        System.out.println(vs.getType());
+        typeMap.put(ctx, vs.getType());
+
+
+    }
+
+    /*
+     ************************************
+     * Unary operations
+     *
+     ************************************
+     **/
+
+    @Override
+    public void exitUnaryNegate(PancakesParser.UnaryNegateContext ctx) {
+        checkValidityBinaryOperand(ctx, ctx.expr(), ctx.expr(), Operand.oUnaryNegation);
+    }
+
+    @Override
+    public void exitUnaryNot(PancakesParser.UnaryNotContext ctx) {
+        checkValidityBinaryOperand(ctx, ctx.expr(), ctx.expr(), Operand.oUnaryNot);
+    }
+
+    /*
+     ************************************
+     * Binary operations
+     *
+     ************************************
+     **/
+
+
+    @Override
+    public void exitMultDiv(PancakesParser.MultDivContext ctx) {
+        if(ctx.MULT() != null) {
+            checkValidityBinaryOperand(ctx, ctx.expr(0), ctx.expr(1), Operand.oMultiplication);
+        } else{
+            checkValidityBinaryOperand(ctx, ctx.expr(0), ctx.expr(1), Operand.oDivision);
+        }
+    }
+
+    @Override
+    public void exitIntdiv(PancakesParser.IntdivContext ctx) {
+        checkValidityBinaryOperand(ctx, ctx.expr(0), ctx.expr(1), Operand.oIntdiv);
+    }
+
+    //Add Sub
+    @Override
+    public void exitAddSub(PancakesParser.AddSubContext ctx) {
+        if (ctx.ADD() != null){
+            checkValidityBinaryOperand(ctx, ctx.expr(0), ctx.expr(1), Operand.oAddition);
+        } else{
+            checkValidityBinaryOperand(ctx, ctx.expr(0), ctx.expr(1), Operand.oSubtraction);
+        }
+
+    }
+
 
     //Equality
 
     @Override
     public void exitEquality(PancakesParser.EqualityContext ctx) {
-        PancakesParser.ExprContext expr1 = ctx.expr(0);
-        PancakesParser.ExprContext expr2 = ctx.expr(1);
-
-
-        staticTypeCheck(expr1, expr2, Operand.oEquality);
+        checkValidityBinaryOperand(ctx, ctx.expr(0), ctx.expr(1), Operand.oEquality);
     }
+
+
+    /*
+     ****************
+     * References and constants
+     *
+     *****************
+     */
+
+
 
 
     //VarRef
@@ -126,7 +200,12 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
         typeMap.put(ctx, Symbol.Type.tFLOAT);
     }
 
-    //Parenthesis
+    /*
+     ************************************
+     * Parenthesis
+     *
+     ************************************
+     **/
 
     @Override
     public void exitParen(PancakesParser.ParenContext ctx) {
@@ -134,6 +213,21 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
     }
 
 
+    /*
+     ************************************
+     * Helper functions
+     *
+     ************************************
+     **/
 
+    private void checkValidityBinaryOperand(PancakesParser.ExprContext ctx, PancakesParser.ExprContext left, PancakesParser.ExprContext right, Operand op){
+        Symbol.Type type = validStaticTypeCheck(left,  right, op);
+
+        if( type != Symbol.Type.tINVALID){
+            typeMap.put(ctx, type);
+        } else{
+            System.err.printf("line %d:%d %s\n", ctx.start.getLine(), ctx.start.getCharPositionInLine(), "Types incompatible with operation.");
+        }
+    }
 
 }

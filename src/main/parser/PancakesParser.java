@@ -18,9 +18,9 @@ public class PancakesParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		T__17=18, T__18=19, BOOLEAN=20, T_FLOAT=21, T_INT=22, T_BOOL=23, T_STRING=24, 
-		T_VOID=25, ID=26, INT=27, FLOAT=28, STRING=29, WS=30, SL_COMMENT=31;
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, BOOLEAN=16, 
+		T_FLOAT=17, T_INT=18, T_BOOL=19, T_STRING=20, T_VOID=21, ADD=22, MINUS=23, 
+		MULT=24, DIV=25, ID=26, INT=27, FLOAT=28, STRING=29, WS=30, SL_COMMENT=31;
 	public static final int
 		RULE_pancakes = 0, RULE_var_declare = 1, RULE_type = 2, RULE_fun_declare = 3, 
 		RULE_fun_params = 4, RULE_fun_param = 5, RULE_block = 6, RULE_statement = 7, 
@@ -32,13 +32,13 @@ public class PancakesParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'='", "';'", "'('", "')'", "','", "'{'", "'}'", "'return'", "'if'", 
-		"'else'", "'['", "']'", "'-'", "'!'", "'*'", "'/'", "'//'", "'+'", "'=='", 
-		null, "'float'", "'int'", "'boolean'", "'string'", "'void'"
+		"'else'", "'['", "']'", "'!'", "'//'", "'=='", null, "'float'", "'int'", 
+		"'boolean'", "'string'", "'void'", "'+'", "'-'", "'*'", "'/'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, null, null, null, null, "BOOLEAN", "T_FLOAT", 
-		"T_INT", "T_BOOL", "T_STRING", "T_VOID", "ID", "INT", "FLOAT", "STRING", 
+		null, null, null, null, "BOOLEAN", "T_FLOAT", "T_INT", "T_BOOL", "T_STRING", 
+		"T_VOID", "ADD", "MINUS", "MULT", "DIV", "ID", "INT", "FLOAT", "STRING", 
 		"WS", "SL_COMMENT"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
@@ -466,7 +466,7 @@ public class PancakesParser extends Parser {
 			setState(62);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__5) | (1L << T__7) | (1L << T__8) | (1L << T__12) | (1L << T__13) | (1L << BOOLEAN) | (1L << T_FLOAT) | (1L << T_INT) | (1L << T_BOOL) | (1L << T_STRING) | (1L << T_VOID) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__5) | (1L << T__7) | (1L << T__8) | (1L << T__12) | (1L << BOOLEAN) | (1L << T_FLOAT) | (1L << T_INT) | (1L << T_BOOL) | (1L << T_STRING) | (1L << T_VOID) | (1L << MINUS) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
 				{
 				{
 				setState(59);
@@ -557,7 +557,7 @@ public class PancakesParser extends Parser {
 				match(T__7);
 				setState(72);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__12) | (1L << T__13) | (1L << BOOLEAN) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__12) | (1L << BOOLEAN) | (1L << MINUS) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
 					{
 					setState(71);
 					expr(0);
@@ -735,6 +735,8 @@ public class PancakesParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
+		public TerminalNode ADD() { return getToken(PancakesParser.ADD, 0); }
+		public TerminalNode MINUS() { return getToken(PancakesParser.MINUS, 0); }
 		public AddSubContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -807,6 +809,8 @@ public class PancakesParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
+		public TerminalNode MULT() { return getToken(PancakesParser.MULT, 0); }
+		public TerminalNode DIV() { return getToken(PancakesParser.DIV, 0); }
 		public MultDivContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -844,11 +848,9 @@ public class PancakesParser extends Parser {
 		}
 	}
 	public static class ArrayIndexContext extends ExprContext {
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
+		public TerminalNode ID() { return getToken(PancakesParser.ID, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
 		}
 		public ArrayIndexContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
@@ -906,7 +908,7 @@ public class PancakesParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(119);
+			setState(124);
 			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 			case 1:
 				{
@@ -915,7 +917,7 @@ public class PancakesParser extends Parser {
 				_prevctx = _localctx;
 
 				setState(100);
-				match(T__12);
+				match(MINUS);
 				setState(101);
 				expr(12);
 				}
@@ -926,7 +928,7 @@ public class PancakesParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(102);
-				match(T__13);
+				match(T__12);
 				setState(103);
 				expr(11);
 				}
@@ -942,7 +944,7 @@ public class PancakesParser extends Parser {
 				match(T__2);
 				setState(107);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__12) | (1L << T__13) | (1L << BOOLEAN) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__12) | (1L << BOOLEAN) | (1L << MINUS) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
 					{
 					setState(106);
 					arguments();
@@ -955,59 +957,74 @@ public class PancakesParser extends Parser {
 				break;
 			case 4:
 				{
-				_localctx = new VarRefContext(_localctx);
+				_localctx = new ArrayIndexContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(110);
 				match(ID);
+				setState(111);
+				match(T__10);
+				setState(112);
+				expr(0);
+				setState(113);
+				match(T__11);
 				}
 				break;
 			case 5:
 				{
-				_localctx = new IntConstContext(_localctx);
+				_localctx = new VarRefContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(111);
-				match(INT);
+				setState(115);
+				match(ID);
 				}
 				break;
 			case 6:
 				{
-				_localctx = new FloatConstContext(_localctx);
+				_localctx = new IntConstContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(112);
-				match(FLOAT);
+				setState(116);
+				match(INT);
 				}
 				break;
 			case 7:
 				{
-				_localctx = new BoolConstContext(_localctx);
+				_localctx = new FloatConstContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(113);
-				match(BOOLEAN);
+				setState(117);
+				match(FLOAT);
 				}
 				break;
 			case 8:
 				{
-				_localctx = new StringConstContext(_localctx);
+				_localctx = new BoolConstContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(114);
-				match(STRING);
+				setState(118);
+				match(BOOLEAN);
 				}
 				break;
 			case 9:
 				{
+				_localctx = new StringConstContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(119);
+				match(STRING);
+				}
+				break;
+			case 10:
+				{
 				_localctx = new ParenContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(115);
+				setState(120);
 				match(T__2);
-				setState(116);
+				setState(121);
 				expr(0);
-				setState(117);
+				setState(122);
 				match(T__3);
 				}
 				break;
@@ -1027,16 +1044,16 @@ public class PancakesParser extends Parser {
 						{
 						_localctx = new MultDivContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(121);
+						setState(126);
 						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
-						setState(122);
+						setState(127);
 						_la = _input.LA(1);
-						if ( !(_la==T__14 || _la==T__15) ) {
+						if ( !(_la==MULT || _la==DIV) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
 						}
-						setState(123);
+						setState(128);
 						expr(11);
 						}
 						break;
@@ -1044,13 +1061,13 @@ public class PancakesParser extends Parser {
 						{
 						_localctx = new IntdivContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(124);
+						setState(129);
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
 						{
-						setState(125);
-						match(T__16);
+						setState(130);
+						match(T__13);
 						}
-						setState(126);
+						setState(131);
 						expr(10);
 						}
 						break;
@@ -1058,16 +1075,16 @@ public class PancakesParser extends Parser {
 						{
 						_localctx = new AddSubContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(127);
+						setState(132);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(128);
+						setState(133);
 						_la = _input.LA(1);
-						if ( !(_la==T__12 || _la==T__17) ) {
+						if ( !(_la==ADD || _la==MINUS) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
 						}
-						setState(129);
+						setState(134);
 						expr(9);
 						}
 						break;
@@ -1075,26 +1092,12 @@ public class PancakesParser extends Parser {
 						{
 						_localctx = new EqualityContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(130);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(131);
-						match(T__18);
-						setState(132);
-						expr(8);
-						}
-						break;
-					case 5:
-						{
-						_localctx = new ArrayIndexContext(new ExprContext(_parentctx, _parentState));
-						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(133);
-						if (!(precpred(_ctx, 13))) throw new FailedPredicateException(this, "precpred(_ctx, 13)");
-						setState(134);
-						match(T__10);
 						setState(135);
-						expr(0);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(136);
-						match(T__11);
+						match(T__14);
+						setState(137);
+						expr(8);
 						}
 						break;
 					}
@@ -1193,8 +1196,6 @@ public class PancakesParser extends Parser {
 			return precpred(_ctx, 8);
 		case 3:
 			return precpred(_ctx, 7);
-		case 4:
-			return precpred(_ctx, 13);
 		}
 		return true;
 	}
@@ -1208,12 +1209,12 @@ public class PancakesParser extends Parser {
 		"\b\3\t\3\t\3\t\3\t\3\t\5\tK\n\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\5"+
 		"\tV\n\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\nd\n\n\3\13"+
 		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13n\n\13\3\13\3\13\3\13\3\13\3\13"+
-		"\3\13\3\13\3\13\3\13\3\13\5\13z\n\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13"+
-		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\7\13\u008d\n\13\f\13"+
-		"\16\13\u0090\13\13\3\f\3\f\3\f\7\f\u0095\n\f\f\f\16\f\u0098\13\f\3\f\2"+
-		"\3\24\r\2\4\6\b\n\f\16\20\22\24\26\2\5\3\2\27\33\3\2\21\22\4\2\17\17\24"+
-		"\24\u00aa\2\32\3\2\2\2\4\36\3\2\2\2\6&\3\2\2\2\b(\3\2\2\2\n\61\3\2\2\2"+
-		"\f9\3\2\2\2\16<\3\2\2\2\20U\3\2\2\2\22W\3\2\2\2\24y\3\2\2\2\26\u0091\3"+
+		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13\177\n\13\3\13"+
+		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\7\13\u008d\n\13"+
+		"\f\13\16\13\u0090\13\13\3\f\3\f\3\f\7\f\u0095\n\f\f\f\16\f\u0098\13\f"+
+		"\3\f\2\3\24\r\2\4\6\b\n\f\16\20\22\24\26\2\5\3\2\23\27\3\2\32\33\3\2\30"+
+		"\31\u00aa\2\32\3\2\2\2\4\36\3\2\2\2\6&\3\2\2\2\b(\3\2\2\2\n\61\3\2\2\2"+
+		"\f9\3\2\2\2\16<\3\2\2\2\20U\3\2\2\2\22W\3\2\2\2\24~\3\2\2\2\26\u0091\3"+
 		"\2\2\2\30\33\5\b\5\2\31\33\5\4\3\2\32\30\3\2\2\2\32\31\3\2\2\2\33\34\3"+
 		"\2\2\2\34\32\3\2\2\2\34\35\3\2\2\2\35\3\3\2\2\2\36\37\5\6\4\2\37\"\7\34"+
 		"\2\2 !\7\3\2\2!#\5\24\13\2\" \3\2\2\2\"#\3\2\2\2#$\3\2\2\2$%\7\4\2\2%"+
@@ -1228,22 +1229,22 @@ public class PancakesParser extends Parser {
 		"T\7\4\2\2TV\3\2\2\2UE\3\2\2\2UF\3\2\2\2UG\3\2\2\2UH\3\2\2\2UM\3\2\2\2"+
 		"UR\3\2\2\2V\21\3\2\2\2WX\7\13\2\2XY\7\5\2\2YZ\5\24\13\2Z[\7\6\2\2[\\\7"+
 		"\b\2\2\\]\5\20\t\2]c\7\t\2\2^_\7\f\2\2_`\7\b\2\2`a\5\20\t\2ab\7\t\2\2"+
-		"bd\3\2\2\2c^\3\2\2\2cd\3\2\2\2d\23\3\2\2\2ef\b\13\1\2fg\7\17\2\2gz\5\24"+
-		"\13\16hi\7\20\2\2iz\5\24\13\rjk\7\34\2\2km\7\5\2\2ln\5\26\f\2ml\3\2\2"+
-		"\2mn\3\2\2\2no\3\2\2\2oz\7\6\2\2pz\7\34\2\2qz\7\35\2\2rz\7\36\2\2sz\7"+
-		"\26\2\2tz\7\37\2\2uv\7\5\2\2vw\5\24\13\2wx\7\6\2\2xz\3\2\2\2ye\3\2\2\2"+
-		"yh\3\2\2\2yj\3\2\2\2yp\3\2\2\2yq\3\2\2\2yr\3\2\2\2ys\3\2\2\2yt\3\2\2\2"+
-		"yu\3\2\2\2z\u008e\3\2\2\2{|\f\f\2\2|}\t\3\2\2}\u008d\5\24\13\r~\177\f"+
-		"\13\2\2\177\u0080\7\23\2\2\u0080\u008d\5\24\13\f\u0081\u0082\f\n\2\2\u0082"+
-		"\u0083\t\4\2\2\u0083\u008d\5\24\13\13\u0084\u0085\f\t\2\2\u0085\u0086"+
-		"\7\25\2\2\u0086\u008d\5\24\13\n\u0087\u0088\f\17\2\2\u0088\u0089\7\r\2"+
-		"\2\u0089\u008a\5\24\13\2\u008a\u008b\7\16\2\2\u008b\u008d\3\2\2\2\u008c"+
-		"{\3\2\2\2\u008c~\3\2\2\2\u008c\u0081\3\2\2\2\u008c\u0084\3\2\2\2\u008c"+
-		"\u0087\3\2\2\2\u008d\u0090\3\2\2\2\u008e\u008c\3\2\2\2\u008e\u008f\3\2"+
-		"\2\2\u008f\25\3\2\2\2\u0090\u008e\3\2\2\2\u0091\u0096\5\24\13\2\u0092"+
-		"\u0093\7\7\2\2\u0093\u0095\5\24\13\2\u0094\u0092\3\2\2\2\u0095\u0098\3"+
-		"\2\2\2\u0096\u0094\3\2\2\2\u0096\u0097\3\2\2\2\u0097\27\3\2\2\2\u0098"+
-		"\u0096\3\2\2\2\20\32\34\",\66@JUcmy\u008c\u008e\u0096";
+		"bd\3\2\2\2c^\3\2\2\2cd\3\2\2\2d\23\3\2\2\2ef\b\13\1\2fg\7\31\2\2g\177"+
+		"\5\24\13\16hi\7\17\2\2i\177\5\24\13\rjk\7\34\2\2km\7\5\2\2ln\5\26\f\2"+
+		"ml\3\2\2\2mn\3\2\2\2no\3\2\2\2o\177\7\6\2\2pq\7\34\2\2qr\7\r\2\2rs\5\24"+
+		"\13\2st\7\16\2\2t\177\3\2\2\2u\177\7\34\2\2v\177\7\35\2\2w\177\7\36\2"+
+		"\2x\177\7\22\2\2y\177\7\37\2\2z{\7\5\2\2{|\5\24\13\2|}\7\6\2\2}\177\3"+
+		"\2\2\2~e\3\2\2\2~h\3\2\2\2~j\3\2\2\2~p\3\2\2\2~u\3\2\2\2~v\3\2\2\2~w\3"+
+		"\2\2\2~x\3\2\2\2~y\3\2\2\2~z\3\2\2\2\177\u008e\3\2\2\2\u0080\u0081\f\f"+
+		"\2\2\u0081\u0082\t\3\2\2\u0082\u008d\5\24\13\r\u0083\u0084\f\13\2\2\u0084"+
+		"\u0085\7\20\2\2\u0085\u008d\5\24\13\f\u0086\u0087\f\n\2\2\u0087\u0088"+
+		"\t\4\2\2\u0088\u008d\5\24\13\13\u0089\u008a\f\t\2\2\u008a\u008b\7\21\2"+
+		"\2\u008b\u008d\5\24\13\n\u008c\u0080\3\2\2\2\u008c\u0083\3\2\2\2\u008c"+
+		"\u0086\3\2\2\2\u008c\u0089\3\2\2\2\u008d\u0090\3\2\2\2\u008e\u008c\3\2"+
+		"\2\2\u008e\u008f\3\2\2\2\u008f\25\3\2\2\2\u0090\u008e\3\2\2\2\u0091\u0096"+
+		"\5\24\13\2\u0092\u0093\7\7\2\2\u0093\u0095\5\24\13\2\u0094\u0092\3\2\2"+
+		"\2\u0095\u0098\3\2\2\2\u0096\u0094\3\2\2\2\u0096\u0097\3\2\2\2\u0097\27"+
+		"\3\2\2\2\u0098\u0096\3\2\2\2\20\32\34\",\66@JUcm~\u008c\u008e\u0096";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
