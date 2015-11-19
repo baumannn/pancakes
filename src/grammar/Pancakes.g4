@@ -37,7 +37,7 @@ statement
     ;
 
 if_statement
-    : 'if' '(' expr ')' '{' statement '}' ('else' '{' statement '')?
+    : 'if' '(' expr ')' '{' statement '}' ('else' '{' statement '}')?
     ;
 
 expr
@@ -64,6 +64,13 @@ arguments
 
 BOOLEAN : ('true' | 'false');
 
+T_FLOAT : 'float'; 
+T_INT : 'int'; 
+T_BOOL : 'boolean'; 
+T_STRING : 'string'; 
+T_VOID : 'void';
+
+
 ID  : LETTER (LETTER | DIGIT)* ;
 
 INT : DIGIT+ ;
@@ -72,12 +79,6 @@ FLOAT
 	: DIGIT+ '.' DIGIT* 
 	| '.' DIGIT+
 	;
-
-T_FLOAT : 'float'; 
-T_INT : 'int'; 
-T_BOOL : 'boolean'; 
-T_STRING : 'string'; 
-T_VOID : 'void';
 
 STRING : '"' (ESC|.)*? '"' ;
 
