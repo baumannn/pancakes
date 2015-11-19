@@ -11,6 +11,7 @@ import java.util.HashMap;
  */
 public class ThirdPassPancakesListener extends PancakesBaseListener{
 
+    public static enum Operand {oEquality, oMultiplication, oDivision, oIntdiv, oAddition, oSubtraction, oNot, oUnaryNegation, oArrayIndex};
 
     ParseTreeProperty<Scope> scopes; // todos los scopes
     GlobalScope globals;
@@ -81,6 +82,17 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
 //        tm.put(ctx, Main.resolveType(type1, type2, "MultDivIntDiv"));
 //    }
 
+    //Equality
+
+    @Override
+    public void exitEquality(PancakesParser.EqualityContext ctx) {
+        PancakesParser.ExprContext expr1 = ctx.expr(0);
+        PancakesParser.ExprContext expr2 = ctx.expr(1);
+
+
+        staticTypeCheck(expr1, expr2, Operand.oEquality);
+    }
+
 
     //VarRef
 
@@ -91,7 +103,6 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
         System.out.println(vs.getType());
         typeMap.put(ctx, vs.getType());
     }
-
 
     //Constants
 
@@ -121,4 +132,8 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
     public void exitParen(PancakesParser.ParenContext ctx) {
         typeMap.put(ctx, typeMap.get(ctx.expr()));
     }
+
+
+
+
 }
