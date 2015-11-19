@@ -6,6 +6,8 @@ import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by adrian on 11/15/15.
@@ -93,6 +95,32 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
     @Override
     public void exitFunCall(PancakesParser.FunCallContext ctx) {
         FunctionSymbol referencedFunction = (FunctionSymbol) currentScope.resolve(ctx.ID().getSymbol().getText());
+
+        Map<String, Symbol> args = referencedFunction.getArgs();
+        List<PancakesParser.ExprContext> callParams = ctx.arguments().expr();
+
+
+        int i = 0;
+        for (String key : args.keySet()) {
+            System.out.println(ctx.arguments().expr(i).getText());
+            Symbol.Type argType = args.get(key).getType();
+            Symbol.Type paramType = typeMap.get(callParams.get(i));
+            i++;
+            if(paramType != argType){
+                Main.logError(ctx.ID().getSymbol(),
+                        "Argument type mismatch in argument number " + ( i ) + " in function "
+                                + ctx.ID().getSymbol().getText()
+                                + ", expected:"
+                                + argType
+                                + ", got:"
+                                + paramType);
+
+
+            }
+        }
+
+        typeMap.put(ctx, referencedFunction.getType());
+
     }
 
     /*
