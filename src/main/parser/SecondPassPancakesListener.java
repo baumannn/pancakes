@@ -10,13 +10,14 @@ import org.antlr.v4.runtime.tree.ParseTreeProperty;
 public class SecondPassPancakesListener extends PancakesBaseListener {
 
 
-    ParseTreeProperty <Scope> scopes; // todos los scopes
-    GlobalScope globals;
-    Scope currentScope;
+    private ParseTreeProperty <Scope> scopes; // todos los scopes
+    private GlobalScope globals;
+    private Scope currentScope;
 
     public SecondPassPancakesListener(GlobalScope globalScope, ParseTreeProperty<Scope> scopes) {
 
         globals = globalScope;
+        currentScope = globals;
         this.scopes = scopes;
 
     }

@@ -20,6 +20,7 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
     Scope currentScope;
 
 
+
     ////////////////
     // listeners ///
     ////////////////
@@ -28,6 +29,8 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
     public void enterPancakes(PancakesParser.PancakesContext ctx) {
 
         globals = new GlobalScope();
+
+
         currentScope = globals;
 
 
@@ -102,36 +105,11 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
     }
 
 
-    ///CONSTANTS
 
-    @Override
-    public void exitFloatConst(PancakesParser.FloatConstContext ctx) {
-        String name = ctx.FLOAT().getText();
-
-
-       // Symbol.Type type = Main.getType(typeTokenType);
-
-        System.out.println("leyo un float");
-
-
-    }
-
-    @Override
-    public void exitStringConst(PancakesParser.StringConstContext ctx) {
-
-    }
-
-    @Override
-    public void exitBoolConst(PancakesParser.BoolConstContext ctx) {
-
-    }
-
-    @Override
-    public void exitIntConst(PancakesParser.IntConstContext ctx) {
-
-    }
 
     //
+
+
 
 
 

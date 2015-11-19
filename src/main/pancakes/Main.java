@@ -43,6 +43,9 @@ public class Main {
             walker.walk(fp_listener, pancakesContext);
 
             SecondPassPancakesListener sp_listener  = new SecondPassPancakesListener( fp_listener.getGlobals(), fp_listener.getScopes());
+            walker.walk(sp_listener, pancakesContext);
+            ThirdPassPancakesListener tp_listener = new ThirdPassPancakesListener( fp_listener.getGlobals(), fp_listener.getScopes());
+            walker.walk(tp_listener, pancakesContext);
 
         } catch (IOException e) {
             e.printStackTrace();

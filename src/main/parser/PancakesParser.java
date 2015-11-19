@@ -687,28 +687,45 @@ public class PancakesParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class VarRefContext extends ExprContext {
-		public TerminalNode ID() { return getToken(PancakesParser.ID, 0); }
-		public VarRefContext(ExprContext ctx) { copyFrom(ctx); }
+	public static class UnaryNegateContext extends ExprContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public UnaryNegateContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterVarRef(this);
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterUnaryNegate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitVarRef(this);
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitUnaryNegate(this);
 		}
 	}
-	public static class StringConstContext extends ExprContext {
-		public TerminalNode STRING() { return getToken(PancakesParser.STRING, 0); }
-		public StringConstContext(ExprContext ctx) { copyFrom(ctx); }
+	public static class FloatConstContext extends ExprContext {
+		public TerminalNode FLOAT() { return getToken(PancakesParser.FLOAT, 0); }
+		public FloatConstContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterStringConst(this);
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterFloatConst(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitStringConst(this);
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitFloatConst(this);
+		}
+	}
+	public static class FunCallContext extends ExprContext {
+		public TerminalNode ID() { return getToken(PancakesParser.ID, 0); }
+		public ArgumentsContext arguments() {
+			return getRuleContext(ArgumentsContext.class,0);
+		}
+		public FunCallContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterFunCall(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitFunCall(this);
 		}
 	}
 	public static class AddSubContext extends ExprContext {
@@ -728,117 +745,16 @@ public class PancakesParser extends Parser {
 			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitAddSub(this);
 		}
 	}
-	public static class UnaryNegateContext extends ExprContext {
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-		}
-		public UnaryNegateContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterUnaryNegate(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitUnaryNegate(this);
-		}
-	}
-	public static class IntConstContext extends ExprContext {
-		public TerminalNode INT() { return getToken(PancakesParser.INT, 0); }
-		public IntConstContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterIntConst(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitIntConst(this);
-		}
-	}
-	public static class ArrayIndexContext extends ExprContext {
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
-		public ArrayIndexContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterArrayIndex(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitArrayIndex(this);
-		}
-	}
-	public static class FloatConstContext extends ExprContext {
-		public TerminalNode FLOAT() { return getToken(PancakesParser.FLOAT, 0); }
-		public FloatConstContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterFloatConst(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitFloatConst(this);
-		}
-	}
-	public static class MultDivContext extends ExprContext {
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
-		public MultDivContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterMultDiv(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitMultDiv(this);
-		}
-	}
-	public static class UnaryNotContext extends ExprContext {
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-		}
-		public UnaryNotContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterUnaryNot(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitUnaryNot(this);
-		}
-	}
-	public static class BoolConstContext extends ExprContext {
-		public TerminalNode BOOLEAN() { return getToken(PancakesParser.BOOLEAN, 0); }
-		public BoolConstContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterBoolConst(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitBoolConst(this);
-		}
-	}
-	public static class FunCallContext extends ExprContext {
+	public static class VarRefContext extends ExprContext {
 		public TerminalNode ID() { return getToken(PancakesParser.ID, 0); }
-		public ArgumentsContext arguments() {
-			return getRuleContext(ArgumentsContext.class,0);
-		}
-		public FunCallContext(ExprContext ctx) { copyFrom(ctx); }
+		public VarRefContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterFunCall(this);
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterVarRef(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitFunCall(this);
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitVarRef(this);
 		}
 	}
 	public static class IntdivContext extends ExprContext {
@@ -858,6 +774,104 @@ public class PancakesParser extends Parser {
 			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitIntdiv(this);
 		}
 	}
+	public static class BoolConstContext extends ExprContext {
+		public TerminalNode BOOLEAN() { return getToken(PancakesParser.BOOLEAN, 0); }
+		public BoolConstContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterBoolConst(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitBoolConst(this);
+		}
+	}
+	public static class ParenContext extends ExprContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public ParenContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterParen(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitParen(this);
+		}
+	}
+	public static class MultDivContext extends ExprContext {
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public MultDivContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterMultDiv(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitMultDiv(this);
+		}
+	}
+	public static class StringConstContext extends ExprContext {
+		public TerminalNode STRING() { return getToken(PancakesParser.STRING, 0); }
+		public StringConstContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterStringConst(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitStringConst(this);
+		}
+	}
+	public static class UnaryNotContext extends ExprContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public UnaryNotContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterUnaryNot(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitUnaryNot(this);
+		}
+	}
+	public static class ArrayIndexContext extends ExprContext {
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public ArrayIndexContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterArrayIndex(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitArrayIndex(this);
+		}
+	}
+	public static class IntConstContext extends ExprContext {
+		public TerminalNode INT() { return getToken(PancakesParser.INT, 0); }
+		public IntConstContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterIntConst(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitIntConst(this);
+		}
+	}
 	public static class EqualityContext extends ExprContext {
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
@@ -873,20 +887,6 @@ public class PancakesParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitEquality(this);
-		}
-	}
-	public static class ParenContext extends ExprContext {
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-		}
-		public ParenContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterParen(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).exitParen(this);
 		}
 	}
 
