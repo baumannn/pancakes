@@ -5,6 +5,8 @@
 # puede empezar con declaraciones de variables o de funciones
 
 
+float asmTest = 1.0 * 3.0;
+
 
 
 # declaracion de variables
@@ -13,6 +15,10 @@ float f = 1.0;
 int i = 0;
 boolean b;
 string s;
+
+
+
+
 
 
 
@@ -29,9 +35,14 @@ void _thingTester666_ (float fl, int in, boolean bo, string st) {
 
 	int j = 0;
 
+
 	# block adentro
 	{
 		int k = 0;
+
+		j = k = 1000;
+
+
 
 	}
 

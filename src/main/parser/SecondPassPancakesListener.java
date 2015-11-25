@@ -78,10 +78,10 @@ public class SecondPassPancakesListener extends PancakesBaseListener {
         }
 
         FunctionSymbol funSym = (FunctionSymbol) currentScope.resolve(funName);
-        System.out.println(ctx.arguments());
-        System.out.println(ctx.ID());
-        System.out.println(ctx.ID().getText());
-        System.out.println(ctx.ID().getSymbol().getText());
+        //System.out.println(ctx.arguments());
+        //System.out.println(ctx.ID());
+        //System.out.println(ctx.ID().getText());
+        //System.out.println(ctx.ID().getSymbol().getText());
 
         if ( (ctx.arguments() == null && funSym.getArgs().size() > 0) ||  (funSym.getArgs().size() != ctx.arguments().expr().size())){
             Main.logError(ctx.ID().getSymbol(),

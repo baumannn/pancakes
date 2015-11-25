@@ -11,6 +11,8 @@ import java.io.IOException;
 
 public class Main {
 
+    private static boolean pass_error = false;
+
     public static Symbol.Type getType(int typeToken){
         switch (typeToken){
             case PancakesParser.T_BOOL : return Symbol.Type.tBOOL;
@@ -23,6 +25,7 @@ public class Main {
     }
 
     public static void logError(Token t, String msg) {
+        pass_error = true;
         System.err.printf("line %d:%d %s\n", t.getLine(), t.getCharPositionInLine(),
                 msg);
     }
@@ -39,13 +42,20 @@ public class Main {
 
             // Walk it and attach our listener
             ParseTreeWalker walker = new ParseTreeWalker();
-            FirstPassPancakesListener fp_listener = new FirstPassPancakesListener();
-            walker.walk(fp_listener, pancakesContext);
+            FirstPassPancakesListener listener_1 = new FirstPassPancakesListener();
+            walker.walk(listener_1, pancakesContext);
+            if(pass_error){ return; }
+                SecondPassPancakesListener listener_2  = new SecondPassPancakesListener( listener_1.getGlobals(), listener_1.getScopes());
+                walker.walk(listener_2, pancakesContext);
 
-            SecondPassPancakesListener sp_listener  = new SecondPassPancakesListener( fp_listener.getGlobals(), fp_listener.getScopes());
-            walker.walk(sp_listener, pancakesContext);
-            ThirdPassPancakesListener tp_listener = new ThirdPassPancakesListener( fp_listener.getGlobals(), fp_listener.getScopes());
-            walker.walk(tp_listener, pancakesContext);
+            if(pass_error){ return;}
+                ThirdPassPancakesListener listener_3 = new ThirdPassPancakesListener( listener_1.getGlobals(), listener_1.getScopes());
+                walker.walk(listener_3, pancakesContext);
+
+            if (pass_error){ return;}
+                FourthPassPancakesListener listener_4 = new FourthPassPancakesListener(listener_1.getGlobals(), listener_1.getScopes(), listener_3.getTypeMap());
+                walker.walk(listener_4, pancakesContext);
+
 
         } catch (IOException e) {
             e.printStackTrace();

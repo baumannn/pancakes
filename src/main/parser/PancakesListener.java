@@ -88,6 +88,16 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitStatement(PancakesParser.StatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PancakesParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment(PancakesParser.AssignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PancakesParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment(PancakesParser.AssignmentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PancakesParser#if_statement}.
 	 * @param ctx the parse tree
 	 */

@@ -21,8 +21,8 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
     ParseTreeProperty<Scope> scopes; // todos los scopes
     GlobalScope globals;
     Scope currentScope;
-    HashMap<PancakesParser.ExprContext, Symbol.Type> typeMap;
-    HashMap<Symbol.Type,HashMap<Symbol.Type, HashMap<Operand, Symbol.Type>>> tesseract;
+    public HashMap<PancakesParser.ExprContext, Symbol.Type> typeMap;
+     HashMap<Symbol.Type,HashMap<Symbol.Type, HashMap<Operand, Symbol.Type>>> tesseract;
 
     public ThirdPassPancakesListener(GlobalScope globalScope, ParseTreeProperty<Scope> scopes) {
 
@@ -102,7 +102,7 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
 
         int i = 0;
         for (String key : args.keySet()) {
-            System.out.println(ctx.arguments().expr(i).getText());
+            //System.out.println(ctx.arguments().expr(i).getText());
             Symbol.Type argType = args.get(key).getType();
             Symbol.Type paramType = typeMap.get(callParams.get(i));
             i++;
@@ -125,6 +125,20 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
 
     /*
      ************************************
+     * Variable assignment
+     *
+     ************************************
+     **/
+
+    @Override
+    public void exitAssignment(PancakesParser.AssignmentContext ctx) {
+        super.exitAssignment(ctx);
+
+        System.out.print("STILL NOT IMPLEMENTED\n");
+    }
+
+    /*
+     ************************************
      * Array indexes
      *
      ************************************
@@ -138,9 +152,8 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
 
         String varName = ctx.ID().getSymbol().getText();
         Symbol vs = currentScope.resolve(varName);
-        System.out.println(vs.getType());
+        //System.out.println(vs.getType());
         typeMap.put(ctx, vs.getType());
-
 
     }
 
@@ -220,7 +233,7 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
     public void exitVarRef(PancakesParser.VarRefContext ctx) {
         String varName = ctx.ID().getSymbol().getText();
         Symbol vs = currentScope.resolve(varName);
-        System.out.println(vs.getType());
+        //System.out.println(vs.getType());
         typeMap.put(ctx, vs.getType());
     }
 
@@ -429,5 +442,7 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
     }
 
 
-
+    public HashMap<PancakesParser.ExprContext, Symbol.Type> getTypeMap() {
+        return typeMap;
+    }
 }

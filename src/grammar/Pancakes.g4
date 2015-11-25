@@ -32,8 +32,12 @@ statement
     | var_declare
     | if_statement
     | 'return' expr? ';' 
-    | expr '=' expr ';' 
+    | assignment ';'
     | expr ';'
+    ;
+
+assignment
+    : ID '=' (ID '=')*  expr
     ;
 
 if_statement
