@@ -3,6 +3,7 @@ package main.parser;
 import main.pancakes.Main;
 import main.parser.symbolTable.*;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
+import org.antlr.v4.runtime.tree.TerminalNode;
 import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 import java.util.HashMap;
@@ -76,6 +77,7 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
         currentScope = currentScope.getEnclosingScope();
     }
 
+    
 
     /*
      ************************************
@@ -132,9 +134,22 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
 
     @Override
     public void exitAssignment(PancakesParser.AssignmentContext ctx) {
-        super.exitAssignment(ctx);
 
-        System.out.print("STILL NOT IMPLEMENTED\n");
+        Symbol.Type type = typeMap.get(ctx.expr());
+
+        for(TerminalNode t: ctx.ID()){
+
+            if(currentScope.resolve(t.getText()).getType() != type){
+
+                System.err.printf("line %d:%d %s\n", ctx.start.getLine(), ctx.start.getCharPositionInLine(), "Type mismatch in assignment.");
+
+
+            }
+
+
+        }
+
+
     }
 
     /*
