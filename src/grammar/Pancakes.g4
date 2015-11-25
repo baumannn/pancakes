@@ -41,7 +41,14 @@ assignment
     ;
 
 if_statement
-    : 'if' '(' expr ')' '{' statement '}' ('else' '{' statement '}')?
+    : 'if' '(' if_expr ')' '{' statement '}' (else_statement)?
+    ;
+else_statement
+    : 'else' '{' statement '}'
+    ;
+
+if_expr
+    : expr
     ;
 
 expr

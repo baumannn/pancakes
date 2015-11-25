@@ -9,4 +9,6 @@ public interface Scope {
     public void define(Symbol sym);
     public Symbol resolve(String name);
     public boolean isDefined(Symbol sym);
+    public short getOffset();
+    public void setOffset(short offset);
 }

@@ -22,13 +22,21 @@ public class OpCode {
     public static final short fMUL = 6;
     public static final short iDIV = 7;
     public static final short fDIV = 8;
+    public static final short INTDIV = 8;
 
 
-    //BOOLEAN LOGIC, JUMPS AND LOGICAL JUMPS
+    //BOOLEAN LOGIC
     public static final short iLT  = 9;
     public static final short fLT  = 10;
     public static final short iEQ  = 11;
     public static final short fEQ  = 12;
+    public static final short bEQ  = 12;
+    public static final short sEQ  = 12;
+    public static final short NOT  = 12;
+    public static final short iNEG  = 12;
+    public static final short fNEG  = 12;
+
+    //LOGICAL JUMPS
     public static final short GOTO   = 13;
     public static final short GOTOT  = 14;
     public static final short GOTOF  = 15;
@@ -49,6 +57,17 @@ public class OpCode {
     public static final short CALL = 24;
     public static final short RET  = 25;
 
+    public OpCode(short OPCODE_VALUE) {
+
+    }
+
+    public OpCode(short store, short address) {
+
+    }
+
+    public OpCode(short call, short i, short size) {
+
+    }
 
 
 //    ArrayList<OpCode> generateByteCode(TerminalNode operation, Symbol.Type type){
