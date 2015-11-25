@@ -6,6 +6,7 @@ import main.parser.symbolTable.Scope;
 import main.parser.symbolTable.Symbol;
 import main.parser.translation.OpCode;
 import main.parser.translation.OpcodesList;
+import main.parser.translation.PendingManager;
 import main.parser.translation.Quadruple;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
@@ -37,6 +38,8 @@ public class FourthPassPancakesListener extends PancakesBaseListener {
     private short instruct_ptr = 0;
 
 //    byte[] code = new byte[1000000];
+
+    PendingManager pending = new PendingManager();
 
 
     public FourthPassPancakesListener(GlobalScope globalScope, ParseTreeProperty<Scope> scopes, HashMap<PancakesParser.ExprContext, Symbol.Type> typeMap) {
@@ -259,7 +262,7 @@ public class FourthPassPancakesListener extends PancakesBaseListener {
         instruct_ptr += 2;
         currentOpcodes.add(ifop);
         pendingToFill.push(ifop);
-        pending.addOffset(ifop);
+        pending.addOffset(ifop, currentScope);
     }
 
     @Override
@@ -274,7 +277,7 @@ public class FourthPassPancakesListener extends PancakesBaseListener {
 
         pendingToFill.push(ifop);
         currentOpcodes.add(ifop);
-        pending.addOffset(ifop);
+        pending.addOffset(ifop, currentScope);
     }
 
 

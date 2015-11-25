@@ -18,6 +18,8 @@ public class FunctionSymbol extends Symbol implements Scope {
 
     }
 
+    short offset = 0;
+
     @Override
     public Symbol resolve(String name) {
         Symbol symbol = args.get(name);
@@ -57,5 +59,15 @@ public class FunctionSymbol extends Symbol implements Scope {
 
     public Map<String, Symbol> getArgs() {
         return args;
+    }
+
+    @Override
+    public short getOffset() {
+        return offset;
+    }
+
+    @Override
+    public void setOffset(short offset) {
+        this.offset = offset;
     }
 }
