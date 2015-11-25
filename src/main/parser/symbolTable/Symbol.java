@@ -11,6 +11,9 @@ public class Symbol {
     private Type type;
     private Scope scope;
 
+
+    private int address;
+
     public Symbol(String name) {
         this.name = name;
     }
@@ -39,4 +42,13 @@ public class Symbol {
     public Type getType() {
         return type;
     }
+
+    public int getAddress() {
+        return address;
+    }
+
+    public void setAddress(int address) {
+        this.address = address;
+    }
+
 }

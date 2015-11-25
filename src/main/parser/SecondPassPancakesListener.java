@@ -53,6 +53,8 @@ public class SecondPassPancakesListener extends PancakesBaseListener {
         String varName = ctx.ID().getSymbol().getText();
         Symbol varSym = currentScope.resolve(varName);
 
+        System.out.println("Name: " + varName + " Symbol: " + varSym);
+
         if( varSym == null){
             Main.logError(ctx.ID().getSymbol(), "Error: Variable name not declared: " + varName);
         }

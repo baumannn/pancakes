@@ -10,4 +10,3 @@ public interface Scope {
     public Symbol resolve(String name);
     public boolean isDefined(Symbol sym);
 }
-

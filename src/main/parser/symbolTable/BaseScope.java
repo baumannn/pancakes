@@ -8,8 +8,9 @@ import java.util.Map;
  */
 public abstract class BaseScope implements Scope {
 
-    Scope enclosingScope;
-    Map<String,Symbol> symbols = new HashMap<>();
+    private Scope enclosingScope;
+    private Map<String,Symbol> symbols = new HashMap<>();
+    private int offset;
 
     public BaseScope(Scope enclosingScope) {
         this.enclosingScope = enclosingScope;
@@ -40,11 +41,14 @@ public abstract class BaseScope implements Scope {
         } else {
             return null;
         }
-
     }
 
     @Override
     public boolean isDefined(Symbol sym) {
         return symbols.containsKey(sym.getName());
+    }
+
+    public Map<String, Symbol> getSymbols() {
+        return symbols;
     }
 }
