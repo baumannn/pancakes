@@ -2,14 +2,12 @@
  
   package main.parser; 
 
+import main.parser.generated.PancakesListener;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class PancakesParser extends Parser {
@@ -113,7 +111,7 @@ public class PancakesParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_pancakes; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PancakesListener ) ((PancakesListener)listener).enterPancakes(this);
+			if ( listener instanceof PancakesListener) ((PancakesListener)listener).enterPancakes(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {

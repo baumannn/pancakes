@@ -1,4 +1,4 @@
-package main.parser.translation;
+package main.parser.compiler;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 

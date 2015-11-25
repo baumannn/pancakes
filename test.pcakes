@@ -5,13 +5,13 @@
 # puede empezar con declaraciones de variables o de funciones
 
 
-float asmTest = 1.0 * 3.0;
+float asmTest = 1.2 * 3.234234;
 
 
 
 # declaracion de variables
 
-float f = 1.0;
+float f = 1.4;
 int i = 0;
 boolean b;
 string s;
@@ -30,9 +30,11 @@ int add_1 (int num) {
 
 }
 
+int far = "asdasdas";
+
 void _thingTester666_ (float fl, int in, boolean bo, string st) {
 	
-
+	
 	int j = 0;
 
 

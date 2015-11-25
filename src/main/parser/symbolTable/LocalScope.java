@@ -5,6 +5,8 @@ package main.parser.symbolTable;
  */
 public class LocalScope extends BaseScope {
 
+    int offset = 0;
+
     public LocalScope(Scope enclosingScope) {
         super(enclosingScope);
     }
@@ -12,5 +14,15 @@ public class LocalScope extends BaseScope {
     @Override
     public String getScopeName() {
         return "local";
+    }
+
+    @Override
+    public int getOffset() {
+        return offset;
+    }
+
+    @Override
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }

@@ -1,13 +1,10 @@
 // Generated from Pancakes.g4 by ANTLR 4.5.1
-package main.parser;
+package main.parser.generated;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class PancakesParser extends Parser {
@@ -18,8 +15,8 @@ public class PancakesParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, BOOLEAN=16, 
-		T_FLOAT=17, T_INT=18, T_BOOL=19, T_STRING=20, T_VOID=21, ADD=22, MINUS=23, 
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, BOOLEAN=15, T_FLOAT=16, 
+		T_INT=17, T_BOOL=18, T_STRING=19, T_VOID=20, EQUAL=21, ADD=22, MINUS=23, 
 		MULT=24, DIV=25, ID=26, INT=27, FLOAT=28, STRING=29, WS=30, SL_COMMENT=31;
 	public static final int
 		RULE_pancakes = 0, RULE_var_declare = 1, RULE_type = 2, RULE_fun_declare = 3, 
@@ -33,15 +30,15 @@ public class PancakesParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'='", "';'", "'('", "')'", "','", "'{'", "'}'", "'return'", "'if'", 
-		"'else'", "'['", "']'", "'!'", "'//'", "'=='", null, "'float'", "'int'", 
-		"'boolean'", "'string'", "'void'", "'+'", "'-'", "'*'", "'/'"
+		null, "';'", "'('", "')'", "','", "'{'", "'}'", "'return'", "'if'", "'else'", 
+		"'['", "']'", "'!'", "'//'", "'=='", null, "'float'", "'int'", "'boolean'", 
+		"'string'", "'void'", "'='", "'+'", "'-'", "'*'", "'/'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, "BOOLEAN", "T_FLOAT", "T_INT", "T_BOOL", "T_STRING", 
-		"T_VOID", "ADD", "MINUS", "MULT", "DIV", "ID", "INT", "FLOAT", "STRING", 
-		"WS", "SL_COMMENT"
+		null, null, null, "BOOLEAN", "T_FLOAT", "T_INT", "T_BOOL", "T_STRING", 
+		"T_VOID", "EQUAL", "ADD", "MINUS", "MULT", "DIV", "ID", "INT", "FLOAT", 
+		"STRING", "WS", "SL_COMMENT"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -169,6 +166,7 @@ public class PancakesParser extends Parser {
 			return getRuleContext(TypeContext.class,0);
 		}
 		public TerminalNode ID() { return getToken(PancakesParser.ID, 0); }
+		public TerminalNode EQUAL() { return getToken(PancakesParser.EQUAL, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -199,17 +197,17 @@ public class PancakesParser extends Parser {
 			match(ID);
 			setState(38);
 			_la = _input.LA(1);
-			if (_la==T__0) {
+			if (_la==EQUAL) {
 				{
 				setState(36);
-				match(T__0);
+				match(EQUAL);
 				setState(37);
 				expr(0);
 				}
 			}
 
 			setState(40);
-			match(T__1);
+			match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -307,7 +305,7 @@ public class PancakesParser extends Parser {
 			setState(45);
 			match(ID);
 			setState(46);
-			match(T__2);
+			match(T__1);
 			setState(48);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T_FLOAT) | (1L << T_INT) | (1L << T_BOOL) | (1L << T_STRING) | (1L << T_VOID))) != 0)) {
@@ -318,7 +316,7 @@ public class PancakesParser extends Parser {
 			}
 
 			setState(50);
-			match(T__3);
+			match(T__2);
 			setState(51);
 			block();
 			}
@@ -367,11 +365,11 @@ public class PancakesParser extends Parser {
 			setState(58);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__4) {
+			while (_la==T__3) {
 				{
 				{
 				setState(54);
-				match(T__4);
+				match(T__3);
 				setState(55);
 				fun_param();
 				}
@@ -464,11 +462,11 @@ public class PancakesParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(64);
-			match(T__5);
+			match(T__4);
 			setState(68);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__5) | (1L << T__7) | (1L << T__8) | (1L << T__12) | (1L << BOOLEAN) | (1L << T_FLOAT) | (1L << T_INT) | (1L << T_BOOL) | (1L << T_STRING) | (1L << T_VOID) | (1L << MINUS) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << T__6) | (1L << T__7) | (1L << T__11) | (1L << BOOLEAN) | (1L << T_FLOAT) | (1L << T_INT) | (1L << T_BOOL) | (1L << T_STRING) | (1L << T_VOID) | (1L << MINUS) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
 				{
 				{
 				setState(65);
@@ -480,7 +478,7 @@ public class PancakesParser extends Parser {
 				_la = _input.LA(1);
 			}
 			setState(71);
-			match(T__6);
+			match(T__5);
 			}
 		}
 		catch (RecognitionException re) {
@@ -556,10 +554,10 @@ public class PancakesParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(76);
-				match(T__7);
+				match(T__6);
 				setState(78);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__12) | (1L << BOOLEAN) | (1L << MINUS) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__11) | (1L << BOOLEAN) | (1L << MINUS) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
 					{
 					setState(77);
 					expr(0);
@@ -567,7 +565,7 @@ public class PancakesParser extends Parser {
 				}
 
 				setState(80);
-				match(T__1);
+				match(T__0);
 				}
 				break;
 			case 5:
@@ -576,7 +574,7 @@ public class PancakesParser extends Parser {
 				setState(81);
 				assignment();
 				setState(82);
-				match(T__1);
+				match(T__0);
 				}
 				break;
 			case 6:
@@ -585,7 +583,7 @@ public class PancakesParser extends Parser {
 				setState(84);
 				expr(0);
 				setState(85);
-				match(T__1);
+				match(T__0);
 				}
 				break;
 			}
@@ -633,7 +631,7 @@ public class PancakesParser extends Parser {
 			setState(89);
 			match(ID);
 			setState(90);
-			match(T__0);
+			match(EQUAL);
 			setState(95);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
@@ -644,7 +642,7 @@ public class PancakesParser extends Parser {
 					setState(91);
 					match(ID);
 					setState(92);
-					match(T__0);
+					match(EQUAL);
 					}
 					} 
 				}
@@ -699,22 +697,22 @@ public class PancakesParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(100);
-			match(T__8);
+			match(T__7);
 			setState(101);
-			match(T__2);
+			match(T__1);
 			setState(102);
 			if_expr();
 			setState(103);
-			match(T__3);
+			match(T__2);
 			setState(104);
-			match(T__5);
+			match(T__4);
 			setState(105);
 			statement();
 			setState(106);
-			match(T__6);
+			match(T__5);
 			setState(108);
 			_la = _input.LA(1);
-			if (_la==T__9) {
+			if (_la==T__8) {
 				{
 				setState(107);
 				else_statement();
@@ -759,13 +757,13 @@ public class PancakesParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(110);
-			match(T__9);
+			match(T__8);
 			setState(111);
-			match(T__5);
+			match(T__4);
 			setState(112);
 			statement();
 			setState(113);
-			match(T__6);
+			match(T__5);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1070,7 +1068,7 @@ public class PancakesParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(120);
-				match(T__12);
+				match(T__11);
 				setState(121);
 				expr(11);
 				}
@@ -1083,10 +1081,10 @@ public class PancakesParser extends Parser {
 				setState(122);
 				match(ID);
 				setState(123);
-				match(T__2);
+				match(T__1);
 				setState(125);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__12) | (1L << BOOLEAN) | (1L << MINUS) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__11) | (1L << BOOLEAN) | (1L << MINUS) | (1L << ID) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
 					{
 					setState(124);
 					arguments();
@@ -1094,7 +1092,7 @@ public class PancakesParser extends Parser {
 				}
 
 				setState(127);
-				match(T__3);
+				match(T__2);
 				}
 				break;
 			case 4:
@@ -1105,11 +1103,11 @@ public class PancakesParser extends Parser {
 				setState(128);
 				match(ID);
 				setState(129);
-				match(T__10);
+				match(T__9);
 				setState(130);
 				expr(0);
 				setState(131);
-				match(T__11);
+				match(T__10);
 				}
 				break;
 			case 5:
@@ -1163,11 +1161,11 @@ public class PancakesParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(138);
-				match(T__2);
+				match(T__1);
 				setState(139);
 				expr(0);
 				setState(140);
-				match(T__3);
+				match(T__2);
 				}
 				break;
 			}
@@ -1207,7 +1205,7 @@ public class PancakesParser extends Parser {
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
 						{
 						setState(148);
-						match(T__13);
+						match(T__12);
 						}
 						setState(149);
 						expr(10);
@@ -1237,7 +1235,7 @@ public class PancakesParser extends Parser {
 						setState(153);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(154);
-						match(T__14);
+						match(T__13);
 						setState(155);
 						expr(8);
 						}
@@ -1295,11 +1293,11 @@ public class PancakesParser extends Parser {
 			setState(166);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__4) {
+			while (_la==T__3) {
 				{
 				{
 				setState(162);
-				match(T__4);
+				match(T__3);
 				setState(163);
 				expr(0);
 				}
@@ -1356,42 +1354,42 @@ public class PancakesParser extends Parser {
 		"\16\5\16\u0091\n\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16"+
 		"\3\16\3\16\7\16\u009f\n\16\f\16\16\16\u00a2\13\16\3\17\3\17\3\17\7\17"+
 		"\u00a7\n\17\f\17\16\17\u00aa\13\17\3\17\2\3\32\20\2\4\6\b\n\f\16\20\22"+
-		"\24\26\30\32\34\2\5\3\2\23\27\3\2\32\33\3\2\30\31\u00ba\2 \3\2\2\2\4$"+
+		"\24\26\30\32\34\2\5\3\2\22\26\3\2\32\33\3\2\30\31\u00ba\2 \3\2\2\2\4$"+
 		"\3\2\2\2\6,\3\2\2\2\b.\3\2\2\2\n\67\3\2\2\2\f?\3\2\2\2\16B\3\2\2\2\20"+
 		"Y\3\2\2\2\22[\3\2\2\2\24f\3\2\2\2\26p\3\2\2\2\30u\3\2\2\2\32\u0090\3\2"+
 		"\2\2\34\u00a3\3\2\2\2\36!\5\b\5\2\37!\5\4\3\2 \36\3\2\2\2 \37\3\2\2\2"+
 		"!\"\3\2\2\2\" \3\2\2\2\"#\3\2\2\2#\3\3\2\2\2$%\5\6\4\2%(\7\34\2\2&\'\7"+
-		"\3\2\2\')\5\32\16\2(&\3\2\2\2()\3\2\2\2)*\3\2\2\2*+\7\4\2\2+\5\3\2\2\2"+
-		",-\t\2\2\2-\7\3\2\2\2./\5\6\4\2/\60\7\34\2\2\60\62\7\5\2\2\61\63\5\n\6"+
-		"\2\62\61\3\2\2\2\62\63\3\2\2\2\63\64\3\2\2\2\64\65\7\6\2\2\65\66\5\16"+
-		"\b\2\66\t\3\2\2\2\67<\5\f\7\289\7\7\2\29;\5\f\7\2:8\3\2\2\2;>\3\2\2\2"+
+		"\27\2\2\')\5\32\16\2(&\3\2\2\2()\3\2\2\2)*\3\2\2\2*+\7\3\2\2+\5\3\2\2"+
+		"\2,-\t\2\2\2-\7\3\2\2\2./\5\6\4\2/\60\7\34\2\2\60\62\7\4\2\2\61\63\5\n"+
+		"\6\2\62\61\3\2\2\2\62\63\3\2\2\2\63\64\3\2\2\2\64\65\7\5\2\2\65\66\5\16"+
+		"\b\2\66\t\3\2\2\2\67<\5\f\7\289\7\6\2\29;\5\f\7\2:8\3\2\2\2;>\3\2\2\2"+
 		"<:\3\2\2\2<=\3\2\2\2=\13\3\2\2\2><\3\2\2\2?@\5\6\4\2@A\7\34\2\2A\r\3\2"+
-		"\2\2BF\7\b\2\2CE\5\20\t\2DC\3\2\2\2EH\3\2\2\2FD\3\2\2\2FG\3\2\2\2GI\3"+
-		"\2\2\2HF\3\2\2\2IJ\7\t\2\2J\17\3\2\2\2KZ\5\16\b\2LZ\5\4\3\2MZ\5\24\13"+
-		"\2NP\7\n\2\2OQ\5\32\16\2PO\3\2\2\2PQ\3\2\2\2QR\3\2\2\2RZ\7\4\2\2ST\5\22"+
-		"\n\2TU\7\4\2\2UZ\3\2\2\2VW\5\32\16\2WX\7\4\2\2XZ\3\2\2\2YK\3\2\2\2YL\3"+
+		"\2\2BF\7\7\2\2CE\5\20\t\2DC\3\2\2\2EH\3\2\2\2FD\3\2\2\2FG\3\2\2\2GI\3"+
+		"\2\2\2HF\3\2\2\2IJ\7\b\2\2J\17\3\2\2\2KZ\5\16\b\2LZ\5\4\3\2MZ\5\24\13"+
+		"\2NP\7\t\2\2OQ\5\32\16\2PO\3\2\2\2PQ\3\2\2\2QR\3\2\2\2RZ\7\3\2\2ST\5\22"+
+		"\n\2TU\7\3\2\2UZ\3\2\2\2VW\5\32\16\2WX\7\3\2\2XZ\3\2\2\2YK\3\2\2\2YL\3"+
 		"\2\2\2YM\3\2\2\2YN\3\2\2\2YS\3\2\2\2YV\3\2\2\2Z\21\3\2\2\2[\\\7\34\2\2"+
-		"\\a\7\3\2\2]^\7\34\2\2^`\7\3\2\2_]\3\2\2\2`c\3\2\2\2a_\3\2\2\2ab\3\2\2"+
-		"\2bd\3\2\2\2ca\3\2\2\2de\5\32\16\2e\23\3\2\2\2fg\7\13\2\2gh\7\5\2\2hi"+
-		"\5\30\r\2ij\7\6\2\2jk\7\b\2\2kl\5\20\t\2ln\7\t\2\2mo\5\26\f\2nm\3\2\2"+
-		"\2no\3\2\2\2o\25\3\2\2\2pq\7\f\2\2qr\7\b\2\2rs\5\20\t\2st\7\t\2\2t\27"+
+		"\\a\7\27\2\2]^\7\34\2\2^`\7\27\2\2_]\3\2\2\2`c\3\2\2\2a_\3\2\2\2ab\3\2"+
+		"\2\2bd\3\2\2\2ca\3\2\2\2de\5\32\16\2e\23\3\2\2\2fg\7\n\2\2gh\7\4\2\2h"+
+		"i\5\30\r\2ij\7\5\2\2jk\7\7\2\2kl\5\20\t\2ln\7\b\2\2mo\5\26\f\2nm\3\2\2"+
+		"\2no\3\2\2\2o\25\3\2\2\2pq\7\13\2\2qr\7\7\2\2rs\5\20\t\2st\7\b\2\2t\27"+
 		"\3\2\2\2uv\5\32\16\2v\31\3\2\2\2wx\b\16\1\2xy\7\31\2\2y\u0091\5\32\16"+
-		"\16z{\7\17\2\2{\u0091\5\32\16\r|}\7\34\2\2}\177\7\5\2\2~\u0080\5\34\17"+
-		"\2\177~\3\2\2\2\177\u0080\3\2\2\2\u0080\u0081\3\2\2\2\u0081\u0091\7\6"+
-		"\2\2\u0082\u0083\7\34\2\2\u0083\u0084\7\r\2\2\u0084\u0085\5\32\16\2\u0085"+
-		"\u0086\7\16\2\2\u0086\u0091\3\2\2\2\u0087\u0091\7\34\2\2\u0088\u0091\7"+
-		"\35\2\2\u0089\u0091\7\36\2\2\u008a\u0091\7\22\2\2\u008b\u0091\7\37\2\2"+
-		"\u008c\u008d\7\5\2\2\u008d\u008e\5\32\16\2\u008e\u008f\7\6\2\2\u008f\u0091"+
+		"\16z{\7\16\2\2{\u0091\5\32\16\r|}\7\34\2\2}\177\7\4\2\2~\u0080\5\34\17"+
+		"\2\177~\3\2\2\2\177\u0080\3\2\2\2\u0080\u0081\3\2\2\2\u0081\u0091\7\5"+
+		"\2\2\u0082\u0083\7\34\2\2\u0083\u0084\7\f\2\2\u0084\u0085\5\32\16\2\u0085"+
+		"\u0086\7\r\2\2\u0086\u0091\3\2\2\2\u0087\u0091\7\34\2\2\u0088\u0091\7"+
+		"\35\2\2\u0089\u0091\7\36\2\2\u008a\u0091\7\21\2\2\u008b\u0091\7\37\2\2"+
+		"\u008c\u008d\7\4\2\2\u008d\u008e\5\32\16\2\u008e\u008f\7\5\2\2\u008f\u0091"+
 		"\3\2\2\2\u0090w\3\2\2\2\u0090z\3\2\2\2\u0090|\3\2\2\2\u0090\u0082\3\2"+
 		"\2\2\u0090\u0087\3\2\2\2\u0090\u0088\3\2\2\2\u0090\u0089\3\2\2\2\u0090"+
 		"\u008a\3\2\2\2\u0090\u008b\3\2\2\2\u0090\u008c\3\2\2\2\u0091\u00a0\3\2"+
 		"\2\2\u0092\u0093\f\f\2\2\u0093\u0094\t\3\2\2\u0094\u009f\5\32\16\r\u0095"+
-		"\u0096\f\13\2\2\u0096\u0097\7\20\2\2\u0097\u009f\5\32\16\f\u0098\u0099"+
+		"\u0096\f\13\2\2\u0096\u0097\7\17\2\2\u0097\u009f\5\32\16\f\u0098\u0099"+
 		"\f\n\2\2\u0099\u009a\t\4\2\2\u009a\u009f\5\32\16\13\u009b\u009c\f\t\2"+
-		"\2\u009c\u009d\7\21\2\2\u009d\u009f\5\32\16\n\u009e\u0092\3\2\2\2\u009e"+
+		"\2\u009c\u009d\7\20\2\2\u009d\u009f\5\32\16\n\u009e\u0092\3\2\2\2\u009e"+
 		"\u0095\3\2\2\2\u009e\u0098\3\2\2\2\u009e\u009b\3\2\2\2\u009f\u00a2\3\2"+
 		"\2\2\u00a0\u009e\3\2\2\2\u00a0\u00a1\3\2\2\2\u00a1\33\3\2\2\2\u00a2\u00a0"+
-		"\3\2\2\2\u00a3\u00a8\5\32\16\2\u00a4\u00a5\7\7\2\2\u00a5\u00a7\5\32\16"+
+		"\3\2\2\2\u00a3\u00a8\5\32\16\2\u00a4\u00a5\7\6\2\2\u00a5\u00a7\5\32\16"+
 		"\2\u00a6\u00a4\3\2\2\2\u00a7\u00aa\3\2\2\2\u00a8\u00a6\3\2\2\2\u00a8\u00a9"+
 		"\3\2\2\2\u00a9\35\3\2\2\2\u00aa\u00a8\3\2\2\2\21 \"(\62<FPYan\177\u0090"+
 		"\u009e\u00a0\u00a8";

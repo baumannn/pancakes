@@ -1,6 +1,8 @@
-package main.parser;
+package main.parser.semanticAnalysis;
 
 import main.pancakes.Main;
+import main.parser.generated.PancakesBaseListener;
+import main.parser.generated.PancakesParser;
 import main.parser.symbolTable.*;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 

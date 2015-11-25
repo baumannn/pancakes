@@ -1,13 +1,11 @@
-package main.parser;
+package main.parser.semanticAnalysis;
 
-import com.sun.tools.javah.Util;
 import main.pancakes.Main;
+import main.parser.generated.PancakesBaseListener;
+import main.parser.generated.PancakesParser;
 import main.parser.symbolTable.*;
-import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
-
-import java.util.HashMap;
 
 /**
  * Registers variables and functions in scopes.

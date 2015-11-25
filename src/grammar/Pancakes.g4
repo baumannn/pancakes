@@ -5,7 +5,7 @@ pancakes
     ;
 
 var_declare
-    : type ID ('=' expr)? ';'
+    : type ID (EQUAL expr)? ';'
     ;
 
 type
@@ -31,7 +31,7 @@ statement
     : block
     | var_declare
     | if_statement
-    | 'return' expr? ';' 
+    | 'return' expr? ';' // seperate?
     | assignment ';'
     | expr ';'
     ;
@@ -81,6 +81,7 @@ T_BOOL : 'boolean';
 T_STRING : 'string'; 
 T_VOID : 'void';
 
+EQUAL : '=';
 ADD : '+';
 MINUS : '-' ;
 MULT : '*' ;

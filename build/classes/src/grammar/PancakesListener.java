@@ -2,6 +2,7 @@
  
   package main.parser; 
 
+import main.parser.generated.PancakesParser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**

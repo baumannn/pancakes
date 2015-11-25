@@ -10,7 +10,7 @@ public class Symbol {
     private String name; //name of symbol
     private Type type;
     private Scope scope;
-    private short address;
+    private int address;
 
     public Symbol(String name) {
         this.name = name;
@@ -41,11 +41,11 @@ public class Symbol {
         return type;
     }
 
-    public short getAddress() {
+    public int getAddress() {
         return address;
     }
 
-    public void setAddress(short address) {
+    public void setAddress(int address) {
         this.address = address;
     }
 

@@ -3,6 +3,8 @@
   package main.parser; 
 
 
+import main.parser.generated.PancakesListener;
+import main.parser.generated.PancakesParser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;

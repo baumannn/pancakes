@@ -1,10 +1,11 @@
-package main.parser;
+package main.parser.semanticAnalysis;
 
 import main.pancakes.Main;
+import main.parser.generated.PancakesBaseListener;
+import main.parser.generated.PancakesParser;
 import main.parser.symbolTable.*;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Map;
 /**
  * Created by adrian on 11/15/15.
  */
-public class ThirdPassPancakesListener extends PancakesBaseListener{
+public class ThirdPassPancakesListener extends PancakesBaseListener {
 
     public static enum Operand {oEquality, oMultiplication, oDivision, oIntdiv, oAddition, oSubtraction, oUnaryNot, oUnaryNegation, oArrayIndex};
 
@@ -97,6 +98,7 @@ public class ThirdPassPancakesListener extends PancakesBaseListener{
     @Override
     public void exitFunCall(PancakesParser.FunCallContext ctx) {
         FunctionSymbol referencedFunction = (FunctionSymbol) currentScope.resolve(ctx.ID().getSymbol().getText());
+
 
         Map<String, Symbol> args = referencedFunction.getArgs();
         List<PancakesParser.ExprContext> callParams = ctx.arguments().expr();

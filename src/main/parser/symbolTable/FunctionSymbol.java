@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class FunctionSymbol extends Symbol implements Scope {
 
-    private Map<String, Symbol> args = new LinkedHashMap<>();
+    private Map<String, Symbol> args;
     private Scope enclosingScope;
 
 
@@ -16,9 +16,10 @@ public class FunctionSymbol extends Symbol implements Scope {
         super(name, retType);
         this.enclosingScope = enclosingScope;
 
+        args = new LinkedHashMap<>();
     }
 
-    short offset = 0;
+    private int offset = 0;
 
     @Override
     public Symbol resolve(String name) {
@@ -62,12 +63,18 @@ public class FunctionSymbol extends Symbol implements Scope {
     }
 
     @Override
-    public short getOffset() {
+    public int getOffset() {
         return offset;
     }
 
     @Override
-    public void setOffset(short offset) {
+    public void setOffset(int offset) {
         this.offset = offset;
+    }
+
+
+
+    public Map<String, Symbol> getSymbols(){
+        return getArgs();
     }
 }

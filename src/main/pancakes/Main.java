@@ -1,8 +1,14 @@
 package main.pancakes;
 
-import main.parser.*;
-
+import main.parser.generated.PancakesLexer;
+import main.parser.generated.PancakesParser;
+import main.parser.semanticAnalysis.FirstPassPancakesListener;
+import main.parser.semanticAnalysis.SecondPassPancakesListener;
+import main.parser.semanticAnalysis.ThirdPassPancakesListener;
 import main.parser.symbolTable.Symbol;
+import main.parser.compiler.TranslationFirstPhase;
+import main.parser.compiler.TranslationSecondPhase;
+import main.parser.compiler.TranslationThirdPhase;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -53,8 +59,20 @@ public class Main {
                 walker.walk(listener_3, pancakesContext);
 
             if (pass_error){ return;}
-                FourthPassPancakesListener listener_4 = new FourthPassPancakesListener(listener_1.getGlobals(), listener_1.getScopes(), listener_3.getTypeMap());
-                walker.walk(listener_4, pancakesContext);
+                //FourthPassPancakesListener listener_4 = new FourthPassPancakesListener(listener_1.getGlobals(), listener_1.getScopes(), listener_3.getTypeMap());
+                //walker.walk(listener_4, pancakesContext);
+            if (pass_error){ return;}
+            TranslationFirstPhase listener_mp = new TranslationFirstPhase();
+            walker.walk(listener_mp, pancakesContext);
+
+            TranslationSecondPhase msp = new TranslationSecondPhase(listener_1.getGlobals(), listener_mp.getMfo(), listener_mp.getIp());
+            walker.walk(msp, pancakesContext);
+
+            //(GlobalScope globalScope, ParseTreeProperty<Scope> scopes, ArrayList<Byte> mfo, int ip, HashMap<Symbol, Integer> varReferences, HashMap<Symbol, Integer> fConst, HashMap<Symbol, Integer> sConst) {
+
+            TranslationThirdPhase mtp = new TranslationThirdPhase(listener_1.getGlobals(), listener_1.getScopes(), msp.getMfo(), msp.getIp(), msp.getVarReferences(), listener_mp.getfConstants(), listener_mp.getsConstants(), listener_3.getTypeMap());
+            walker.walk(mtp, pancakesContext);
+               // AddressUpdater au = new AddressUpdater(listener_4);
 
 
         } catch (IOException e) {
