@@ -11,6 +11,13 @@ import java.util.ArrayList;
  */
 public class OpCode {
 
+
+    private short firstOp;
+    private short secondOp;
+    private short thirdOp;
+
+    private short size;
+
     public static final short HALT = 0;
 
     //Add, substract, multiply, divide
@@ -24,6 +31,9 @@ public class OpCode {
     public static final short fDIV = 8;
     public static final short INTDIV = 8;
 
+    //CONSTANTS
+    public static final short bCONST = 0;
+    public static final short sCONST = 0;
 
     //BOOLEAN LOGIC
     public static final short iLT  = 9;
@@ -57,20 +67,53 @@ public class OpCode {
     public static final short CALL = 24;
     public static final short RET  = 25;
 
-    public OpCode(short OPCODE_VALUE) {
-
+    public OpCode(short firstOp) {
+        this.firstOp = firstOp;
+        size = 1;
     }
 
-    public OpCode(short store, short address) {
-
+    public OpCode(short firstOp, short secondOp) {
+        this.firstOp = firstOp;
+        this.secondOp = secondOp;
+        size = 2;
     }
 
-    public OpCode(short call, short i, short size) {
-
+    public OpCode(short firstOp, short secondOp, short thirdOp) {
+        this.firstOp = firstOp;
+        this.secondOp = secondOp;
+        this.thirdOp = thirdOp;
+        size = 3;
     }
 
+    public short getFirstOp() {
+        return firstOp;
+    }
 
-//    ArrayList<OpCode> generateByteCode(TerminalNode operation, Symbol.Type type){
+    public void setFirstOp(short firstOp) {
+        this.firstOp = firstOp;
+    }
+
+    public short getSecondOp() {
+        return secondOp;
+    }
+
+    public void setSecondOp(short secondOp) {
+        this.secondOp = secondOp;
+    }
+
+    public short getThirdOp() {
+        return thirdOp;
+    }
+
+    public void setThirdOp(short thirdOp) {
+        this.thirdOp = thirdOp;
+    }
+
+    public short getSize() {
+        return size;
+    }
+
+    //    ArrayList<OpCode> generateByteCode(TerminalNode operation, Symbol.Type type){
 //        switch (operation.getSymbol().getType()){
 //            case PancakesParser.ADD:
 //                if(type == Symbol.Type.tFLOAT){
