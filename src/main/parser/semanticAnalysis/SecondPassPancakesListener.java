@@ -21,6 +21,7 @@ public class SecondPassPancakesListener extends PancakesBaseListener {
         globals = globalScope;
         this.currentScope = globals;
         this.scopes = scopes;
+    
 
     }
 
@@ -55,10 +56,26 @@ public class SecondPassPancakesListener extends PancakesBaseListener {
         String varName = ctx.ID().getSymbol().getText();
         Symbol varSym = currentScope.resolve(varName);
 
-        System.out.println("Name: " + varName + " Symbol: " + varSym);
+        //System.out.println("Name: " + varName + " Symbol: " + varSym);
 
         if( varSym == null){
             Main.logError(ctx.ID().getSymbol(), "Error: Variable name not declared: " + varName);
+        }
+
+        if(varSym instanceof FunctionSymbol){
+            Main.logError(ctx.ID().getSymbol(), "Error: Name refers to function: " + varName);
+        }
+    }
+
+    @Override
+    public void exitArrayIndex(PancakesParser.ArrayIndexContext ctx) {
+        String varName = ctx.ID().getSymbol().getText();
+        Symbol varSym = currentScope.resolve(varName);
+
+//        System.out.println("Name: " + varName + " Symbol: " + varSym);
+
+        if( varSym == null){
+            Main.logError(ctx.ID().getSymbol(), "Error: Array not declared: " + varName);
         }
 
         if(varSym instanceof FunctionSymbol){

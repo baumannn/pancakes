@@ -28,8 +28,6 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
     public void enterPancakes(PancakesParser.PancakesContext ctx) {
 
         globals = new GlobalScope();
-
-
         currentScope = globals;
 
 

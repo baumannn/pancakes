@@ -26,16 +26,18 @@ public class Main {
     private static int[] stack;
     private static int fp;
     private static Integer[] bc;
+    private static boolean trace;
 
 
     public static void main(String[] args) {
+        trace = false;
         String file;
         if (args.length == 1) {
              file = args[0];
 
 
         } else{
-            System.err.println("Se usara el nombre por defecto");
+            if(trace)System.err.println("Se usara el nombre por defecto");
             file = "compiled.pcks";
         }
 
@@ -72,7 +74,7 @@ public class Main {
         //ip++; do this inside while
         while (inst != OpCode.HALT && ip < bc.length){
             //////
-            System.err.printf("%-35s", disInstr());
+            if(trace) System.err.printf("%-35s", disInstr());
             //////
 
 
@@ -278,13 +280,13 @@ public class Main {
                     stack[sp] = stack[fp + address + ia];
                     break;
                 case OpCode.oGLOAD:
-                    ia = stack[sp]; //offset
+                    offset = stack[sp]; //offset
                     sp--;
                     address = bc[ip]; //starting address of array.
                     ip++;
 
                     sp++;
-                    stack[sp] = stack[ address + ia];
+                    stack[sp] = bc[ address + offset];
                     break;
                 case OpCode.GLOAD:
                     sp++;
@@ -321,11 +323,11 @@ public class Main {
                     address = bc[ip];
                     ip++;
 
-                    offset = stack[sp];
-                    sp--;
+                    offset = stack[sp - 1];
+//                    sp--;
 
                     bc[ address + offset] = stack[sp];
-                    sp--;
+                    sp-=2;
                     break;
 
 
@@ -425,7 +427,7 @@ public class Main {
 
             }//end switch
             //////
-            System.err.println(stackString());
+            if(trace)System.err.println(stackString());
             /////
 
             inst = bc[ip];
@@ -433,9 +435,12 @@ public class Main {
 
 
         }
-        System.err.printf("%-35s", disInstr());
-        System.err.println(stackString());
-        dumpDataMemory();
+        if(trace) {
+            System.err.printf("%-35s", disInstr());
+            System.err.println(stackString());
+            dumpDataMemory();
+        }
+
 
     }
 

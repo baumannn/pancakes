@@ -148,12 +148,9 @@ public class ThirdPassPancakesListener extends PancakesBaseListener {
 
                 System.err.printf("line %d:%d %s\n", ctx.start.getLine(), ctx.start.getCharPositionInLine(), "Type mismatch in assignment.");
 
-
             }
 
-
         }
-
 
     }
 

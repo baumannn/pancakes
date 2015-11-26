@@ -172,6 +172,26 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitElse_statement(PancakesParser.Else_statementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PancakesParser#while_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhile_statement(PancakesParser.While_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PancakesParser#while_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhile_statement(PancakesParser.While_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PancakesParser#do_while_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDo_while_statement(PancakesParser.Do_while_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PancakesParser#do_while_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDo_while_statement(PancakesParser.Do_while_statementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PancakesParser#if_expr}.
 	 * @param ctx the parse tree
 	 */

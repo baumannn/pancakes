@@ -5,52 +5,54 @@
 # puede empezar con declaraciones de variables o de funciones
 
 
-# float asmTest = 1.2 * 3.234234;
+float asmTest = 1.2 * 3.234234;
 
 
 
-# # declaracion de variables
+# declaracion de variables
 
-# float f = 1.4;
-# int i = 0;
-# boolean b;
-# string s;
+float f = 1.4;
+int i = 0;
+boolean b;
+string s;
 
-# int [3][4] arr;
+int [3][4] arr;
 
 int[3][2][2] arr;
 
-arr[1][1][1] = 1;
+arr[1][1][1] = 10;
+print(arr[1][1][1]);
+arr[1][1][1] = 15;
 
 print(arr[1][1][1]);
 
-# print(arr[1][1]);
+print(arr[1][1]);
 
 
-# arr[0][1] = 2;
-# arr[2][3] = 4;
-# arr[0][0] = 1;
-# arr[2][0] = 5;
-# arr[0][0] = 1;
+arr[0][1] = 2;
+arr[2][3] = 4;
+arr[0][0] = 1;
+arr[2][0] = 5;
+arr[0][0] = 1;
 
 
-# print("separation");
+print("separation");
 
-# print(arr[0][0]);
-# print(arr[0][1]);
-# print(arr[2][3]);
-# print(arr[0][0]);
-# print(arr[3][0]);
-# print(arr[0][0]);
+print(arr[0][0]);
+print(arr[0][1]);
+print(arr[2][3]);
+print(arr[0][0]);
+print(arr[3][0]);
+print(arr[0][0]);
 
-# print(arr[0][0]);
-# print(arr[0][1]);
-# print(arr[0][2]);
-# print(arr[0][2]);
-# print(arr[1][1]);
-# print(arr[0][2]);
+print(arr[0][0]);
+print(arr[0][1]);
+print(arr[0][2]);
+print(arr[0][2]);
+print(arr[1][1]);
+print(arr[0][2]);
 
-# print("separation");
+print("separation");
 
 
 int [3][4] arr1;
@@ -69,6 +71,8 @@ int add_1 (int num) {
 
 
 
+factorial(5);
+
 
 int factorial(int n){
 	
@@ -79,7 +83,7 @@ int factorial(int n){
 
 }
 
-factorial(5);
+
 
 
 float until10(float x){
@@ -133,27 +137,27 @@ void _thingTester666_ (float fl, int in, boolean bo, string st) {
 
 
 
-# string sx = "";
+string sx = "";
 
-# print(sx);
+print(sx);
 
-# print( "asdas\n");
+print( "asdas\n");
 
-# print(1);
-# print( "\n");
-# print(1.4);
-# print( "\n");
-
-
-
-# float fx1 = 2.5;
-# int ix1 = 2;
-# print(fx1);
-# print( "\n");
-
-# print(ix1);
-# print( "\n");
+print(1);
+print( "\n");
+print(1.4);
+print( "\n");
 
 
-# add_1(2);
+
+float fx1 = 2.5;
+int ix1 = 2;
+print(fx1);
+print( "\n");
+
+print(ix1);
+print( "\n");
+
+
+add_1(2);
 

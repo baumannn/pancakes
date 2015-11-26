@@ -213,6 +213,9 @@ public class OpCode {
             case OpCode.POP:
                 //return
             case OpCode.RET:
+            case OpCode.sPRINT:
+            case OpCode.fPRINT:
+            case OpCode.iPRINT:
                 return 0;
 
             //CONSTANTS
@@ -235,9 +238,6 @@ public class OpCode {
             case OpCode.oGSTORE:
             case OpCode.GSTORE:
                 //BUILT IN FUNCTIONS
-            case OpCode.sPRINT:
-            case OpCode.fPRINT:
-            case OpCode.iPRINT:
                 return 1;
             case OpCode.CALL:
                 return 2;

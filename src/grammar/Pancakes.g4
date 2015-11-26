@@ -34,6 +34,8 @@ block
 	: '{' statement* '}'
 	;
 
+
+
 statement
     : block
     | var_declare
@@ -65,7 +67,15 @@ if_statement
     : 'if' '(' if_expr ')' block (else_statement)?
     ;
 else_statement
-    : 'else' '{' statement '}'
+    : 'else'  block 
+    ;
+
+while_statement
+    : 'while' '(' if_expr ')' block
+    ;
+
+do_while_statement
+    : 'do' block 'while' '(' if_expr ')'
     ;
 
 if_expr
