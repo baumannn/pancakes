@@ -72,7 +72,7 @@ public class Main {
         //ip++; do this inside while
         while (inst != OpCode.HALT && ip < bc.length){
             //////
-            System.err.printf("%-35s", disInstr());
+          //  System.err.printf("%-35s", disInstr());
             //////
 
 
@@ -159,17 +159,9 @@ public class Main {
                 case OpCode.sCONST:
                     //push string in reverse order
                     //push size
-                    address = bc[ip]; //points to size
+                    stack[++sp] = bc[ip]; //points to size
                     ip++;
-                    ia = bc[address]; //size
-                    ib = ia; //for the loop
-                    while (ib > 0){
-                        sp++;
-                        stack[sp] = bc[address + ib];
-                        ib--;
-                    }
-                    sp++;
-                    stack[sp] = ia;
+
                     break;
 
                 //BOOLEAN LOGIC
@@ -275,6 +267,16 @@ public class Main {
                     stack[sp] = stack[fp + bc[ip]];
                     ip++;
                     break;
+                case OpCode.oLOAD:
+                    ia = stack[sp]; //offset
+                    sp--;
+                    address = bc[ip]; //starting address of array.
+                    ip++;
+
+
+                    sp++;
+                    stack[sp] = stack[fp + address + ia];
+                    break;
                 case OpCode.GLOAD:
                     sp++;
                     stack[sp] = bc[bc[ip]];
@@ -299,13 +301,15 @@ public class Main {
 
                 //FUNCTIONS
                 case OpCode.sPRINT:
-                    ia = stack[sp];
+                    address = stack[sp];
                     sp--;
+
+                    int size = bc[address];
+
                     StringBuffer sbuff = new StringBuffer();
-                    while (ia > 0){
-                        sbuff.append((char) stack[sp]);
-                        sp--;
-                        ia--;
+                    address++; //now points at first character
+                    for (int i = 0; i < size; i++) {
+                        sbuff.append( (char) bc[i + address].intValue());
                     }
                     System.out.print(sbuff.toString());
                     break;
@@ -382,13 +386,16 @@ public class Main {
                     sp -= ib;    // pop #ib of args
                     sp++;
                     stack[sp] = ia; // restore result to stack
+
+
+
                     break;
 
 
 
             }//end switch
             //////
-            System.err.println(stackString());
+//            System.err.println(stackString());
             /////
 
             inst = bc[ip];
@@ -396,9 +403,9 @@ public class Main {
 
 
         }
-        System.err.printf("%-35s", disInstr());
-        System.err.println(stackString());
-        dumpDataMemory();
+//        System.err.printf("%-35s", disInstr());
+//        System.err.println(stackString());
+//        dumpDataMemory();
 
     }
 

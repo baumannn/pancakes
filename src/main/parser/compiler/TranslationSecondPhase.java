@@ -1,6 +1,7 @@
 package main.parser.compiler;
 
 import main.parser.generated.PancakesBaseListener;
+import main.parser.symbolTable.ArraySymbol;
 import main.parser.symbolTable.GlobalScope;
 import main.parser.symbolTable.Symbol;
 import main.parser.symbolTable.VariableSymbol;
@@ -28,12 +29,26 @@ public class TranslationSecondPhase extends PancakesBaseListener {
         Map<String, Symbol> symbols = globalScope.getSymbols();
 
         for (String s : symbols.keySet()) {
-            if(symbols.get(s) instanceof VariableSymbol){
-                VariableSymbol vs = (VariableSymbol) symbols.get(s);
+
+            Symbol sym = symbols.get(s);
+            if(sym instanceof VariableSymbol){
+                VariableSymbol vs = (VariableSymbol) sym;
                 varReferences.put(vs, ip);
                 vs.setAddress(ip);
                 mfo.add(new Integer(0));
                 this.ip++;
+            } else if(sym instanceof ArraySymbol){
+                ArraySymbol as = (ArraySymbol) sym;
+                varReferences.put(as, ip);
+                as.setAddress(ip);
+
+                int size = as.getTotalSize();
+
+                for (int i = 0; i < size; i++) {
+                    mfo.add(new Integer(0));
+                    this.ip++;
+                }
+
             }
 
         }

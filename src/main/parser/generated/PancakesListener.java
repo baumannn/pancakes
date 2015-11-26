@@ -28,6 +28,16 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitVar_declare(PancakesParser.Var_declareContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PancakesParser#array_declare}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray_declare(PancakesParser.Array_declareContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PancakesParser#array_declare}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray_declare(PancakesParser.Array_declareContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PancakesParser#type}.
 	 * @param ctx the parse tree
 	 */
@@ -121,6 +131,16 @@ public interface PancakesListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReturn_statement(PancakesParser.Return_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PancakesParser#array_assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray_assignment(PancakesParser.Array_assignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PancakesParser#array_assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray_assignment(PancakesParser.Array_assignmentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PancakesParser#assignment}.
 	 * @param ctx the parse tree
@@ -341,6 +361,16 @@ public interface PancakesListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEquality(PancakesParser.EqualityContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PancakesParser#close_bracket}.
+	 * @param ctx the parse tree
+	 */
+	void enterClose_bracket(PancakesParser.Close_bracketContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PancakesParser#close_bracket}.
+	 * @param ctx the parse tree
+	 */
+	void exitClose_bracket(PancakesParser.Close_bracketContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PancakesParser#funCall}.
 	 * @param ctx the parse tree

@@ -7,6 +7,9 @@ pancakes
 var_declare
     : type ID (EQUAL expr)? ';'
     ;
+array_declare
+    : type ('[' INT ']')+ ID ';'
+    ;
 
 type
     : T_FLOAT | T_INT | T_BOOL | T_STRING | T_VOID 
@@ -30,9 +33,11 @@ block
 statement
     : block
     | var_declare
+    | array_declare
     | if_statement
     | return_statement';' // seperate?
     | assignment ';'
+    | array_assignment ';'
     | funCall ';'
     | built_in_function ';'
     ;
@@ -46,12 +51,16 @@ return_statement
     : 'return' expr? 
     ;
 
+array_assignment
+    : ID ('[' INT ']')+ '='  expr
+    ;
+
 assignment
-    : ID '=' (ID '=')*  expr
+    : ID  '=' (ID '=')*  expr
     ;
 
 if_statement
-    : 'if' '(' if_expr ')' '{' statement '}' (else_statement)?
+    : 'if' '(' if_expr ')' block (else_statement)?
     ;
 else_statement
     : 'else' '{' statement '}'
@@ -63,7 +72,7 @@ if_expr
 
 expr
 	: funCall                       #DontUseFunCall //get parent instead to use this expr node
-    | ID '[' expr ']'               #ArrayIndex
+    | ID ('[' expr close_bracket)+  #ArrayIndex
     | '-' expr                      #UnaryNegate
     | '!' expr                      #UnaryNot
     | expr (MULT | DIV ) expr 		#MultDiv
@@ -79,6 +88,10 @@ expr
     | '(' expr ')'                  #Paren
     ;
 
+close_bracket
+    : ']'
+    ;
+
 funCall
     : ID '(' arguments? ')'
     ;
@@ -89,6 +102,8 @@ arguments
 
 
 PRINT : 'print';
+
+
 
 LT : '<';
 GT : '>';

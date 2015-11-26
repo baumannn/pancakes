@@ -48,6 +48,9 @@ public class TranslationFirstPhase extends PancakesBaseListener {
 
         String sconst = ctx.STRING().getSymbol().getText();
         sconst = sconst.replace("\"", "");
+        sconst = sconst.replace("\\n", "\n");
+        sconst = sconst.replace("\\r", "\r");
+        sconst = sconst.replace("\\t", "\t");
         System.out.println("String " + sconst);
         sConstants.put(sconst, ip);
 

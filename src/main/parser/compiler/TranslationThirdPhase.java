@@ -9,10 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by adrian on 11/25/15.
@@ -22,7 +19,7 @@ public class TranslationThirdPhase extends PancakesBaseListener{
     private final int startCode;
     private GlobalScope globalScope;
     private ParseTreeProperty<Scope> scopes;
-    private ArrayList<Integer> mfo;
+    private static ArrayList<Integer> mfo;
     private int ip;
     private HashMap<Symbol, Integer> varReferences;
     private HashMap<String, Integer> fConst;
@@ -31,6 +28,7 @@ public class TranslationThirdPhase extends PancakesBaseListener{
     private Stack<Integer> pendingToFill;
     private HashMap<Integer, FunctionSymbol> functionCallLocations;
     private HashMap<FunctionSymbol, Integer> functionLocations;
+    private HashMap<ParserRuleContext, ArrayList<Integer>> offsetHM;
 
     private Scope currentScope;
     private int fp;
@@ -52,11 +50,14 @@ public class TranslationThirdPhase extends PancakesBaseListener{
         pendingToFill = new Stack<>();
         functionCallLocations = new HashMap<>();
         functionLocations = new HashMap<>();
+        offsetHM = new HashMap<>();
     }
 
     @Override
     public void enterPancakes(PancakesParser.PancakesContext ctx) {
     }
+
+
 
     //todo implement
     @Override
@@ -188,6 +189,7 @@ public class TranslationThirdPhase extends PancakesBaseListener{
         String name = ctx.ID().getSymbol().getText();
         Symbol sym = currentScope.resolve(name);
 
+
         if ( sym.getScope() == globalScope){
             mfo.add(OpCode.GLOAD);
             ip++;
@@ -200,6 +202,77 @@ public class TranslationThirdPhase extends PancakesBaseListener{
         ip++;
     }
 
+    /*
+     *****************
+     * ARRAYS refs      *
+     *****************
+     **/
+
+    @Override
+    public void enterArrayIndex(PancakesParser.ArrayIndexContext ctx) {
+        String name = ctx.ID().getSymbol().getText();
+        ArraySymbol sym = (ArraySymbol) currentScope.resolve(name);
+        ArrayList<Integer> offsets = new ArrayList<>();
+
+
+        offsets.add(sym.dimensions.size()); //first element has dimensions of array
+
+        int mn = 1;
+
+//        for (int i = 0; i < sym.dimensions.size(); i++) {
+//            offsets.add(mn);
+//            mn *= sym.dimensions.get(i);
+//        }
+
+        for (int i = sym.dimensions.size() - 1; i >= 0; i--) {
+            mn *= sym.dimensions.get(i);
+        }
+
+        for (int i = sym.dimensions.size() - 1; i >= 0; i--) {
+            mn /= sym.dimensions.get(i);
+            offsets.add(mn);
+        }
+
+
+
+        //Collections.reverse(offsets);
+        offsetHM.put(ctx, offsets);
+    }
+
+    @Override
+    public void enterClose_bracket(PancakesParser.Close_bracketContext ctx) {
+        ArrayList<Integer> offsets = offsetHM.get(ctx.getParent());
+
+        int currentOffset = offsets.get(0);
+        //update offsets
+        offsets.set(0, currentOffset - 1);
+
+        mfo.add(OpCode.iCONST);
+        ip++;
+        mfo.add(offsets.get(currentOffset));
+        ip++;
+        mfo.add(OpCode.iMUL);
+        ip++;
+
+    }
+
+    @Override
+    public void exitArrayIndex(PancakesParser.ArrayIndexContext ctx) {
+        String name = ctx.ID().getSymbol().getText();
+        ArraySymbol sym = (ArraySymbol) currentScope.resolve(name);
+        ArrayList<Integer> offsets = new ArrayList<>();
+
+        for (int i = 0; i < sym.dimensions.size() - 1; i++) {
+            mfo.add(OpCode.iADD);
+            ip++;
+        }
+
+        mfo.add(OpCode.oLOAD);
+        ip++;
+
+        mfo.add(sym.getAddress());
+        ip++;
+    }
 
     /*
      *****************
@@ -425,7 +498,6 @@ public class TranslationThirdPhase extends PancakesBaseListener{
     @Override
     public void exitFloatConst(PancakesParser.FloatConstContext ctx) {
         mfo.add(OpCode.fCONST);
-        //mfo.add(fConst.get(ctx.FLOAT().getSymbol().getText()));
         byte[] b = ByteBuffer.allocate(4).putFloat( new Float(ctx.FLOAT().getSymbol().getText())).array();
         int floatAsInt = ByteBuffer.wrap(b).getInt();
         mfo.add(floatAsInt);
@@ -438,6 +510,9 @@ public class TranslationThirdPhase extends PancakesBaseListener{
 
         String str = ctx.STRING().getText();
         str = str.replace("\"", "");
+        str = str.replace("\\n", "\n");
+        str = str.replace("\\r", "\r");
+        str = str.replace("\\t", "\t");
         mfo.add(sConst.get(str));
         ip+=2;
     }
@@ -463,7 +538,7 @@ public class TranslationThirdPhase extends PancakesBaseListener{
     public void exitPrintFunc(PancakesParser.PrintFuncContext ctx) {
         Symbol.Type type = typeMap.get(ctx.expr());
 
-        switch (type){
+        switch (type) {
             case tSTRING:
                 mfo.add(OpCode.sPRINT);
                 break;
@@ -475,6 +550,7 @@ public class TranslationThirdPhase extends PancakesBaseListener{
                 mfo.add(OpCode.fPRINT);
                 break;
         }
+        ip++;
     }
 
 
@@ -509,7 +585,11 @@ public class TranslationThirdPhase extends PancakesBaseListener{
     }
 
     private void translate(int startCode) {
-        for (int i = startCode; i < mfo.size(); i++) {
+        for (int i = startCode; i < mfo.size(); i++){
+            if (mfo.get(i) == null){
+                continue;
+            }
+
             System.out.print(OpCode.translateOpCode(mfo.get(i)) + "\t");
             int numOpers = OpCode.numberOfOperands(mfo.get(i));
             for (int j = 0; j < numOpers; j++){

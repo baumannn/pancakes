@@ -166,14 +166,20 @@ public class ThirdPassPancakesListener extends PancakesBaseListener {
 
     @Override
     public void exitArrayIndex(PancakesParser.ArrayIndexContext ctx) {
-        if( typeMap.get(ctx.expr()) != Symbol.Type.tINT){
-            System.err.printf("line %d:%d %s\n", ctx.start.getLine(), ctx.start.getCharPositionInLine(), "Array index is not an integer.");
-        }
+//        if( typeMap.get(ctx.expr()) != Symbol.Type.tINT){
+//            System.err.printf("line %d:%d %s\n", ctx.start.getLine(), ctx.start.getCharPositionInLine(), "Array index is not an integer.");
+//        }
 
         String varName = ctx.ID().getSymbol().getText();
         Symbol vs = currentScope.resolve(varName);
-        //System.out.println(vs.getType());
         typeMap.put(ctx, vs.getType());
+
+        for (PancakesParser.ExprContext exprContext : ctx.expr()) {
+            if(typeMap.get(exprContext) != Symbol.Type.tINT){
+                System.err.printf("line %d:%d %s\n", ctx.start.getLine(), ctx.start.getCharPositionInLine(), "Array index is not an integer.");
+            }
+        }
+
 
     }
 

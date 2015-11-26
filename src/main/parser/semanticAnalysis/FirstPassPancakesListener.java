@@ -6,6 +6,7 @@ import main.parser.generated.PancakesParser;
 import main.parser.symbolTable.*;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
  * Registers variables and functions in scopes.
@@ -44,6 +45,18 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
 
     }
 
+    @Override
+    public void exitArray_declare(PancakesParser.Array_declareContext ctx) {
+        ArraySymbol arrSym = defineArray(ctx.type(), ctx.ID().getSymbol());
+        if( arrSym == null){
+            Main.logError(ctx.ID().getSymbol(), "Error: Redefinition of variable: " +  ctx.ID().getText());
+        } else{
+            for (TerminalNode terminalNode : ctx.INT()) {
+                arrSym.dimensions.add(Integer.parseInt(terminalNode.toString()));
+            }
+        }
+
+    }
 
     @Override
     public void enterFun_declare(PancakesParser.Fun_declareContext ctx) {
@@ -117,7 +130,7 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
 
 
     ////////////////
-    // functions ///
+    // helper functions ///
     ////////////////
 
 
@@ -132,6 +145,19 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
         }
 
         return false;
+    }
+
+    ArraySymbol defineArray(PancakesParser.TypeContext typeCtx, Token nameToken) {
+        int typeTokenType = typeCtx.start.getType();
+        Symbol.Type type = Main.getType(typeTokenType);
+        ArraySymbol var = new ArraySymbol(nameToken.getText(), type);
+
+        if( !currentScope.isDefined(var)) {
+            currentScope.define(var);
+            return var;
+        }
+
+        return null;
     }
 
 

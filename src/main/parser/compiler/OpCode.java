@@ -50,6 +50,7 @@ public class OpCode {
     public static final int iCONST = 24;
     public static final int fCONST = 25;
     public static final int LOAD   = 26;
+    public static final int oLOAD   = 38;
     public static final int GLOAD  = 27;
     public static final int POP  = 28;
 
@@ -108,6 +109,10 @@ public class OpCode {
                     return "iLT";
                 case OpCode.fLT:
                     return "fLT";
+                case OpCode.iGT:
+                    return "iGT";
+                case OpCode.fGT:
+                    return "fGT";
                 case OpCode.iEQ:
                     return "iEQ";
                 case OpCode.fEQ:
@@ -138,6 +143,8 @@ public class OpCode {
                     return "fCONST";
                 case OpCode.LOAD:
                     return "LOAD";
+                case OpCode.oLOAD:
+                    return "oLOAD";
                 case OpCode.GLOAD:
                     return "GLOAD";
                 case OpCode.POP:
@@ -183,7 +190,9 @@ public class OpCode {
             case OpCode.INTDIV:
                 //BOOLEAN LOGIC
             case OpCode.iLT:
+            case OpCode.iGT:
             case OpCode.fLT:
+            case OpCode.fGT:
             case OpCode.iEQ:
             case OpCode.fEQ:
             case OpCode.bEQ:
@@ -208,6 +217,7 @@ public class OpCode {
             case OpCode.iCONST:
             case OpCode.fCONST:
             case OpCode.LOAD:
+            case OpCode.oLOAD:
             case OpCode.GLOAD:
                 //STORE
             case OpCode.STORE:
