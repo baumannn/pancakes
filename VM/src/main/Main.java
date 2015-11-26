@@ -63,7 +63,7 @@ public class Main {
         bc = code.toArray(new Integer[code.size()]);
 
 
-        int ia, ib, address;
+        int ia, ib, address, offset;
         float fa, fb;
         byte[] bytes;
         char[] sa, sb;
@@ -72,7 +72,7 @@ public class Main {
         //ip++; do this inside while
         while (inst != OpCode.HALT && ip < bc.length){
             //////
-          //  System.err.printf("%-35s", disInstr());
+            System.err.printf("%-35s", disInstr());
             //////
 
 
@@ -277,6 +277,15 @@ public class Main {
                     sp++;
                     stack[sp] = stack[fp + address + ia];
                     break;
+                case OpCode.oGLOAD:
+                    ia = stack[sp]; //offset
+                    sp--;
+                    address = bc[ip]; //starting address of array.
+                    ip++;
+
+                    sp++;
+                    stack[sp] = stack[ address + ia];
+                    break;
                 case OpCode.GLOAD:
                     sp++;
                     stack[sp] = bc[bc[ip]];
@@ -296,6 +305,27 @@ public class Main {
                     bc[bc[ip]] = stack[sp];
                     sp--;
                     ip++;
+                    break;
+
+                case OpCode.oSTORE:
+                    address = bc[ip];
+                    ip++;
+
+                    offset = stack[sp];
+                    sp--;
+
+                    stack[fp + address + offset] = stack[sp];
+                    sp--;
+                    break;
+                case OpCode.oGSTORE:
+                    address = bc[ip];
+                    ip++;
+
+                    offset = stack[sp];
+                    sp--;
+
+                    bc[ address + offset] = stack[sp];
+                    sp--;
                     break;
 
 
@@ -395,7 +425,7 @@ public class Main {
 
             }//end switch
             //////
-//            System.err.println(stackString());
+            System.err.println(stackString());
             /////
 
             inst = bc[ip];
@@ -403,9 +433,9 @@ public class Main {
 
 
         }
-//        System.err.printf("%-35s", disInstr());
-//        System.err.println(stackString());
-//        dumpDataMemory();
+        System.err.printf("%-35s", disInstr());
+        System.err.println(stackString());
+        dumpDataMemory();
 
     }
 

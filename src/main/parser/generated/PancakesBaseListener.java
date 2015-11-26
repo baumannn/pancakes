@@ -100,6 +100,18 @@ public class PancakesBaseListener implements PancakesListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArray_assignment(PancakesParser.Array_assignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArray_assignment(PancakesParser.Array_assignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBlock(PancakesParser.BlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -155,18 +167,6 @@ public class PancakesBaseListener implements PancakesListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReturn_statement(PancakesParser.Return_statementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterArray_assignment(PancakesParser.Array_assignmentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArray_assignment(PancakesParser.Array_assignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

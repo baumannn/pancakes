@@ -42,8 +42,10 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-
-            PancakesLexer lexer = new PancakesLexer(new ANTLRFileStream("test.pcakes"));
+            String file;
+            if(args.length < 1) file = "test.pcakes";
+             else file = args[0];
+            PancakesLexer lexer = new PancakesLexer(new ANTLRFileStream(file));
             PancakesParser parser = new PancakesParser(new CommonTokenStream(lexer));
 
             // Specify our entry point
@@ -73,7 +75,7 @@ public class Main {
 
             //(GlobalScope globalScope, ParseTreeProperty<Scope> scopes, ArrayList<Byte> mfo, int ip, HashMap<Symbol, Integer> varReferences, HashMap<Symbol, Integer> fConst, HashMap<Symbol, Integer> sConst) {
 
-            TranslationThirdPhase mtp = new TranslationThirdPhase(listener_1.getGlobals(), listener_1.getScopes(), msp.getMfo(), msp.getIp(), msp.getVarReferences(), listener_mp.getfConstants(), listener_mp.getsConstants(), listener_3.getTypeMap());
+            TranslationThirdPhase mtp = new TranslationThirdPhase(listener_1.getGlobals(), listener_1.getScopes(), msp.getMfo(), msp.getIp(), msp.getReferences(), listener_mp.getfConstants(), listener_mp.getsConstants(), listener_3.getTypeMap());
             walker.walk(mtp, pancakesContext);
                // AddressUpdater au = new AddressUpdater(listener_4);
 

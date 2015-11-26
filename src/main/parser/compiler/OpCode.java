@@ -51,6 +51,7 @@ public class OpCode {
     public static final int fCONST = 25;
     public static final int LOAD   = 26;
     public static final int oLOAD   = 38;
+    public static final int oGLOAD   = 41;
     public static final int GLOAD  = 27;
     public static final int POP  = 28;
 
@@ -64,6 +65,8 @@ public class OpCode {
     public static final int iPRINT  = 33;
     public static final int CALL = 34;
     public static final int RET  = 35;
+    public static final int oGSTORE  = 39;
+    public static final int oSTORE  = 40;
 
 
 
@@ -147,6 +150,8 @@ public class OpCode {
                     return "oLOAD";
                 case OpCode.GLOAD:
                     return "GLOAD";
+                case OpCode.oGLOAD:
+                    return "oGLOAD";
                 case OpCode.POP:
                     return "POP";
 
@@ -155,6 +160,10 @@ public class OpCode {
                     return "STORE";
                 case OpCode.GSTORE:
                     return "GSTORE";
+                case OpCode.oSTORE:
+                    return "oSTORE";
+                case OpCode.oGSTORE:
+                    return "oGSTORE";
 
                 //FUNCTIONS
                 case OpCode.sPRINT:
@@ -218,9 +227,12 @@ public class OpCode {
             case OpCode.fCONST:
             case OpCode.LOAD:
             case OpCode.oLOAD:
+            case OpCode.oGLOAD:
             case OpCode.GLOAD:
                 //STORE
             case OpCode.STORE:
+            case OpCode.oSTORE:
+            case OpCode.oGSTORE:
             case OpCode.GSTORE:
                 //BUILT IN FUNCTIONS
             case OpCode.sPRINT:

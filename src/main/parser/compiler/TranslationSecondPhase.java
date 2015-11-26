@@ -44,6 +44,8 @@ public class TranslationSecondPhase extends PancakesBaseListener {
 
                 int size = as.getTotalSize();
 
+                System.out.println("aaaaa " + as.getTotalSize());
+
                 for (int i = 0; i < size; i++) {
                     mfo.add(new Integer(0));
                     this.ip++;
@@ -73,7 +75,7 @@ public class TranslationSecondPhase extends PancakesBaseListener {
         this.ip = ip;
     }
 
-    public HashMap<Symbol, Integer> getVarReferences() {
+    public HashMap<Symbol, Integer> getReferences() {
         return varReferences;
     }
 

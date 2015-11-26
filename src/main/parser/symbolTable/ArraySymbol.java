@@ -20,6 +20,6 @@ public class ArraySymbol extends Symbol {
         for (int i = 0; i < dimensions.size(); i++) {
             total *= dimensions.get(i);
         }
-        return 0;
+        return total;
     }
 }

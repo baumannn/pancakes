@@ -52,10 +52,12 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
             Main.logError(ctx.ID().getSymbol(), "Error: Redefinition of variable: " +  ctx.ID().getText());
         } else{
             for (TerminalNode terminalNode : ctx.INT()) {
+
+
                 arrSym.dimensions.add(Integer.parseInt(terminalNode.toString()));
             }
+            System.out.println("aaa23 " + arrSym.dimensions);
         }
-
     }
 
     @Override
@@ -118,15 +120,6 @@ public class FirstPassPancakesListener extends PancakesBaseListener {
 
         currentScope = currentScope.getEnclosingScope();
     }
-
-
-
-
-    //
-
-
-
-
 
 
     ////////////////

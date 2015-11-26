@@ -136,6 +136,72 @@ public class TranslationThirdPhase extends PancakesBaseListener{
 
 
     @Override
+    public void enterArray_assignment(PancakesParser.Array_assignmentContext ctx) {
+        String name = ctx.ID().getSymbol().getText();
+        ArraySymbol sym = (ArraySymbol) currentScope.resolve(name);
+        ArrayList<Integer> offsets = new ArrayList<>();
+
+
+        offsets.add(sym.dimensions.size()); //first element has dimensions of array
+
+        int mn = 1;
+
+//        for (int i = 0; i < sym.dimensions.size(); i++) {
+//            offsets.add(mn);
+//            mn *= sym.dimensions.get(i);
+//        }
+
+        for (int i = sym.dimensions.size() - 1; i >= 0; i--) {
+            offsets.add(mn);
+            mn *= sym.dimensions.get(i);
+        }
+
+//        for (int i = sym.dimensions.size() - 1; i >= 0; i--) {
+//            mn *= sym.dimensions.get(i);
+//        }
+//
+//        for (int i = sym.dimensions.size() - 1; i >= 0; i--) {
+//            mn /= sym.dimensions.get(i);
+//            offsets.add(mn);
+//        }
+
+        //Collections.reverse(offsets);
+        offsetHM.put(ctx, offsets);
+
+    }
+
+
+    @Override
+    public void exitArray_assignment(PancakesParser.Array_assignmentContext ctx) {
+        String name = ctx.ID().getSymbol().getText();
+        ArraySymbol sym = (ArraySymbol) currentScope.resolve(name);
+        ArrayList<Integer> offsets = new ArrayList<>();
+
+        for (int i = 0; i < sym.dimensions.size() - 1; i++) {
+            mfo.add(OpCode.iADD);
+            ip++;
+        }
+
+        if (sym.getScope() == globalScope){
+            mfo.add(OpCode.oGSTORE);
+            ip++;
+        } else{
+            mfo.add(OpCode.oSTORE);
+            ip++;
+        }
+
+        mfo.add(sym.getAddress());
+        ip++;
+    }
+
+
+
+
+
+
+    ////////////
+
+    @Override
     public void exitAssignment(PancakesParser.AssignmentContext ctx) {
         System.out.println("Assignment " + ip);
         List<TerminalNode> ids = ctx.ID();
@@ -156,6 +222,7 @@ public class TranslationThirdPhase extends PancakesBaseListener{
         mfo.add(OpCode.POP);
         ip++;
     }
+
 
     @Override
     public void exitVar_declare(PancakesParser.Var_declareContext ctx) {
@@ -219,19 +286,19 @@ public class TranslationThirdPhase extends PancakesBaseListener{
 
         int mn = 1;
 
-//        for (int i = 0; i < sym.dimensions.size(); i++) {
-//            offsets.add(mn);
-//            mn *= sym.dimensions.get(i);
-//        }
-
         for (int i = sym.dimensions.size() - 1; i >= 0; i--) {
+            offsets.add(mn);
             mn *= sym.dimensions.get(i);
         }
 
-        for (int i = sym.dimensions.size() - 1; i >= 0; i--) {
-            mn /= sym.dimensions.get(i);
-            offsets.add(mn);
-        }
+//        for (int i = sym.dimensions.size() - 1; i >= 0; i--) {
+//            mn *= sym.dimensions.get(i);
+//        }
+//
+//        for (int i = sym.dimensions.size() - 1; i >= 0; i--) {
+//            mn /= sym.dimensions.get(i);
+//            offsets.add(mn);
+//        }
 
 
 
@@ -242,10 +309,12 @@ public class TranslationThirdPhase extends PancakesBaseListener{
     @Override
     public void enterClose_bracket(PancakesParser.Close_bracketContext ctx) {
         ArrayList<Integer> offsets = offsetHM.get(ctx.getParent());
-
+        System.out.print(offsets);
         int currentOffset = offsets.get(0);
         //update offsets
         offsets.set(0, currentOffset - 1);
+
+        System.out.print("h  " + offsets.get(currentOffset));
 
         mfo.add(OpCode.iCONST);
         ip++;
@@ -267,8 +336,14 @@ public class TranslationThirdPhase extends PancakesBaseListener{
             ip++;
         }
 
-        mfo.add(OpCode.oLOAD);
-        ip++;
+        if (currentScope == globalScope){
+            mfo.add(OpCode.oGLOAD);
+            ip++;
+        } else{
+            mfo.add(OpCode.oLOAD);
+            ip++;
+        }
+
 
         mfo.add(sym.getAddress());
         ip++;

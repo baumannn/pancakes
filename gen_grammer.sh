@@ -14,9 +14,9 @@ $(cd misc; javac -cp /usr/local/Cellar/antlr/4.5.1/antlr-4.5.1-complete.jar $1*.
 rm -rf misc;
 
 
-# dot file gen
-# echo "generating png files"
-# mkdir -p misc/dotFiles;
-# $(cd src/grammar; antlr4 Pancakes.g4 -atn -o ../../misc/dotFiles);
-# $(cd misc/dotFiles; find *.dot -exec dot {} -Tpng -o ../{}.png \;; cd ../; rm -rf dotFiles);
+dot file gen
+echo "generating png files"
+mkdir -p misc/dotFiles;
+$(cd src/grammar; antlr4 Pancakes.g4 -atn -o ../../misc/dotFiles);
+$(cd misc/dotFiles; find *.dot -exec dot {} -Tpng -o ../{}.png \;; cd ../; rm -rf dotFiles);
 

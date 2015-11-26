@@ -16,91 +16,120 @@
 # boolean b;
 # string s;
 
-int [3][4] arr;
+# int [3][4] arr;
 
-print(arr[0][0]);
-print(arr[0][1]);
-print(arr[0][2]);
-print(arr[0][3]);
-print(arr[1][1]);
-print(arr[0][2]);
-# int [3][4] arr1;
+int[3][2][2] arr;
 
-# int j = 3;
+arr[1][1][1] = 1;
+
+print(arr[1][1][1]);
+
+# print(arr[1][1]);
 
 
+# arr[0][1] = 2;
+# arr[2][3] = 4;
+# arr[0][0] = 1;
+# arr[2][0] = 5;
+# arr[0][0] = 1;
 
-# #declaracion de funciones
 
-# int add_1 (int num) {
+# print("separation");
+
+# print(arr[0][0]);
+# print(arr[0][1]);
+# print(arr[2][3]);
+# print(arr[0][0]);
+# print(arr[3][0]);
+# print(arr[0][0]);
+
+# print(arr[0][0]);
+# print(arr[0][1]);
+# print(arr[0][2]);
+# print(arr[0][2]);
+# print(arr[1][1]);
+# print(arr[0][2]);
+
+# print("separation");
+
+
+int [3][4] arr1;
+
+int j = 3;
+
+
+
+#declaracion de funciones
+
+int add_1 (int num) {
 	
-# 	return( num + 1 ) ;
+	return( num + 1 ) ;
 
-# }
-
-
+}
 
 
-# int factorial(int n){
+
+
+int factorial(int n){
 	
-# 	if( n < 1){
-# 		return 1;
-# 	}
-# 		return n * factorial(n-1);
+	if( n < 1){
+		return 1;
+	}
+		return n * factorial(n-1);
 
-# }
+}
 
-# factorial(5);
+factorial(5);
 
 
-# float until10(float x){
+float until10(float x){
 	
-# 	return 3.0;
+	return 3.0;
 
-# }
+}
 
-# until10(1.3);
-
-
-# int x = add_1(14);
+until10(1.3);
 
 
-# void _thingTester666_ (float fl, int in, boolean bo, string st) {
+int x = add_1(14);
+
+
+void _thingTester666_ (float fl, int in, boolean bo, string st) {
 	
 	
-# 	int j = 0;
+	int j = 0;
 
 
-# 	# block adentro
-# 	{
-# 		int k = 0;
+	# block adentro
+	{
+		int k = 0;
 
-# 		j = k = 1000;
-
-
-
-# 	}
-
-# 	if ( add_1(j) ) {
-
-# 		return;
-
-# 	}
-
-# 	if ( j == 1 ) {
-
-# 		j = - j ;
-
-# 	} else {
-
-# 		j = add_1(j);
-
-# 	}
-
-# 	_thingTester666_ ( fl, add_1(in), !bo, st);
+		j = k = 1000;
 
 
-# }
+
+	}
+
+	if ( add_1(j) ) {
+
+		return;
+
+	}
+
+	if ( j == 1 ) {
+
+		j = - j ;
+
+	} else {
+
+		j = add_1(j);
+
+	}
+
+	_thingTester666_ ( fl, add_1(in), !bo, st);
+
+
+}
 
 
 

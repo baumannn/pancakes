@@ -26,6 +26,10 @@ fun_param
     : type ID
     ;
 
+array_assignment
+    : ID ('[' expr close_bracket )+ '='  expr
+    ;
+
 block
 	: '{' statement* '}'
 	;
@@ -51,9 +55,7 @@ return_statement
     : 'return' expr? 
     ;
 
-array_assignment
-    : ID ('[' INT ']')+ '='  expr
-    ;
+
 
 assignment
     : ID  '=' (ID '=')*  expr

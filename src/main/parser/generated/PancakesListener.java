@@ -78,6 +78,16 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitFun_param(PancakesParser.Fun_paramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PancakesParser#array_assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray_assignment(PancakesParser.Array_assignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PancakesParser#array_assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray_assignment(PancakesParser.Array_assignmentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PancakesParser#block}.
 	 * @param ctx the parse tree
 	 */
@@ -131,16 +141,6 @@ public interface PancakesListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReturn_statement(PancakesParser.Return_statementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PancakesParser#array_assignment}.
-	 * @param ctx the parse tree
-	 */
-	void enterArray_assignment(PancakesParser.Array_assignmentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#array_assignment}.
-	 * @param ctx the parse tree
-	 */
-	void exitArray_assignment(PancakesParser.Array_assignmentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PancakesParser#assignment}.
 	 * @param ctx the parse tree
