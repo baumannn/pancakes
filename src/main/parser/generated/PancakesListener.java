@@ -88,6 +88,30 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitStatement(PancakesParser.StatementContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code PrintFunc}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintFunc(PancakesParser.PrintFuncContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PrintFunc}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintFunc(PancakesParser.PrintFuncContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DummyFunc}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterDummyFunc(PancakesParser.DummyFuncContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DummyFunc}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitDummyFunc(PancakesParser.DummyFuncContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PancakesParser#return_statement}.
 	 * @param ctx the parse tree
 	 */
@@ -162,17 +186,17 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitFloatConst(PancakesParser.FloatConstContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FunCall}
+	 * Enter a parse tree produced by the {@code DontUseFunCall}
 	 * labeled alternative in {@link PancakesParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunCall(PancakesParser.FunCallContext ctx);
+	void enterDontUseFunCall(PancakesParser.DontUseFunCallContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code FunCall}
+	 * Exit a parse tree produced by the {@code DontUseFunCall}
 	 * labeled alternative in {@link PancakesParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunCall(PancakesParser.FunCallContext ctx);
+	void exitDontUseFunCall(PancakesParser.DontUseFunCallContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code AddSub}
 	 * labeled alternative in {@link PancakesParser#expr}.
@@ -305,6 +329,16 @@ public interface PancakesListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEquality(PancakesParser.EqualityContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PancakesParser#funCall}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunCall(PancakesParser.FunCallContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PancakesParser#funCall}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunCall(PancakesParser.FunCallContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PancakesParser#arguments}.
 	 * @param ctx the parse tree

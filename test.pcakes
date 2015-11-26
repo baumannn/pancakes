@@ -1,73 +1,8 @@
 
+float f = 1.3;
+string s = "hola";
+int i = 22;
 
-# Pancakes testfile
-
-# puede empezar con declaraciones de variables o de funciones
-
-
-float asmTest = 1.2 * 3.234234;
-
-
-
-# declaracion de variables
-
-float f = 1.4;
-int i = 0;
-boolean b;
-string s;
-
-
-
-int j = 3;
-
-
-
-#declaracion de funciones
-
-int add_1 (int num) {
-	
-	return( num + 1 ) ;
-
-}
-
-
-int x = add_1(14);
-
-int far = "asdasdas";
-
-void _thingTester666_ (float fl, int in, boolean bo, string st) {
-	
-	
-	int j = 0;
-
-
-	# block adentro
-	{
-		int k = 0;
-
-		j = k = 1000;
-
-
-
-	}
-
-	if ( add_1(j) ) {
-
-		return;
-
-	}
-
-	if ( j == 1 ) {
-
-		j = - j ;
-
-	} else {
-
-		j = add_1(j);
-
-	}
-
-	_thingTester666_ ( fl, add_1(in), !bo, st);
-
-
-}
+print(f);
+print(s);
+print(i);

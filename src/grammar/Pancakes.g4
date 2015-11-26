@@ -1,7 +1,7 @@
 grammar Pancakes;
 
 pancakes
-    : (fun_declare | var_declare)+
+    : (fun_declare | statement)+
     ;
 
 var_declare
@@ -33,8 +33,15 @@ statement
     | if_statement
     | return_statement';' // seperate?
     | assignment ';'
-    | expr ';'
+    | funCall ';'
+    | built_in_function ';'
     ;
+
+built_in_function
+    : PRINT '(' expr ')' #PrintFunc
+    | 'dummy' '(' expr ')' #DummyFunc
+    ;
+
 return_statement
     : 'return' expr? 
     ;
@@ -55,7 +62,7 @@ if_expr
     ;
 
 expr
-	: ID '(' arguments? ')'         #FunCall
+	: funCall                       #DontUseFunCall //get parent instead to use this expr node
     | ID '[' expr ']'               #ArrayIndex
     | '-' expr                      #UnaryNegate
     | '!' expr                      #UnaryNot
@@ -71,10 +78,16 @@ expr
     | '(' expr ')'                  #Paren
     ;
 
+funCall
+    : ID '(' arguments? ')'
+    ;
+
 arguments 
 	: expr (',' expr)*
 	;
 
+
+PRINT : 'print';
 
 BOOLEAN : ('true' | 'false');
 

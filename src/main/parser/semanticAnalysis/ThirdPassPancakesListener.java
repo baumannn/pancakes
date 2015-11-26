@@ -4,6 +4,8 @@ import main.pancakes.Main;
 import main.parser.generated.PancakesBaseListener;
 import main.parser.generated.PancakesParser;
 import main.parser.symbolTable.*;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -23,7 +25,7 @@ public class ThirdPassPancakesListener extends PancakesBaseListener {
     ParseTreeProperty<Scope> scopes; // todos los scopes
     GlobalScope globals;
     Scope currentScope;
-    public HashMap<PancakesParser.ExprContext, Symbol.Type> typeMap;
+    public HashMap<ParserRuleContext, Symbol.Type> typeMap;
      HashMap<Symbol.Type,HashMap<Symbol.Type, HashMap<Operand, Symbol.Type>>> tesseract;
 
     public ThirdPassPancakesListener(GlobalScope globalScope, ParseTreeProperty<Scope> scopes) {
@@ -95,6 +97,7 @@ public class ThirdPassPancakesListener extends PancakesBaseListener {
      ************************************
      **/
 
+
     @Override
     public void exitFunCall(PancakesParser.FunCallContext ctx) {
         FunctionSymbol referencedFunction = (FunctionSymbol) currentScope.resolve(ctx.ID().getSymbol().getText());
@@ -123,7 +126,7 @@ public class ThirdPassPancakesListener extends PancakesBaseListener {
             }
         }
 
-        typeMap.put(ctx, referencedFunction.getType());
+        typeMap.put(ctx.getParent(), referencedFunction.getType());
 
     }
 
@@ -459,7 +462,7 @@ public class ThirdPassPancakesListener extends PancakesBaseListener {
     }
 
 
-    public HashMap<PancakesParser.ExprContext, Symbol.Type> getTypeMap() {
+    public HashMap<ParserRuleContext, Symbol.Type> getTypeMap() {
         return typeMap;
     }
 }

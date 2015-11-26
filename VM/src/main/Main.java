@@ -1,6 +1,6 @@
 package main;
 
-import opcodes.OpCode;
+import main.parser.compiler.OpCode;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -46,12 +46,9 @@ public class Main {
 
             vm(code);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
 
 
     }
@@ -276,14 +273,14 @@ public class Main {
                     ip++;
                     break;
                 case OpCode.GSTORE:
-                    sp++;
-                    stack[sp] = bc[bc[ip]];
+                    bc[bc[ip]] = stack[sp];
+                    sp--;
                     ip++;
                     break;
 
 
                 //FUNCTIONS
-                case OpCode.PRINT:
+                case OpCode.sPRINT:
                     ia = stack[sp];
                     sp--;
                     StringBuffer sbuff = new StringBuffer();
@@ -293,6 +290,18 @@ public class Main {
                         ia--;
                     }
                     System.out.print(sbuff.toString());
+                    break;
+
+                case OpCode.iPRINT:
+                    ia = stack[sp];
+                    sp--;
+                    System.out.print(ia);
+                    break;
+                case OpCode.fPRINT:
+                    bytes = ByteBuffer.allocate(4).putInt(stack[sp]).array();
+                    sp--;
+                    fa =  ByteBuffer.wrap(bytes).getFloat();
+                    System.out.print(fa);
                     break;
 
                 //LOGICAL JUMPS
@@ -386,10 +395,10 @@ public class Main {
 
     protected static String disInstr() {
         int opcode = bc[ip];
-        String opName = transOp(opcode);
+        String opName = OpCode.translateOpCode(opcode);
         StringBuilder buf = new StringBuilder();
         buf.append(String.format("%04d:\t%-11s", ip, opName));
-        int nargs = numbArgs(opcode);
+        int nargs = OpCode.numberOfOperands(opcode);
         if ( nargs>0 ) {
             List<String> operands = new ArrayList<String>();
             for (int i=ip+1; i<=ip+nargs; i++) {
@@ -412,195 +421,6 @@ public class Main {
         }
         System.err.println();
     }
-
-
-    private static String transOp(int opcode){
-
-
-        switch(opcode){
-
-
-            case OpCode.HALT:
-                return "HALT";
-
-            //Add, substract, multiply, divide
-            case OpCode.iADD:
-                return "iADD";
-            case OpCode.fADD:
-                return "fADD";
-            case OpCode.iSUB:
-                return "iSUB";
-            case OpCode.fSUB:
-                return "fSUB";
-            case OpCode.iMUL:
-                return "iMUL";
-            case OpCode.fMUL:
-                return "fMUL";
-            case OpCode.iDIV:
-                return "iDIV";
-            case OpCode.fDIV:
-                return "fDIV";
-            case OpCode.INTDIV:
-                return "INTDIV";
-
-            //CONSTANTS
-            case OpCode.bCONST:
-                return "bCONST";
-            case OpCode.sCONST:
-                return "sCONST";
-
-            //BOOLEAN LOGIC
-            case OpCode.iLT:
-                return "iLT";
-            case OpCode.fLT:
-                return "fLT";
-            case OpCode.iEQ:
-                return "iEQ";
-            case OpCode.fEQ:
-                return "fEQ";
-            case OpCode.bEQ:
-                return "bEQ";
-            case OpCode.sEQ:
-                return "sEQ";
-            case OpCode.NOT:
-                return "NOT";
-            case OpCode.iNEG:
-                return "iNEG";
-            case OpCode.fNEG:
-                return "fNEG";
-
-            //LOGICAL JUMPS
-            case OpCode.GOTO:
-                return "GOTO";
-            case OpCode.GOTOT:
-                return "GOTOT";
-            case OpCode.GOTOF:
-                return "GOTOF";
-
-            //LOAD AND POP
-            case OpCode.iCONST:
-                return "iCONST";
-            case OpCode.fCONST:
-                return "fCONST";
-            case OpCode.LOAD:
-                return "LOAD";
-            case OpCode.GLOAD:
-                return "GLOAD";
-            case OpCode.POP:
-                return "POP";
-
-            //STORE
-            case OpCode.STORE:
-                return "STORE";
-            case OpCode.GSTORE:
-                return "GSTORE";
-
-            //FUNCTIONS
-            case OpCode.PRINT:
-                return "PRINT";
-            case OpCode.CALL:
-                return "CALL";
-            case OpCode.RET:
-                return "RET";
-
-        }
-        return "Error";
-    }
-
-    private static int numbArgs(Integer opcode) {
-        switch(opcode){
-
-
-            case OpCode.HALT:
-                return 0;
-
-            //Add, substract, multiply, divide
-            case OpCode.iADD:
-                return 0;
-            case OpCode.fADD:
-                return 0;
-            case OpCode.iSUB:
-                return 0;
-            case OpCode.fSUB:
-                return 0;
-            case OpCode.iMUL:
-                return 0;
-            case OpCode.fMUL:
-                return 0;
-            case OpCode.iDIV:
-                return 0;
-            case OpCode.fDIV:
-                return 0;
-            case OpCode.INTDIV:
-                return 0;
-
-            //CONSTANTS
-            case OpCode.bCONST:
-                return 1;
-            case OpCode.sCONST:
-                return 1;
-
-            //BOOLEAN LOGIC
-            case OpCode.iLT:
-                return 0;
-            case OpCode.fLT:
-                return 0;
-            case OpCode.iEQ:
-                return 0;
-            case OpCode.fEQ:
-                return 0;
-            case OpCode.bEQ:
-                return 0;
-            case OpCode.sEQ:
-                return 0;
-            case OpCode.NOT:
-                return 0;
-            case OpCode.iNEG:
-                return 0;
-            case OpCode.fNEG:
-                return 0;
-
-            //LOGICAL JUMPS
-            case OpCode.GOTO:
-                return 1;
-            case OpCode.GOTOT:
-                return 1;
-            case OpCode.GOTOF:
-                return 1;
-
-            //LOAD AND POP
-            case OpCode.iCONST:
-                return 1;
-            case OpCode.fCONST:
-                return 1;
-            case OpCode.LOAD:
-                return 1;
-            case OpCode.GLOAD:
-                return 1;
-            case OpCode.POP:
-                return 0;
-
-            //STORE
-            case OpCode.STORE:
-                return 1;
-            case OpCode.GSTORE:
-                return 1;
-
-            //FUNCTIONS
-            case OpCode.PRINT:
-                return 0;
-            case OpCode.CALL:
-                return 2;
-            case OpCode.RET:
-                return 0;
-
-        }
-
-        return 0;
-    }
-
-
-
 
 
 }

@@ -112,6 +112,30 @@ public class PancakesBaseListener implements PancakesListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPrintFunc(PancakesParser.PrintFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrintFunc(PancakesParser.PrintFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDummyFunc(PancakesParser.DummyFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDummyFunc(PancakesParser.DummyFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterReturn_statement(PancakesParser.Return_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -196,13 +220,13 @@ public class PancakesBaseListener implements PancakesListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunCall(PancakesParser.FunCallContext ctx) { }
+	@Override public void enterDontUseFunCall(PancakesParser.DontUseFunCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunCall(PancakesParser.FunCallContext ctx) { }
+	@Override public void exitDontUseFunCall(PancakesParser.DontUseFunCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -335,6 +359,18 @@ public class PancakesBaseListener implements PancakesListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitEquality(PancakesParser.EqualityContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunCall(PancakesParser.FunCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunCall(PancakesParser.FunCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
