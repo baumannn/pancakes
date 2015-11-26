@@ -2,7 +2,7 @@
 #todo: make a nice script later (build.xml?)
 
 echo "building"
-$(cd src/grammar; antlr4 Pancakes.g4 -package main.parser -o ../main/parser;)
+$(cd src/grammar; antlr4 Pancakes.g4 -package main.parser.generated -o ../main/parser/generated;)
 
 
 

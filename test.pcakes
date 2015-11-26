@@ -30,6 +30,9 @@ int add_1 (int num) {
 
 }
 
+
+int x = add_1(14);
+
 int far = "asdasdas";
 
 void _thingTester666_ (float fl, int in, boolean bo, string st) {

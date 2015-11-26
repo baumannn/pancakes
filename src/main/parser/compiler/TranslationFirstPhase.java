@@ -24,6 +24,12 @@ public class TranslationFirstPhase extends PancakesBaseListener {
         sConstants = new HashMap<>();
         mfo = new ArrayList<>();
 
+        mfo.add(OpCode.GOTO);
+        ip++;
+
+        mfo.add(new Integer(0));
+        ip++;
+
     }
 
 

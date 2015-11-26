@@ -31,9 +31,12 @@ statement
     : block
     | var_declare
     | if_statement
-    | 'return' expr? ';' // seperate?
+    | return_statement';' // seperate?
     | assignment ';'
     | expr ';'
+    ;
+return_statement
+    : 'return' expr? 
     ;
 
 assignment

@@ -12,7 +12,10 @@ import main.parser.compiler.TranslationThirdPhase;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 
 public class Main {
@@ -73,6 +76,18 @@ public class Main {
             TranslationThirdPhase mtp = new TranslationThirdPhase(listener_1.getGlobals(), listener_1.getScopes(), msp.getMfo(), msp.getIp(), msp.getVarReferences(), listener_mp.getfConstants(), listener_mp.getsConstants(), listener_3.getTypeMap());
             walker.walk(mtp, pancakesContext);
                // AddressUpdater au = new AddressUpdater(listener_4);
+
+            ObjectOutputStream out = new ObjectOutputStream(
+                    new FileOutputStream("compiled.pcks")
+            );
+
+            ArrayList<Integer> mfo =  mtp.getMfo();
+
+            out.writeObject(mfo);
+            out.flush();
+            out.close();
+
+
 
 
         } catch (IOException e) {

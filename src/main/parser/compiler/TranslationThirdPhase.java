@@ -44,6 +44,7 @@ public class TranslationThirdPhase extends PancakesBaseListener{
         this.currentScope = globalScope;
 
         startCode = ip;
+        mfo.set(1, startCode);
 
         pendingToFill = new Stack<>();
         functionCallLocations = new HashMap<>();
@@ -68,7 +69,17 @@ public class TranslationThirdPhase extends PancakesBaseListener{
             i++;
         }
 
+        mfo.add(OpCode.GOTO);
+        ip++;
+        mfo.add(new Integer(0));
+        pendingToFill.push(ip);
+        ip++;
+
         functionLocations.put((FunctionSymbol) currentScope, ip);
+
+
+
+
     }
 
 
@@ -78,6 +89,9 @@ public class TranslationThirdPhase extends PancakesBaseListener{
 
         currentScope = currentScope.getEnclosingScope();
         fp = 0;
+
+        int update = pendingToFill.pop();
+        mfo.set(update, ip);
 
     }
 
@@ -355,8 +369,19 @@ public class TranslationThirdPhase extends PancakesBaseListener{
 
     }
 
+    /*
+     ****************
+     * return
+     *
+     *****************
+     */
 
+    @Override
+    public void exitReturn_statement(PancakesParser.Return_statementContext ctx) {
+        mfo.add(OpCode.RET);
+        ip++;
 
+    }
 
 
 
@@ -404,28 +429,15 @@ public class TranslationThirdPhase extends PancakesBaseListener{
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public ArrayList<Integer> getMfo() {
+        return mfo;
+    }
 
     @Override
     public void exitPancakes(PancakesParser.PancakesContext ctx) {
+        mfo.add(OpCode.HALT);
+        ip++;
+
         updateFunctionCalls();
 
         System.out.print(mfo);
