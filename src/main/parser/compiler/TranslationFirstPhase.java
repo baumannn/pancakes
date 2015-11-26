@@ -35,13 +35,12 @@ public class TranslationFirstPhase extends PancakesBaseListener {
 
     @Override
     public void exitFloatConst(PancakesParser.FloatConstContext ctx) {
-        fConstants.put(ctx.FLOAT().getSymbol().getText(), ip);
-
-        byte[] b = ByteBuffer.allocate(4).putFloat( new Float(ctx.FLOAT().getSymbol().getText())).array();
-        int floatAsInt = ByteBuffer.wrap(b).getInt();
-        mfo.add(floatAsInt);
-
-        ip++;
+//        fConstants.put(ctx.FLOAT().getSymbol().getText(), ip);
+//
+//        byte[] b = ByteBuffer.allocate(4).putFloat( new Float(ctx.FLOAT().getSymbol().getText())).array();
+//        int floatAsInt = ByteBuffer.wrap(b).getInt();
+        //mfo.add(floatAsInt);
+        //ip++;
     }
 
     @Override
@@ -54,6 +53,7 @@ public class TranslationFirstPhase extends PancakesBaseListener {
 
         mfo.add(sconst.length());
         ip++;
+
         for (int i = 0; i < sconst.length(); i++) {
             mfo.add((int) sconst.charAt(i));
             ip++;

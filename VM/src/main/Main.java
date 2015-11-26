@@ -188,6 +188,24 @@ public class Main {
 
                     stack[sp] = (fa < fb)? 1 : 0;
                     break;
+
+                case OpCode.fGT:
+                    bytes = ByteBuffer.allocate(4).putInt(stack[sp-1]).array();
+                    fa =  ByteBuffer.wrap(bytes).getFloat();
+                    bytes = ByteBuffer.allocate(4).putInt(stack[sp]).array();
+                    fb =  ByteBuffer.wrap(bytes).getFloat();
+                    sp--;
+
+                    stack[sp] = (fa > fb)? 1 : 0;
+                    break;
+                case OpCode.iGT:
+                    ia = stack[sp - 1];
+                    ib = stack[sp];
+                    sp--;
+                    stack[sp] = (ia > ib)? 1 : 0;
+                    break;
+
+
                 case OpCode.bEQ:
                 case OpCode.iEQ:
                     ia = stack[sp - 1];
@@ -249,7 +267,7 @@ public class Main {
                     break;
                 case OpCode.fCONST:
                     sp++;
-                    stack[sp] = bc[bc[ip]];
+                    stack[sp] = bc[ip];
                     ip++;
                     break;
                 case OpCode.LOAD:
@@ -318,7 +336,7 @@ public class Main {
                     }
                     break;
                 case OpCode.GOTOF:
-                    address = bc[ip]; //advance ip?
+                    address = bc[ip++]; //advance ip?
                     ia = stack[sp];
                     sp--;
                     if (ia == 0){
@@ -334,6 +352,7 @@ public class Main {
 
                     sp++;
                     stack[sp] = bc[ip]; //number of args
+                    ip++;
 
                     sp++;
                     stack[sp] = fp; //save fp
@@ -341,7 +360,7 @@ public class Main {
                     sp++;
                     stack[sp] = ip; //return address
 
-                    fp = sp;    // new fp
+                    fp = sp;    // fp points to return address
                     ip = address;
 
                     break;
@@ -361,8 +380,11 @@ public class Main {
                     sp--;
 
                     sp -= ib;    // pop #ib of args
+                    sp++;
                     stack[sp] = ia; // restore result to stack
                     break;
+
+
 
             }//end switch
             //////

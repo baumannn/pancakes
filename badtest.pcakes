@@ -24,6 +24,19 @@ int add_1 (int num) {
 
 }
 
+
+int factorial(int n){
+	
+	if( n < 1){
+		return 1;
+	} else{
+		return n * factorial(n-1);
+	}
+
+}
+
+factorial(5);
+
 int add_1 (){
 	return 1;
 }

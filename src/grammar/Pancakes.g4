@@ -69,6 +69,7 @@ expr
     | expr (MULT | DIV ) expr 		#MultDiv
     | expr ('//') expr				#Intdiv
     | expr ( ADD | MINUS) expr      #AddSub
+    | expr ( LT | GT) expr          #LTGT
     | expr '==' expr                #Equality
     | ID                            #VarRef
     | INT                           #IntConst
@@ -88,6 +89,9 @@ arguments
 
 
 PRINT : 'print';
+
+LT : '<';
+GT : '>';
 
 BOOLEAN : ('true' | 'false');
 

@@ -244,6 +244,18 @@ public class PancakesBaseListener implements PancakesListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLTGT(PancakesParser.LTGTContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLTGT(PancakesParser.LTGTContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterVarRef(PancakesParser.VarRefContext ctx) { }
 	/**
 	 * {@inheritDoc}

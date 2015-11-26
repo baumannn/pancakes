@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -318,7 +319,6 @@ public class TranslationThirdPhase extends PancakesBaseListener{
             }
         }
         ip++;
-
     }
 
     @Override
@@ -340,6 +340,24 @@ public class TranslationThirdPhase extends PancakesBaseListener{
             mfo.add(OpCode.sEQ);
         }
 
+        ip++;
+    }
+
+    @Override
+    public void exitLTGT(PancakesParser.LTGTContext ctx) {
+        if (typeMap.get(ctx.expr(0)) == Symbol.Type.tFLOAT || typeMap.get(ctx.expr(1)) == Symbol.Type.tFLOAT){
+            if (ctx.LT() != null) {
+                mfo.add(OpCode.fLT);
+            } else{
+                mfo.add(OpCode.fGT);
+            }
+        } else{
+            if (ctx.LT() != null) {
+                mfo.add(OpCode.iLT);
+            } else{
+                mfo.add(OpCode.iGT);
+            }
+        }
         ip++;
     }
 
@@ -407,7 +425,10 @@ public class TranslationThirdPhase extends PancakesBaseListener{
     @Override
     public void exitFloatConst(PancakesParser.FloatConstContext ctx) {
         mfo.add(OpCode.fCONST);
-        mfo.add(fConst.get(ctx.FLOAT().getSymbol().getText()));
+        //mfo.add(fConst.get(ctx.FLOAT().getSymbol().getText()));
+        byte[] b = ByteBuffer.allocate(4).putFloat( new Float(ctx.FLOAT().getSymbol().getText())).array();
+        int floatAsInt = ByteBuffer.wrap(b).getInt();
+        mfo.add(floatAsInt);
         ip+=2;
     }
 

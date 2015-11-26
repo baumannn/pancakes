@@ -29,6 +29,10 @@ public class OpCode {
     //BOOLEAN LOGIC
     public static final int iLT  = 12;
     public static final int fLT  = 13;
+    public static final int fGT = 36;
+    public static final int iGT = 37;
+
+
     public static final int iEQ  = 14;
     public static final int fEQ  = 15;
     public static final int bEQ  = 16;
@@ -59,6 +63,8 @@ public class OpCode {
     public static final int iPRINT  = 33;
     public static final int CALL = 34;
     public static final int RET  = 35;
+
+
 
 
 

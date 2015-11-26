@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class ThirdPassPancakesListener extends PancakesBaseListener {
 
-    public static enum Operand {oEquality, oMultiplication, oDivision, oIntdiv, oAddition, oSubtraction, oUnaryNot, oUnaryNegation, oArrayIndex};
+    public static enum Operand {oEquality, oMultiplication, oDivision, oIntdiv, oAddition, oSubtraction, oUnaryNot, oUnaryNegation, oLTGT, oArrayIndex};
 
 
     Symbol.Type[] types = {Symbol.Type.tSTRING, Symbol.Type.tINT, Symbol.Type.tBOOL, Symbol.Type.tFLOAT};
@@ -238,6 +238,11 @@ public class ThirdPassPancakesListener extends PancakesBaseListener {
         checkValidityBinaryOperand(ctx, ctx.expr(0), ctx.expr(1), Operand.oEquality);
     }
 
+    @Override
+    public void exitLTGT(PancakesParser.LTGTContext ctx) {
+        checkValidityBinaryOperand(ctx, ctx.expr(0), ctx.expr(1), Operand.oLTGT);
+    }
+
 
     /*
      ****************
@@ -455,7 +460,22 @@ public class ThirdPassPancakesListener extends PancakesBaseListener {
         addToTesseract(Operand.oUnaryNegation, Symbol.Type.tFLOAT, Symbol.Type.tINT, Symbol.Type.tINVALID);
         addToTesseract(Operand.oUnaryNegation, Symbol.Type.tFLOAT, Symbol.Type.tBOOL, Symbol.Type.tINVALID);
         addToTesseract(Operand.oUnaryNegation, Symbol.Type.tFLOAT, Symbol.Type.tFLOAT, Symbol.Type.tFLOAT);
-
+        addToTesseract(Operand.oLTGT, Symbol.Type.tSTRING, Symbol.Type.tSTRING, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tSTRING, Symbol.Type.tINT, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tSTRING, Symbol.Type.tBOOL, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tSTRING, Symbol.Type.tFLOAT, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tINT, Symbol.Type.tSTRING, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tINT, Symbol.Type.tINT, Symbol.Type.tINT);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tINT, Symbol.Type.tBOOL, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tINT, Symbol.Type.tFLOAT, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tBOOL, Symbol.Type.tSTRING, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tBOOL, Symbol.Type.tINT, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tBOOL, Symbol.Type.tBOOL, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tBOOL, Symbol.Type.tFLOAT, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tFLOAT, Symbol.Type.tSTRING, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tFLOAT, Symbol.Type.tINT, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tFLOAT, Symbol.Type.tBOOL, Symbol.Type.tINVALID);
+        addToTesseract(Operand.oLTGT, Symbol.Type.tFLOAT, Symbol.Type.tFLOAT, Symbol.Type.tFLOAT);
 
 
 

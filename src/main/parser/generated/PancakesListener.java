@@ -210,6 +210,18 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitAddSub(PancakesParser.AddSubContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code LTGT}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLTGT(PancakesParser.LTGTContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LTGT}
+	 * labeled alternative in {@link PancakesParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLTGT(PancakesParser.LTGTContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code VarRef}
 	 * labeled alternative in {@link PancakesParser#expr}.
 	 * @param ctx the parse tree
