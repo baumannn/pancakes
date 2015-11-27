@@ -709,6 +709,55 @@ public class TranslationThirdPhase extends PancakesBaseListener{
 
         System.out.print(mfo);
         translate(startCode);
+
+        printInstructions();
+
+
+    }
+
+    private void printInstructions() {
+
+        for (int i = 0; i < mfo.size(); i++) {
+
+            int opcode = mfo.get(i);
+            StringBuilder buffer = new StringBuilder();
+
+            if (i >= startCode){
+                String opName = OpCode.translateOpCode(opcode);
+                buffer.append(String.format("%04d:\t%-11s", i, opName));
+                int nargs = OpCode.numberOfOperands(opcode);
+                if (nargs > 0) {
+                    nargs = i + nargs;
+
+                    if (opcode == OpCode.CALL) {
+                        i++;
+                        buffer.append(translateFunction(mfo.get(i)));
+                        buffer.append("  ");
+                    }
+                    for (int j = i + 1; j <= nargs; j++) {
+                        buffer.append(String.valueOf(mfo.get(j)));
+                        buffer.append("  ");
+                        i++;
+                    }
+                }
+            } else{
+                buffer.append(String.format("%04d:\t%-11d", i, opcode));
+            }
+
+            //buffer.append("\n");
+            System.out.println(String.format("%-35s", buffer.toString()));
+        }
+
+
+    }
+
+    private String translateFunction(Integer integer) {
+        for (FunctionSymbol functionSymbol : functionLocations.keySet()) {
+            if ( functionLocations.get(functionSymbol) == integer){
+                return functionSymbol.getName();
+            }
+        }
+        return Integer.toString(integer);
     }
 
     private void updateFunctionCalls() {
