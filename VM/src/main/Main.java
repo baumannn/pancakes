@@ -368,7 +368,8 @@ public class Main {
 
                     break;
                 case OpCode.GOTOT:
-                    address = bc[ip];//advance ip?
+                    address = bc[ip];
+                    ip++;
                     ia = stack[sp];
                     sp--;
                     if (ia == 1){
