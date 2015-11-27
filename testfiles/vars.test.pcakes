@@ -1,0 +1,52 @@
+#prueba declaraciones
+
+int uno = 1;
+float dos = 2.0;
+string tres = "tres";
+boolean cuatro = true;
+
+print(uno); print("\n");
+print(dos); print("\n");
+print(tres); print("\n");
+print(cuatro); print("\n");
+
+#prueba declaraciones vacías
+
+int entero;
+float flotante;
+string palabra;
+boolean boleano;
+
+#prueba asignación a variables vacías
+entero = 4;
+flotante = 4.3;
+palabra = "hola";
+boleano = true;
+
+print(entero); print("\n");
+print(flotante); print("\n");
+print(palabra); print("\n");
+print(boleano); print("\n");
+
+#prueba modificación de variables
+entero = 6;
+flotante = 8.1;
+palabra = "adios";
+boleano = false;
+
+print(entero); print("\n");
+print(flotante); print("\n");
+print(palabra); print("\n");
+print(boleano); print("\n");
+
+#prueba asignación en cadena
+
+int a;
+int b;
+int c;
+
+a = b = c = 8;
+
+print(a); print("\n");
+print(b); print("\n");
+print(c); print("\n");

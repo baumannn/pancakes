@@ -1,0 +1,27 @@
+#factorial recursivo
+
+print(factorial_rec(5));
+
+
+int factorial_rec (int num) {
+	
+	if(num == 0) {
+		return 1;
+	}
+
+	return num * factorial_rec (num-1);
+}
+
+
+
+int num = 5;
+int fact = 1;
+int i = 1;
+while( i < num + 1) {
+
+	fact = fact*i;
+
+	i = i + 1;
+}
+
+print(fact);
