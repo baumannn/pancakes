@@ -248,7 +248,7 @@ public class Main {
                     stack[sp] = ia;
                     break;
                 case OpCode.NOT:
-                    stack[sp] = (stack[sp] == 1)? 0 : 1;
+                    stack[sp] = (stack[sp] != 0)? 0 : 1;
                     break;
                 case OpCode.fNEG:
                 case OpCode.iNEG:
@@ -372,7 +372,7 @@ public class Main {
                     ip++;
                     ia = stack[sp];
                     sp--;
-                    if (ia == 1){
+                    if (ia != 0){
                         ip = address;
                     }
                     break;

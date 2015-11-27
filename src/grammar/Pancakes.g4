@@ -137,9 +137,9 @@ T_STRING : 'string';
 T_VOID : 'void';
 
 EQUAL : '=';
-ADD : '+';
+ADD : '+' | 'OR';
 MINUS : '-' ;
-MULT : '*' ;
+MULT : '*' | 'AND' ;
 DIV : '/';
 
 
