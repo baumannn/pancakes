@@ -67,6 +67,7 @@ public class OpCode {
     public static final int RET  = 35;
     public static final int oGSTORE  = 39;
     public static final int oSTORE  = 40;
+    public static final int DUP  = 42;
 
 
 
@@ -176,6 +177,8 @@ public class OpCode {
                     return "CALL";
                 case OpCode.RET:
                     return "RET";
+                case OpCode.DUP:
+                    return "DUP";
 
             }
             return "Error" + opcode;
@@ -216,6 +219,7 @@ public class OpCode {
             case OpCode.sPRINT:
             case OpCode.fPRINT:
             case OpCode.iPRINT:
+            case OpCode.DUP:
                 return 0;
 
             //CONSTANTS

@@ -24,6 +24,14 @@ public class TranslationSecondPhase extends PancakesBaseListener {
         this.globalScope = globalScope;
         this.mfo = mfo;
         this.ip = ip;
+
+        do_ip();
+
+
+    }
+
+    private void do_ip(){
+
         varReferences = new HashMap<>();
 
         Map<String, Symbol> symbols = globalScope.getSymbols();
@@ -33,14 +41,16 @@ public class TranslationSecondPhase extends PancakesBaseListener {
             Symbol sym = symbols.get(s);
             if(sym instanceof VariableSymbol){
                 VariableSymbol vs = (VariableSymbol) sym;
-                varReferences.put(vs, ip);
-                vs.setAddress(ip);
+                varReferences.put(vs, this.ip);
+                vs.setAddress(this.ip);
                 mfo.add(new Integer(0));
+                System.out.println(vs.getType() + "  " + vs.getName() + " " + ip);
                 this.ip++;
+
             } else if(sym instanceof ArraySymbol){
                 ArraySymbol as = (ArraySymbol) sym;
-                varReferences.put(as, ip);
-                as.setAddress(ip);
+                varReferences.put(as, this.ip);
+                as.setAddress(this.ip);
 
                 int size = as.getTotalSize();
 
@@ -54,10 +64,7 @@ public class TranslationSecondPhase extends PancakesBaseListener {
             }
 
         }
-
-
     }
-
 
     public ArrayList<Integer> getMfo() {
         return mfo;

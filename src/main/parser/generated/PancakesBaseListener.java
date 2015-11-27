@@ -112,6 +112,18 @@ public class PancakesBaseListener implements PancakesListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAssignment(PancakesParser.AssignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignment(PancakesParser.AssignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBlock(PancakesParser.BlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -172,18 +184,6 @@ public class PancakesBaseListener implements PancakesListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignment(PancakesParser.AssignmentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAssignment(PancakesParser.AssignmentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterIf_statement(PancakesParser.If_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -239,6 +239,18 @@ public class PancakesBaseListener implements PancakesListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIf_expr(PancakesParser.If_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDo_if_expr(PancakesParser.Do_if_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDo_if_expr(PancakesParser.Do_if_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

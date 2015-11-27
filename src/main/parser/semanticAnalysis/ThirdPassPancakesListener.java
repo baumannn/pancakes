@@ -145,7 +145,6 @@ public class ThirdPassPancakesListener extends PancakesBaseListener {
         for(TerminalNode t: ctx.ID()){
 
             if(currentScope.resolve(t.getText()).getType() != type){
-
                 System.err.printf("line %d:%d %s\n", ctx.start.getLine(), ctx.start.getCharPositionInLine(), "Type mismatch in assignment.");
 
             }

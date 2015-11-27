@@ -5,6 +5,9 @@ import main.parser.generated.PancakesBaseListener;
 import main.parser.generated.PancakesParser;
 import main.parser.symbolTable.*;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
+import java.util.ArrayList;
 
 /**
  * Checks for correct references in variable and function names.
@@ -21,7 +24,7 @@ public class SecondPassPancakesListener extends PancakesBaseListener {
         globals = globalScope;
         this.currentScope = globals;
         this.scopes = scopes;
-    
+
 
     }
 
@@ -49,6 +52,24 @@ public class SecondPassPancakesListener extends PancakesBaseListener {
     @Override
     public void exitBlock(PancakesParser.BlockContext ctx) {
         currentScope = currentScope.getEnclosingScope();
+    }
+
+    @Override
+    public void exitAssignment(PancakesParser.AssignmentContext ctx) {
+        for (TerminalNode terminalNode : ctx.ID()) {
+            String varName = terminalNode.getSymbol().getText();
+            Symbol varSym = currentScope.resolve(varName);
+
+            //System.out.println("Name: " + varName + " Symbol: " + varSym);
+
+            if( varSym == null){
+                Main.logError(terminalNode.getSymbol(), "Error: Variable name not declared: " + varName);
+            }
+
+            if(varSym instanceof FunctionSymbol){
+                Main.logError(terminalNode.getSymbol(), "Error: Name refers to function: " + varName);
+            }
+        }
     }
 
     @Override

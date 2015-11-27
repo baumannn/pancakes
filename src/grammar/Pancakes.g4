@@ -30,6 +30,10 @@ array_assignment
     : ID ('[' expr close_bracket )+ '='  expr
     ;
 
+assignment
+    : ID  '=' (ID '=')*  expr
+    ;
+
 block
 	: '{' statement* '}'
 	;
@@ -41,6 +45,8 @@ statement
     | var_declare
     | array_declare
     | if_statement
+    | while_statement
+    | do_while_statement
     | return_statement';' // seperate?
     | assignment ';'
     | array_assignment ';'
@@ -59,9 +65,7 @@ return_statement
 
 
 
-assignment
-    : ID  '=' (ID '=')*  expr
-    ;
+
 
 if_statement
     : 'if' '(' if_expr ')' block (else_statement)?
@@ -75,10 +79,14 @@ while_statement
     ;
 
 do_while_statement
-    : 'do' block 'while' '(' if_expr ')'
+    : 'do' block 'while' '(' do_if_expr ')'
     ;
 
 if_expr
+    : expr
+    ;
+
+do_if_expr
     : expr
     ;
 

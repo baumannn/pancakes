@@ -62,7 +62,6 @@ public class TranslationThirdPhase extends PancakesBaseListener{
 
 
 
-    //todo implement
     @Override
     public void enterFun_declare(PancakesParser.Fun_declareContext ctx) {
         currentScope = scopes.get(ctx);
@@ -84,13 +83,9 @@ public class TranslationThirdPhase extends PancakesBaseListener{
 
         functionLocations.put((FunctionSymbol) currentScope, ip);
 
-
-
-
     }
 
 
-    //todo implement
     @Override
     public void exitFun_declare(PancakesParser.Fun_declareContext ctx) {
 
@@ -99,11 +94,9 @@ public class TranslationThirdPhase extends PancakesBaseListener{
 
         int update = pendingToFill.pop();
         mfo.set(update, ip);
-
     }
 
 
-    //todo implement
     @Override
     public void enterBlock(PancakesParser.BlockContext ctx) {
 
@@ -212,9 +205,13 @@ public class TranslationThirdPhase extends PancakesBaseListener{
         System.out.println("Assignment " + ip);
         List<TerminalNode> ids = ctx.ID();
 
-        for (int i = ids.size() - 1; i >= 0; i--) {
+        for (int i = ids.size() - 1; i > 0; i--) {
             String name = ctx.ID(i).getSymbol().getText();
             Symbol sym = currentScope.resolve(name);
+
+            mfo.add(OpCode.DUP); //duplica el valor para que sea disponible para la siguiente asignacion
+            ip++;
+
             if ( sym.getScope() == globalScope){
                 mfo.add(OpCode.GSTORE);
                 ip++;
@@ -224,9 +221,24 @@ public class TranslationThirdPhase extends PancakesBaseListener{
             }
             mfo.add(sym.getAddress());
             ip++;
+
+
         }
-        mfo.add(OpCode.POP);
+
+        String name = ctx.ID(0).getSymbol().getText();
+        Symbol sym = currentScope.resolve(name);
+        if ( sym.getScope() == globalScope){
+            mfo.add(OpCode.GSTORE);
+            ip++;
+        } else{
+            mfo.add(OpCode.STORE);
+            ip++;
+        }
+        mfo.add(sym.getAddress());
         ip++;
+
+//        mfo.add(OpCode.POP);
+//        ip++;
     }
 
 
@@ -436,8 +448,37 @@ public class TranslationThirdPhase extends PancakesBaseListener{
     }
 
 
+    @Override
+    public void enterWhile_statement(PancakesParser.While_statementContext ctx) {
+        pendingToFill.push(ip);
+    }
+
+    @Override
+    public void exitWhile_statement(PancakesParser.While_statementContext ctx) {
+        int update = pendingToFill.pop();
+
+        mfo.add(OpCode.GOTO);
+        ip++;
+        mfo.add(pendingToFill.pop());
+        ip++;
 
 
+        mfo.set(update, ip);
+    }
+
+
+    @Override
+    public void exitDo_if_expr(PancakesParser.Do_if_exprContext ctx) {
+        mfo.add(OpCode.GOTOT);
+        ip++;
+        mfo.add(pendingToFill.pop()); // dummy address
+        ip++;
+    }
+
+    @Override
+    public void enterDo_while_statement(PancakesParser.Do_while_statementContext ctx) {
+        pendingToFill.push(ip);
+    }
 
 
     /*

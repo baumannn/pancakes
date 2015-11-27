@@ -88,6 +88,16 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitArray_assignment(PancakesParser.Array_assignmentContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PancakesParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment(PancakesParser.AssignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PancakesParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment(PancakesParser.AssignmentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PancakesParser#block}.
 	 * @param ctx the parse tree
 	 */
@@ -142,16 +152,6 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitReturn_statement(PancakesParser.Return_statementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PancakesParser#assignment}.
-	 * @param ctx the parse tree
-	 */
-	void enterAssignment(PancakesParser.AssignmentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PancakesParser#assignment}.
-	 * @param ctx the parse tree
-	 */
-	void exitAssignment(PancakesParser.AssignmentContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link PancakesParser#if_statement}.
 	 * @param ctx the parse tree
 	 */
@@ -201,6 +201,16 @@ public interface PancakesListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIf_expr(PancakesParser.If_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PancakesParser#do_if_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterDo_if_expr(PancakesParser.Do_if_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PancakesParser#do_if_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitDo_if_expr(PancakesParser.Do_if_exprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code UnaryNegate}
 	 * labeled alternative in {@link PancakesParser#expr}.

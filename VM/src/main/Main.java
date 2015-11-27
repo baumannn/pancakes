@@ -21,7 +21,7 @@ public class Main {
 
     // registers
     private static int ip;
-    private static int sp = -1;
+    private static int sp;
 
     private static int[] stack;
     private static int fp;
@@ -29,7 +29,8 @@ public class Main {
     private static boolean trace;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
         trace = false;
         String file;
         if (args.length == 1) {
@@ -59,7 +60,7 @@ public class Main {
     public static void vm(ArrayList<Integer> code){
         stack = new int[STACK_SIZE];
         ip = 0;
-        sp = 0;
+        sp = -1;
         fp = 0;
 
         bc = code.toArray(new Integer[code.size()]);
@@ -304,9 +305,12 @@ public class Main {
                     ip++;
                     break;
                 case OpCode.GSTORE:
-                    bc[bc[ip]] = stack[sp];
-                    sp--;
+                    address = bc[ip];
                     ip++;
+
+                    bc[address] = stack[sp];
+                    sp--;
+
                     break;
 
                 case OpCode.oSTORE:
@@ -418,13 +422,12 @@ public class Main {
                     sp -= ib;    // pop #ib of args
                     sp++;
                     stack[sp] = ia; // restore result to stack
-
-
-
                     break;
 
-
-
+                case OpCode.DUP:
+                    sp++;
+                    stack[sp] = stack[sp - 1];
+                    break;
             }//end switch
             //////
             if(trace)System.err.println(stackString());
@@ -480,7 +483,7 @@ public class Main {
     protected static void dumpDataMemory() {
         System.err.println("Data memory:");
         int addr = 0;
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < bc.length; i++) {
             System.err.printf("%s\t%s", i, bc[i]);
         }
         System.err.println();
