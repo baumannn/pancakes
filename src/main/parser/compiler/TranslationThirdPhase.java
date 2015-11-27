@@ -587,7 +587,7 @@ public class TranslationThirdPhase extends PancakesBaseListener{
     }
 
     @Override
-    public void enterUnaryNegate(PancakesParser.UnaryNegateContext ctx) {
+    public void exitUnaryNegate(PancakesParser.UnaryNegateContext ctx) {
         if (typeMap.get(ctx.expr()) == Symbol.Type.tFLOAT){
             mfo.add(OpCode.fNEG);
         } else {

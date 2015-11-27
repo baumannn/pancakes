@@ -33,13 +33,13 @@ public class Main extends JFrame{
     private static int[] stack;
     private static int fp;
     private static Integer[] bc;
-    private static boolean trace;
+    private static boolean trace = true;
     private DrawPad drawPad;
 
     ArrayList<Line2D> lines = new ArrayList<>();
 
 
-    private class DrawPad extends JFrame {
+    private class DrawPad {
 
         class Circle{
             int x, y, radius;
@@ -102,22 +102,22 @@ public class Main extends JFrame{
         public ArrayList<Oval> ovals;
 
 
-        public DrawPad() throws HeadlessException {
-            setTitle("Dibujo");
-            setSize(400, 400);
-            setLocationRelativeTo(null);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            lines = new ArrayList<>();
-            rect = new ArrayList<>();
-            circles = new ArrayList<>();
-            ovals = new ArrayList<>();
-        }
-
-        public void paint(Graphics g) {
-            super.paint(g);
-            drawLines(g);
-        }
+//        public DrawPad() throws HeadlessException {
+//            setTitle("Dibujo");
+//            setSize(400, 400);
+//            setLocationRelativeTo(null);
+//            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//            lines = new ArrayList<>();
+//            rect = new ArrayList<>();
+//            circles = new ArrayList<>();
+//            ovals = new ArrayList<>();
+//        }
+//
+//        public void paint(Graphics g) {
+//            super.paint(g);
+//            drawLines(g);
+//        }
 
 
         public void drawLines(Graphics g) {
@@ -142,7 +142,7 @@ public class Main extends JFrame{
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        trace = true;
+//        trace = true;
         String file;
         if (args.length == 1) {
              file = args[0];
@@ -159,7 +159,7 @@ public class Main extends JFrame{
             @Override
             public void run() {
                 Main vm = new Main();
-                vm.drawPad.setVisible(true);
+                //vm.drawPad.setVisible(true);
                 vm.vm();
             }
         });

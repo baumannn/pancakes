@@ -104,25 +104,29 @@ public class ThirdPassPancakesListener extends PancakesBaseListener {
 
 
         Map<String, Symbol> args = referencedFunction.getArgs();
-        List<PancakesParser.ExprContext> callParams = ctx.arguments().expr();
+        if (args.size() != 0){
 
 
-        int i = 0;
-        for (String key : args.keySet()) {
-            //System.out.println(ctx.arguments().expr(i).getText());
-            Symbol.Type argType = args.get(key).getType();
-            Symbol.Type paramType = typeMap.get(callParams.get(i));
-            i++;
-            if(paramType != argType){
-                Main.logError(ctx.ID().getSymbol(),
-                        "Argument type mismatch in argument number " + ( i ) + " in function "
-                                + ctx.ID().getSymbol().getText()
-                                + ", expected:"
-                                + argType
-                                + ", got:"
-                                + paramType);
+            List<PancakesParser.ExprContext> callParams = ctx.arguments().expr();
 
 
+            int i = 0;
+            for (String key : args.keySet()) {
+                //System.out.println(ctx.arguments().expr(i).getText());
+                Symbol.Type argType = args.get(key).getType();
+                Symbol.Type paramType = typeMap.get(callParams.get(i));
+                i++;
+                if(paramType != argType){
+                    Main.logError(ctx.ID().getSymbol(),
+                            "Argument type mismatch in argument number " + ( i ) + " in function "
+                                    + ctx.ID().getSymbol().getText()
+                                    + ", expected:"
+                                    + argType
+                                    + ", got:"
+                                    + paramType);
+
+
+                }
             }
         }
 

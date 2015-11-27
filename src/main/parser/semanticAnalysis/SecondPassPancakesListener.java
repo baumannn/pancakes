@@ -124,8 +124,13 @@ public class SecondPassPancakesListener extends PancakesBaseListener {
         //System.out.println(ctx.ID());
         //System.out.println(ctx.ID().getText());
         //System.out.println(ctx.ID().getSymbol().getText());
+        Object d = ctx.arguments();
+        if(d != null){
+            int f = ctx.arguments().expr().size();
+        }
 
-        if ( (ctx.arguments() == null && funSym.getArgs().size() > 0) ||  (funSym.getArgs().size() != ctx.arguments().expr().size())){
+
+        if ( (ctx.arguments() == null && funSym.getArgs().size() > 0) ||  ( ctx.arguments() != null && (funSym.getArgs().size() != ctx.arguments().expr().size()))){
             Main.logError(ctx.ID().getSymbol(),
                     "Argument count mismatch in "
                             + funName

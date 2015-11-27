@@ -1,6 +1,6 @@
-#factorial recursivo
+print("factorial recursivo\n\n");
 
-print(factorial_rec(5));
+print(factorial_rec(8));
 
 
 int factorial_rec (int num) {
@@ -13,7 +13,7 @@ int factorial_rec (int num) {
 }
 
 
-
+print("factorial iterativo\n\n");
 int num = 5;
 int fact = 1;
 int i = 1;

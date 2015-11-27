@@ -1,38 +1,43 @@
 #busqueda
-int [10] arr;
+int [10] arr1;
 
 #para inicializar el arreglo con numeros del 1 al 10
+
+print("Arreglo de una dimension: \n");
 int i = 0;
 while(i<10){
-	arr[i] = i+1;
+	arr1[i] = i+1;
 	i = i+1;
 }
 
 
 i = 0;
 while(i<10){
-	print(arr[i]);
+	print(arr1[i]);
 	print(" ");
 	i = i+1;
 }
 
 print("\n");
+print("\n");
 
 #######################
+print("Arreglo de dos dimension, arreglo[i][j] = i * j: \n\n");
+
 
 int [10][10] arr;
 
-int i = 0;
+i = 0;
 int j;
 while(i < 10){
 
 	j = 0;
 	while(j < 10) {
 
-	arr[i][j] = i*j;
+		arr[i][j] = i*j;
 
 
-	j = j + 1;
+		j = j + 1;
 	}
 
 
@@ -48,13 +53,13 @@ while(i < 10){
 	j = 0;
 	while(j < 10) {
 
-	print(arr[i][j]);
+		print(arr[i][j]);
+		print(" ");
 
-
-	j = j + 1;
+		j = j + 1;
 	}
 
-
+	print("\n");
 
 
 	i = i + 1;

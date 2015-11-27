@@ -1,0 +1,96 @@
+
+int[40] arr;
+int i = 39;
+
+arr[0] = 68;
+arr[1] = 38;
+arr[2] = 95;
+arr[3] = 40;
+arr[4] = 19;
+arr[5] = 82;
+arr[6] = 100;
+arr[7] = 25;
+arr[8] = 76;
+arr[9] = 63;
+arr[10] = 90;
+arr[11] = 61;
+arr[12] = 31;
+arr[13] = 10;
+arr[14] = 6;
+arr[15] = 35;
+arr[16] = 34;
+arr[17] = 23;
+arr[18] = 89;
+arr[19] = 92;
+arr[20] = 18;
+arr[21] = 81;
+arr[22] = 64;
+arr[23] = 53;
+arr[24] = 94;
+arr[25] = 14;
+arr[26] = 51;
+arr[27] = 67;
+arr[28] = 59;
+arr[29] = 21;
+arr[30] = 13;
+arr[31] = 56;
+arr[32] = 30;
+arr[33] = 3;
+arr[34] = 85;
+arr[35] = 83;
+arr[36] = 86;
+arr[37] = 80;
+arr[38] = 5;
+arr[39] = 88;
+
+i = 0;
+while(i < 40) {
+	
+
+	print(arr[i]);
+	print(" ");
+
+	i = i + 1;
+
+}
+
+print("\n");
+
+
+
+boolean swapped = true;
+int j;
+int temp;
+j = 0;
+
+while (swapped){
+
+	j = 0;
+	swapped = false;
+
+	while( j < 40){
+
+		if(arr[j] > arr[j+1]){
+			temp = arr[j+1];
+			arr[j + 1] = arr[j];
+			arr[j] = temp;
+			swapped = true;
+		} 
+		j = j + 1;
+	}
+
+}
+
+print("sorted\n\n");
+i = 0;
+while(i < 40) {
+	
+
+	print(arr[i]);
+	print(" ");
+
+	i = i + 1;
+
+}
+
+print("\n");

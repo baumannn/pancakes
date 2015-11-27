@@ -1,11 +1,11 @@
 #prueba de while
 
-#no debería de entrar
+print(" no debería de entrar e imprimir la palabra no: \n\n")
 while (false) {
 	print("no");
 }
 
-#debería de imprimir los numeros del 1 al 5
+print("debería de imprimir los numeros del 1 al 5\n\n");
 int i = 0;
 while ( i < 5 ) {
 	
@@ -18,7 +18,7 @@ while ( i < 5 ) {
 print ("\n");
 
 
-#debería imprimir los numeros del 5 al 1
+print("debería imprimir los numeros del 5 al 1\n\n");
 do {
 	print (i);
 	print (" ");
@@ -27,9 +27,12 @@ do {
 
 print("\n");
 
+
+print("debería entrar solo una vez\n\n");
+
 do {
 	print("ultimo");
 	print("\n");
 } while(false)
 
-print("fin");
+print("\n\nfin");
