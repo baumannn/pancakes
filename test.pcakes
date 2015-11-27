@@ -37,14 +37,44 @@
 # print(i);
 
 
-int fact = 1;
-int n = 5;
+# int fact = 1;
+# int n = 5;
 
-do{
-	fact = fact * n;
-	n  = n - 1;
-} while( n > 1 )
+# do{
+# 	fact = fact * n;
+# 	n  = n - 1;
+# } while( n > 1 )
 
 
-print(fact);
+# print(fact);
+
+if ( false AND false ){
+	print ("A1");
+}
+if ( true AND true ){
+	print ("A2");
+}
+if ( false AND true ){
+	print ("A3");
+}
+
+if ( true AND false ){
+	print ("A4");
+}
+
+if ( false OR false ){
+	print ("A5");
+}
+if ( true OR true ){
+	print ("A6");
+}
+if ( false OR true ){
+	print ("A7");
+}
+
+if ( true OR false ){
+	print ("A8");
+}
+
+
 

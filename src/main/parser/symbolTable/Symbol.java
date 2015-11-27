@@ -5,7 +5,7 @@ package main.parser.symbolTable;
  */
 public class Symbol {
 
-    public static enum Type {tINVALID, tVOID, tINT, tFLOAT, tBOOL, tSTRING};
+    public static enum Type {tINVALID, tVOID, tINT, tFLOAT, tSTRING};
 
     private String name; //name of symbol
     private Type type;

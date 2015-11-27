@@ -24,7 +24,7 @@ public class Main {
 
     public static Symbol.Type getType(int typeToken){
         switch (typeToken){
-            case PancakesParser.T_BOOL : return Symbol.Type.tBOOL;
+            case PancakesParser.T_BOOL : return Symbol.Type.tINT;
             case PancakesParser.T_INT : return Symbol.Type.tINT;
             case PancakesParser.T_FLOAT : return Symbol.Type.tFLOAT;
             case PancakesParser.T_STRING : return Symbol.Type.tSTRING;

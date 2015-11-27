@@ -1,7 +1,14 @@
 package main;
 
+import javafx.embed.swing.JFXPanel;
 import main.parser.compiler.OpCode;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,7 +19,7 @@ import java.util.List;
 /**
  * Created by adrian on 11/25/15.
  */
-public class Main {
+public class Main extends JFrame{
 
     public static final int STACK_SIZE = 1000;
     public static final int CALL_STACK_SIZE = 1000;
@@ -27,11 +34,115 @@ public class Main {
     private static int fp;
     private static Integer[] bc;
     private static boolean trace;
+    private DrawPad drawPad;
+
+    ArrayList<Line2D> lines = new ArrayList<>();
 
 
-    public static void main(String[] args) throws IOException {
+    private class DrawPad extends JFrame {
 
-        trace = false;
+        class Circle{
+            int x, y, radius;
+            Color c;
+
+            public Circle(int x, int y, int radius, Color c) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.c = c;
+            }
+        }
+
+        class Line{
+            Line2D line;
+            Color c;
+
+            public Line(Line2D line, Color c) {
+                this.line = line;
+                this.c = c;
+            }
+        }
+
+        class Rectangle{
+            Rectangle2D rectangle;
+            Color c;
+
+            public Rectangle(Rectangle2D rectangle, Color c) {
+                this.rectangle = rectangle;
+                this.c = c;
+            }
+        }
+
+        class PrintString{
+            String str;
+            Color c;
+
+            public PrintString(String str, Color c) {
+                this.str = str;
+                this.c = c;
+            }
+        }
+
+        class Oval{
+            int x1, y1, width, height;
+            Color c;
+
+            public Oval(int x1, int y1, int width, int height, Color c) {
+                this.x1 = x1;
+                this.y1 = y1;
+                this.width = width;
+                this.height = height;
+                this.c = c;
+            }
+        }
+
+        public ArrayList<Line> lines;
+        public ArrayList<Rectangle> rect;
+        public ArrayList<Circle> circles;
+        public ArrayList<Oval> ovals;
+
+
+        public DrawPad() throws HeadlessException {
+            setTitle("Dibujo");
+            setSize(400, 400);
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            lines = new ArrayList<>();
+            rect = new ArrayList<>();
+            circles = new ArrayList<>();
+            ovals = new ArrayList<>();
+        }
+
+        public void paint(Graphics g) {
+            super.paint(g);
+            drawLines(g);
+        }
+
+
+        public void drawLines(Graphics g) {
+            Graphics2D g2d = (Graphics2D) g;
+            for (int i = 0; i < lines.size(); i++) {
+                //g2d.draw(lines.get(i));
+            }
+            g2d.drawLine(120, 50, 360, 50);
+        }
+
+    }
+
+
+    public Main(){
+        drawPad = new DrawPad();
+    }
+
+
+
+
+
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+
+        trace = true;
         String file;
         if (args.length == 1) {
              file = args[0];
@@ -42,22 +153,38 @@ public class Main {
             file = "compiled.pcks";
         }
 
-        try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
-            ArrayList<Integer> code = (ArrayList<Integer>) in.readObject();
-            in.close();
 
-            vm(code);
 
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                Main vm = new Main();
+                vm.drawPad.setVisible(true);
+                vm.vm();
+            }
+        });
 
 
     }
 
 
-    public static void vm(ArrayList<Integer> code){
+
+
+    public void vm(){
+        //todo prompt user for file name
+        String file = "compiled.pcks";
+        ObjectInputStream in = null;
+        ArrayList<Integer> code = new ArrayList<>();
+        code.add(0);
+        try {
+            in = new ObjectInputStream(new FileInputStream(file));
+            code = (ArrayList<Integer>) in.readObject();
+            in.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
         stack = new int[STACK_SIZE];
         ip = 0;
         sp = -1;
@@ -355,6 +482,16 @@ public class Main {
                     sp--;
                     System.out.print(ia);
                     break;
+                case OpCode.bPRINT:
+                    ia = stack[sp];
+                    sp--;
+                    if(ia == 0){
+                        System.out.print("false");
+                    } else{
+                        System.out.print("true");
+                    }
+
+                    break;
                 case OpCode.fPRINT:
                     bytes = ByteBuffer.allocate(4).putInt(stack[sp]).array();
                     sp--;
@@ -429,6 +566,23 @@ public class Main {
                     sp++;
                     stack[sp] = stack[sp - 1];
                     break;
+
+
+
+                ////DRAWING INSTRUCCTIONS
+
+//                case OpCode.BGRND:
+//                    break;
+//                case OpCode.SETSIZE:
+//                    break;
+
+
+
+
+
+
+
+
             }//end switch
             //////
             if(trace)System.err.println(stackString());
@@ -446,6 +600,7 @@ public class Main {
         }
 
 
+
     }
 
 
@@ -459,6 +614,7 @@ public class Main {
         }
         buf.append(" ]");
         return buf.toString();
+
     }
 
     protected static String disInstr() {
@@ -489,6 +645,7 @@ public class Main {
         }
         System.err.println();
     }
+
 
 
 }

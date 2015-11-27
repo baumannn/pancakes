@@ -130,17 +130,65 @@ public interface PancakesListener extends ParseTreeListener {
 	 */
 	void exitPrintFunc(PancakesParser.PrintFuncContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code DummyFunc}
+	 * Enter a parse tree produced by the {@code DrawCircle}
 	 * labeled alternative in {@link PancakesParser#built_in_function}.
 	 * @param ctx the parse tree
 	 */
-	void enterDummyFunc(PancakesParser.DummyFuncContext ctx);
+	void enterDrawCircle(PancakesParser.DrawCircleContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code DummyFunc}
+	 * Exit a parse tree produced by the {@code DrawCircle}
 	 * labeled alternative in {@link PancakesParser#built_in_function}.
 	 * @param ctx the parse tree
 	 */
-	void exitDummyFunc(PancakesParser.DummyFuncContext ctx);
+	void exitDrawCircle(PancakesParser.DrawCircleContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DrawRectangle}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterDrawRectangle(PancakesParser.DrawRectangleContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DrawRectangle}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitDrawRectangle(PancakesParser.DrawRectangleContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DrawOval}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterDrawOval(PancakesParser.DrawOvalContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DrawOval}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitDrawOval(PancakesParser.DrawOvalContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DrawLine}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterDrawLine(PancakesParser.DrawLineContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DrawLine}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitDrawLine(PancakesParser.DrawLineContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DrawString}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void enterDrawString(PancakesParser.DrawStringContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DrawString}
+	 * labeled alternative in {@link PancakesParser#built_in_function}.
+	 * @param ctx the parse tree
+	 */
+	void exitDrawString(PancakesParser.DrawStringContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PancakesParser#return_statement}.
 	 * @param ctx the parse tree

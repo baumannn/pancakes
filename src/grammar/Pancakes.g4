@@ -56,7 +56,11 @@ statement
 
 built_in_function
     : PRINT '(' expr ')' #PrintFunc
-    | 'dummy' '(' expr ')' #DummyFunc
+    | DRAWCIRCLE '(' expr',' expr',' expr',' COLOR ')' #DrawCircle //x, y, radius, Color
+    | DRAWRECT '(' expr',' expr',' expr',' expr',' COLOR ')' #DrawRectangle //x1, y1, x2, y2, Color
+    | DRAWOVAL '(' expr',' expr',' expr',' expr ')' #DrawOval // x, y, width, height
+    | DRAWLINE '(' expr',' expr',' expr',' expr',' COLOR ')' #DrawLine //x1, y1, x2, y2, Color
+    | DRAWSTRING '(' STRING ',' expr',' expr')' #DrawString // string, x, y
     ;
 
 return_statement
@@ -123,6 +127,14 @@ arguments
 
 PRINT : 'print';
 
+COLOR : 'red' | 'yellow' | 'green' | 'blue' | 'orange' | 'purple' | 'black' | 'white' ;
+
+DRAWCIRCLE : 'drawCircle';
+
+DRAWRECT : 'drawRectangle' ;
+DRAWOVAL : 'drawOval';
+DRAWSTRING : 'drawString';
+DRAWLINE : 'drawLine';
 
 
 LT : '<';

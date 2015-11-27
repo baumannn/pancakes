@@ -542,7 +542,7 @@ public class TranslationThirdPhase extends PancakesBaseListener{
             mfo.add(OpCode.fEQ);
         } else if (typeMap.get(ctx.expr(0)) == Symbol.Type.tINT || typeMap.get(ctx.expr(1)) == Symbol.Type.tINT){
             mfo.add(OpCode.iEQ);
-        } else if (typeMap.get(ctx.expr(0)) == Symbol.Type.tBOOL || typeMap.get(ctx.expr(1)) == Symbol.Type.tBOOL){
+        } else if (typeMap.get(ctx.expr(0)) == Symbol.Type.tINT || typeMap.get(ctx.expr(1)) == Symbol.Type.tINT){
             mfo.add(OpCode.bEQ);
         } else if (typeMap.get(ctx.expr(0)) == Symbol.Type.tSTRING || typeMap.get(ctx.expr(1)) == Symbol.Type.tSTRING){
             mfo.add(OpCode.sEQ);
@@ -678,7 +678,6 @@ public class TranslationThirdPhase extends PancakesBaseListener{
                 mfo.add(OpCode.sPRINT);
                 break;
             case tINT:
-            case tBOOL:
                 mfo.add(OpCode.iPRINT);
                 break;
             case tFLOAT:
