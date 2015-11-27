@@ -405,7 +405,7 @@ public class Main extends JFrame{
 
 
                     sp++;
-                    stack[sp] = stack[fp + address + ia];
+                    stack[sp] = bc[fp + address + ia];
                     break;
                 case OpCode.oGLOAD:
                     offset = stack[sp]; //offset

@@ -1,14 +1,14 @@
 
 # Referencia a una funcion que se declara despues
-print(factorial(5));
+# print(factorial(5));
 
 
-int factorial(int n){
-	if( n < 1){
-		return 1;
-	}
-		return n * factorial(n-1);
-}
+# int factorial(int n){
+# 	if( n < 1){
+# 		return 1;
+# 	}
+# 		return n * factorial(n-1);
+# }
 
 # int i;
 # int i2;
@@ -17,6 +17,46 @@ int factorial(int n){
 # int i5;
 
 # i  = i2 = i3 = i4 = i5 = 3;
+
+int [10] arr;
+
+int i = 0;
+
+while( i < 10 ){
+	arr[i] = i;
+	i = i + 1;
+	# print(i);
+}
+
+
+
+i = 0;
+
+while( i < 10 ){
+	print(arr[i]);
+	# arr[i] = i;
+	i = i + 1;
+	
+}
+# 
+# int j = 0;
+
+# arr[4] = 4;
+
+# print (arr[4]);
+
+# while( i < 10){
+
+# 	while( j < 10){
+# 		arr[i][j] = i +j;
+# 		print(arr[i]);
+# 		j = j + 1;
+# 	}
+# 	j = 0;
+# 	i = i + 1;
+# }
+
+
 
 # int n = 4;
 
@@ -48,33 +88,33 @@ int factorial(int n){
 
 # print(fact);
 
-if ( false AND false ){
-	print ("A1");
-}
-if ( true AND true ){
-	print ("A2");
-}
-if ( false AND true ){
-	print ("A3");
-}
+# if ( false AND false ){
+# 	print ("A1");
+# }
+# if ( true AND true ){
+# 	print ("A2");
+# }
+# if ( false AND true ){
+# 	print ("A3");
+# }
 
-if ( true AND false ){
-	print ("A4");
-}
+# if ( true AND false ){
+# 	print ("A4");
+# }
 
-if ( false OR false ){
-	print ("A5");
-}
-if ( true OR true ){
-	print ("A6");
-}
-if ( false OR true ){
-	print ("A7");
-}
+# if ( false OR false ){
+# 	print ("A5");
+# }
+# if ( true OR true ){
+# 	print ("A6");
+# }
+# if ( false OR true ){
+# 	print ("A7");
+# }
 
-if ( true OR false ){
-	print ("A8");
-}
+# if ( true OR false ){
+# 	print ("A8");
+# }
 
 
 
