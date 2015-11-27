@@ -1,0 +1,35 @@
+#prueba de while
+
+#no debería de entrar
+while (false) {
+	print("no");
+}
+
+#debería de imprimir los numeros del 1 al 5
+int i = 0;
+while ( i < 5 ) {
+	
+	print(i+1);
+	print(" ");
+
+	i = i + 1;
+
+}
+print ("\n");
+
+
+#debería imprimir los numeros del 5 al 1
+do {
+	print (i);
+	print (" ");
+	i = i - 1;
+} while (i > 0)
+
+print("\n");
+
+do {
+	print("ultimo");
+	print("\n");
+} while(false)
+
+print("fin");
